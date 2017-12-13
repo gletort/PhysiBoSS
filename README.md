@@ -24,7 +24,7 @@ firefox doc/html/index.html &
 
 You can also refer to (future) publications with PhysiBoSS for scientific applications of this software and description of the models.
 
-Step-by-step examples with the necessary files to run them are also proposed in the 'examples' directory.
+Step-by-step examples with the necessary files to run them are also proposed in the 'examples' directory and on the Wiki of this repository.
 
 ## Usage 
 ### Compiling PhysiBoSS
@@ -36,6 +36,7 @@ Clone the repository on your local machine, and go inside the main directory.
 Install and compile  MaBoSS, by going into the MaBoSS directory and type 'make'. Or directly type 'make maboss' in the main PhysiBoSS directory.
 Then type 'make' in the main directory to compile everything. The executables will be created in the 'bin' directory if all goes well. 
 It can be compiled in 'Debug', 'Release' or 'Proliling' modes, to set in the 'Makefile' file. Default is 'Release' mode (fastest).
+You might also have to change your c++ compiler in the Makefile according to your operating system.
 
 Commands list:
 ~~~bash
@@ -49,7 +50,7 @@ make
 
 ### Running one simulation
 To run a simulation, you need (at least) a XML parameter file indicating the conditions of the simulation, and the networks file (you can find some on [MaBoSS website](http://maboss.curie.fr)). 
-Other options are possible, cf the code-documentation or examples or wiki for more informations.  
+Other options are possible, cf the code-documentation or this repository wiki for more informations.  
  
 Example of a parameter file (with only few parameters shown):
 ~~~xml
@@ -77,7 +78,8 @@ Example of a parameter file (with only few parameters shown):
  		...
   </initial_configuration>
 ~~~ 
- 
+
+Please, refer to the Wiki of this repository for a much more extended documentation, with step by step examples instructions. 
  
 PhysiCell is developped in [Paul Macklin's lab](http://mathcancer.org). 
 MaBoSS and PhysiBoSS are developped in the [Computational Systems Biology of Cancer group](http://sysbio.curie.fr) at Institut Curie (Paris, France). 
