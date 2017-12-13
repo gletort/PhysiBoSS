@@ -5,10 +5,10 @@ Multiscale simulation of multi-cellular system
  
 PhysiBoSS (PhysiCell-MaBoSS) is C++ software for multiscale simulation of heterogeneous multi-cellular system. It integrates together cell's internal signalling pathway model (boolean formalism), physical representation of cell (agent-based) and extra-cellular matrix diffusing or fixed entities. 
 It is adapted from [PhysiCell](http://physicell.mathcancer.org) sources, with the boolean network computation inside each cell from [MaBoSS](http://maboss.curie.fr) software. 
+  
+![Hello world image](./doc/imgs/hello.png?raw=true "PhysiBoSS simulation example") 
  
-  
-  \image html hello.png "PhysiCell-MaBoSS example" 
-  
+ 
 ## Documentation 
 Code-oriented documentation can be generated with Doxygen:
 ~~~bash
