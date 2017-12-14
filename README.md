@@ -1,13 +1,15 @@
 # PhysiBoSS   
 Multiscale simulation of multi-cellular system
  
-[Presentation](1-pres)
-[Documentation](2-doc)
-[Usage](3-usage)
-[Remarks](4-rem)
+[Presentation](#presentation)
+
+[Documentation](#documentation)
+
+[Usage](#usage)
+
+[Remarks](#rem)
 
 ## Presentation 
-[1-pres] 
 PhysiBoSS (PhysiCell-MaBoSS) is C++ software for multiscale simulation of heterogeneous multi-cellular system. It integrates together cell's internal signalling pathway model (boolean formalism), physical representation of cell (agent-based) and extra-cellular matrix diffusing or fixed entities. 
 It is adapted from [PhysiCell](http://physicell.mathcancer.org) sources, with the boolean network computation inside each cell from [MaBoSS](http://maboss.curie.fr) software. 
   
@@ -15,7 +17,6 @@ It is adapted from [PhysiCell](http://physicell.mathcancer.org) sources, with th
  
  
 ## Documentation 
-[2-doc]
 Code-oriented documentation can be generated with Doxygen:
 ~~~bash
 make doc
@@ -33,7 +34,6 @@ You can also refer to (future) publications with PhysiBoSS for scientific applic
 Step-by-step examples with the necessary files to run them are also proposed in the 'examples' directory and on the Wiki of this repository.
 
 ## Usage
-[3-usage] 
 ### Compiling PhysiBoSS
 PhysiBoSS should run and be easily installed on Linux and MacOS system. We will provide (soon) a Docker version for Windows operating system or if it doesn't run on your machine.
 It requires moderatly recent version of C++ (at least c++11) and OpenMP support.
@@ -87,7 +87,6 @@ Example of a parameter file (with only few parameters shown):
 ~~~ 
 
 ## Remarks
-[4-rem]
 
 Please, refer to the Wiki of this repository for a much more extended documentation, with step by step examples instructions. 
  
