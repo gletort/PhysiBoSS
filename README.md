@@ -3,13 +3,10 @@ Multiscale simulation of multi-cellular system
  
 Overview:
 
-[Presentation](#presentation)
-
-[Documentation](#documentation)
-
-[Usage](#usage)
-
-[Remarks](#remarks)
+ * [Presentation](#presentation)
+ * [Documentation](#documentation)
+ * [Usage](#usage)
+ * [Remarks](#remarks)
 
 ## Presentation 
 PhysiBoSS (PhysiCell-MaBoSS) is C++ software for multiscale simulation of heterogeneous multi-cellular system. It integrates together cell's internal signalling pathway model (boolean formalism), physical representation of cell (agent-based) and extra-cellular matrix diffusing or fixed entities. 
