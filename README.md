@@ -96,5 +96,6 @@ We invit you to use PhysiBoSS for you research and give feedbacks to us. Any hel
 Do not hesitate to contact us for any comments or difficulties in using PhysiBoSS: physiboss@gmail.com.
 
 
-Wishing you to enjoy using PhysiBoSS,
+Wishing you to enjoy using PhysiBoSS, 
+
 PhysiBoSS's team. 
