@@ -30,7 +30,7 @@ firefox doc/html/index.html &
 
 You can also refer to (future) publications with PhysiBoSS for scientific applications of this software and description of the models.
 
-Step-by-step examples with the necessary files to run them are also proposed in the 'examples' directory and on the Wiki of this repository.
+Step-by-step examples with the necessary files to run them are also proposed in the 'examples' directory and on the [Wiki](./Wiki) of this repository.
 
 ## Usage
 ### Compiling PhysiBoSS
@@ -87,7 +87,7 @@ Example of a parameter file (with only few parameters shown):
 
 ## Remarks
 
-Please, refer to the Wiki of this repository for a much more extended documentation, with step by step examples instructions. 
+Please, refer to the [Wiki](./Wiki) of this repository for a much more extended documentation, with step by step examples instructions. 
  
 PhysiCell is developped in [Paul Macklin's lab](http://mathcancer.org). 
 MaBoSS and PhysiBoSS are developped in the [Computational Systems Biology of Cancer group](http://sysbio.curie.fr) at Institut Curie (Paris, France). 
