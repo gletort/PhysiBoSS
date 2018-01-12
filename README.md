@@ -55,7 +55,7 @@ make
 ~~~
 
 ### Running one simulation
-To run a simulation, you need (at least) a XML parameter file indicating the conditions of the simulation, and the networks file (you can find some on [MaBoSS website](http://maboss.curie.fr)). 
+To run a simulation, you need (at least) a XML parameter file indicating the conditions of the simulation, and the networks file (you can find some on [MaBoSS website](http://maboss.curie.fr) and on our <a href="https://github.com/ArnauMontagud/Logical_modelling_pipeline">logical modelling pipeline repository</a>). 
 Other options are possible, cf the code-documentation or this repository wiki for more informations.  
  
 Example of a parameter file (with only few parameters shown):
