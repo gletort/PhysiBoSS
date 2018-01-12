@@ -1,0 +1,120 @@
+Node ECMicroenv {
+  logic = (ECMicroenv);
+  rate_up = @logic ? $u_ECMicroenv : 0;
+  rate_down = @logic ? 0 : $d_ECMicroenv;
+}
+
+Node DNAdamage {
+  logic = (DNAdamage);
+  rate_up = @logic ? $u_DNAdamage : 0;
+  rate_down = @logic ? 0 : $d_DNAdamage;
+}
+
+Node GF {
+  logic = (!GF & EMTreg & !Ecadh) | (GF & !Ecadh);
+  rate_up = @logic ? $u_GF : 0;
+  rate_down = @logic ? 0 : $d_GF;
+}
+
+Node Metastasis {
+  logic = (Migration);
+  rate_up = @logic ? $u_Metastasis : 0;
+  rate_down = @logic ? 0 : $d_Metastasis;
+}
+
+Node Migration {
+  logic = (Invasion & EMT & !p63_73 & !AKT1 & AKT2 & ERK_pthw & !miRNA);
+  rate_up = @logic ? $u_Migration : 0;
+  rate_down = @logic ? 0 : $d_Migration;
+}
+
+Node Invasion {
+  logic = (!TGFb_pthw & WNT_pthw) | (TGFb_pthw & !WNT_pthw & EMTreg) | (TGFb_pthw & WNT_pthw);
+  rate_up = @logic ? $u_Invasion : 0;
+  rate_down = @logic ? 0 : $d_Invasion;
+}
+
+Node EMT {
+  logic = (EMTreg & !Ecadh);
+  rate_up = @logic ? $u_EMT : 0;
+  rate_down = @logic ? 0 : $d_EMT;
+}
+
+Node Apoptosis {
+  logic = (!p53 & !EMTreg & !p63_73 & !AKT1 & !ERK_pthw & miRNA) | (!p53 & !EMTreg & p63_73 & !AKT1 & !ERK_pthw) | (p53 & !EMTreg & !AKT1 & !ERK_pthw);
+  rate_up = @logic ? $u_Apoptosis : 0;
+  rate_down = @logic ? 0 : $d_Apoptosis;
+}
+
+Node CCA {
+  logic = (!TGFb_pthw & !p53 & !EMTreg & !p63_73 & !AKT1 & !AKT2 & miRNA) | (!TGFb_pthw & !p53 & !EMTreg & !p63_73 & !AKT1 & AKT2 & !ERK_pthw) | (!TGFb_pthw & !p53 & !EMTreg & !p63_73 & !AKT1 & AKT2 & ERK_pthw & miRNA) | (!TGFb_pthw & !p53 & !EMTreg & p63_73 & !AKT1 & !ERK_pthw) | (!TGFb_pthw & !p53 & !EMTreg & p63_73 & !AKT1 & ERK_pthw & miRNA) | (!TGFb_pthw & !p53 & EMTreg & !AKT1) | (!TGFb_pthw & p53 & !EMTreg & !AKT1 & !ERK_pthw) | (!TGFb_pthw & p53 & !EMTreg & !AKT1 & ERK_pthw & miRNA) | (!TGFb_pthw & p53 & EMTreg & !AKT1) | (TGFb_pthw & !Notch_pthw & !p53 & !EMTreg & !p63_73 & !AKT1 & !AKT2 & miRNA) | (TGFb_pthw & !Notch_pthw & !p53 & !EMTreg & !p63_73 & !AKT1 & AKT2 & !ERK_pthw) | (TGFb_pthw & !Notch_pthw & !p53 & !EMTreg & !p63_73 & !AKT1 & AKT2 & ERK_pthw & miRNA) | (TGFb_pthw & !Notch_pthw & !p53 & !EMTreg & p63_73 & !AKT1 & !ERK_pthw) | (TGFb_pthw & !Notch_pthw & !p53 & !EMTreg & p63_73 & !AKT1 & ERK_pthw & miRNA) | (TGFb_pthw & !Notch_pthw & !p53 & EMTreg & !AKT1) | (TGFb_pthw & !Notch_pthw & p53 & !EMTreg & !AKT1 & !ERK_pthw) | (TGFb_pthw & !Notch_pthw & p53 & !EMTreg & !AKT1 & ERK_pthw & miRNA) | (TGFb_pthw & !Notch_pthw & p53 & EMTreg & !AKT1) | (TGFb_pthw & Notch_pthw & !EMTreg & !AKT1 & !ERK_pthw) | (TGFb_pthw & Notch_pthw & !EMTreg & !AKT1 & ERK_pthw & miRNA) | (TGFb_pthw & Notch_pthw & EMTreg & !AKT1);
+  rate_up = @logic ? $u_CCA : 0;
+  rate_down = @logic ? 0 : $d_CCA;
+}
+
+Node TGFb_pthw {
+  logic = (!ECMicroenv & Notch_pthw & !WNT_pthw & !miRNA) | (ECMicroenv & !WNT_pthw & !miRNA);
+  rate_up = @logic ? $u_TGFb_pthw : 0;
+  rate_down = @logic ? 0 : $d_TGFb_pthw;
+}
+
+Node Notch_pthw {
+  logic = (ECMicroenv & !p53 & !p63_73 & !miRNA);
+  rate_up = @logic ? $u_Notch_pthw : 0;
+  rate_down = @logic ? 0 : $d_Notch_pthw;
+}
+
+Node WNT_pthw {
+  logic = (!Notch_pthw & !WNT_pthw & !p53 & !EMTreg & !p63_73 & !AKT1 & !miRNA & !Ecadh);
+  rate_up = @logic ? $u_WNT_pthw : 0;
+  rate_down = @logic ? 0 : $d_WNT_pthw;
+}
+
+Node p53 {
+  logic = (!DNAdamage & !Notch_pthw & WNT_pthw & !EMTreg & !p63_73 & !AKT1 & !AKT2) | (!DNAdamage & Notch_pthw & !EMTreg & !p63_73 & !AKT1 & !AKT2) | (DNAdamage & !EMTreg & !p63_73 & !AKT1 & !AKT2);
+  rate_up = @logic ? $u_p53 : 0;
+  rate_down = @logic ? 0 : $d_p53;
+}
+
+Node EMTreg {
+  logic = (!Notch_pthw & !WNT_pthw & !p53 & EMTreg & !miRNA) | (!Notch_pthw & WNT_pthw & !p53 & !miRNA) | (Notch_pthw & !p53 & !miRNA);
+  rate_up = @logic ? $u_EMTreg : 0;
+  rate_down = @logic ? 0 : $d_EMTreg;
+}
+
+Node p63_73 {
+  logic = (DNAdamage & !Notch_pthw & !p53 & !EMTreg & !AKT1 & !AKT2);
+  rate_up = @logic ? $u_p63_73 : 0;
+  rate_down = @logic ? 0 : $d_p63_73;
+}
+
+Node AKT1 {
+  logic = (!GF & !TGFb_pthw & !Notch_pthw & WNT_pthw & !p53 & EMTreg & !miRNA & !Ecadh) | (!GF & !TGFb_pthw & Notch_pthw & WNT_pthw & !p53 & !miRNA & !Ecadh) | (!GF & TGFb_pthw & WNT_pthw & !p53 & !miRNA & !Ecadh) | (GF & WNT_pthw & !p53 & !miRNA & !Ecadh);
+  rate_up = @logic ? $u_AKT1 : 0;
+  rate_down = @logic ? 0 : $d_AKT1;
+}
+
+Node AKT2 {
+  logic = (!p53 & EMTreg & !miRNA);
+  rate_up = @logic ? $u_AKT2 : 0;
+  rate_down = @logic ? 0 : $d_AKT2;
+}
+
+Node ERK_pthw {
+  logic = (!GF & !TGFb_pthw & !Notch_pthw & EMTreg & !AKT1) | (!GF & !TGFb_pthw & Notch_pthw & !AKT1) | (!GF & TGFb_pthw & !AKT1) | (GF & !AKT1);
+  rate_up = @logic ? $u_ERK_pthw : 0;
+  rate_down = @logic ? 0 : $d_ERK_pthw;
+}
+
+Node miRNA {
+  logic = (!p53 & !EMTreg & p63_73 & !AKT1 & !AKT2) | (p53 & !EMTreg & !AKT1 & !AKT2);
+  rate_up = @logic ? $u_miRNA : 0;
+  rate_down = @logic ? 0 : $d_miRNA;
+}
+
+Node Ecadh {
+  logic = (!EMTreg & !AKT2);
+  rate_up = @logic ? $u_Ecadh : 0;
+  rate_down = @logic ? 0 : $d_Ecadh;
+}
+
