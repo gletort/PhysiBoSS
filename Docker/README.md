@@ -1,4 +1,4 @@
-# PhysiBoSS
+## PhysiBoSS
 
 PhysiBoSS is a multiscale software to allow for computation of large multi-cellular system, integrating both individual signalling pathway and agent-based representation of cells.
 
@@ -37,10 +37,10 @@ docker run -d -it -v /path/to/local/directory:/home/PhysiBoSS/running/name_of_si
 ~~~
 
 With:
-	* -d to run the docker image in background
-	* -v path1:path2 allows you to mount the local directory path1 and placed it in PhysiBoSS image as directory path2. 
+* -d to run the docker image in background
+* -v path1:path2 allows you to mount the local directory path1 and placed it in PhysiBoSS image as directory path2. 
 	You have to precise the full path to the directories. 
 	In the PhysiBoSS image, we created a folder '/home/PhysiBoSS/running' in which to place all running simulations. But of course you can specified another path.
-	* 'gletort/physiboss" precises the image that you want to run
-	* sh -c "cmd" allows you to define which commands you want to run in the image. 
+* 'gletort/physiboss" precises the image that you want to run
+* sh -c "cmd" allows you to define which commands you want to run in the image. 
 	Here, you move to the simulation folder, in the subfolder that you want to run. From there, you call PhysiBoSS executable and run the simulation.  
