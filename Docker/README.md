@@ -1,10 +1,16 @@
+# PhysiBoSS
+
+PhysiBoSS is a multiscale software to allow for computation of large multi-cellular system, integrating both individual signalling pathway and agent-based representation of cells.
+
+Here we described how to use PhysiBoSS docker image, assuming that you have already read [PhysiBoSS GitHub repository](http://github.com/gletort/PhysiBoSS) description on what is PhysiBoSS and how to use it.
+
 ## How to use PhysiBoSS docker image
 
 If PhysiBoSS cannot be compiled on your operating system, it is possible to use [PhysiBoSS docker image](http://hub.docker.com/r/gletort/physiboss).
 For this, you need Docker engine to be installed on your computer.
 Docker allows you to run an image of a software/environment build in a given operating system with all necessary dependencies, from any operating system.
 We built the image with a CentOS distribution in which we installed and compiled PhysiBoSS.
-Thus when you have copied PhysiBoSS docker iamge, it is ready to be used in a simulation directly.
+Thus when you have copied PhysiBoSS docker image, it is ready to be used in a simulation directly.
 
 ### Running a simulation with docking.sh script
 You can find in PhysiBoSS GitHub repository in the `Docker` folder a bash script to use the docker image directly.
