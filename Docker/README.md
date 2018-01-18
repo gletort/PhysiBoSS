@@ -15,7 +15,7 @@ Thus when you have copied PhysiBoSS docker image, it is ready to be used in a si
 ### Running a simulation with docking.sh script
 You can find in PhysiBoSS GitHub repository in the `Docker` folder a bash script to use the docker image directly.
 You need to give as parameter to this script the full path to the main folder on your computer of the simulation that you want to run, and as second parameter the name of the subfolder containing the parameter file.
-It will output the results in the folders 'output' and 'microutput' of this folder, as explained in PhysiBoSS description.
+It will output the results in the folders `output` and `microutput` of this folder, as explained in PhysiBoSS description.
 
 For example, to run with docker the Hello World Example from this repository, that you have copied on your machine:
 ~~~bash
@@ -37,10 +37,10 @@ docker run -d -it -v /path/to/local/directory:/home/PhysiBoSS/running/name_of_si
 ~~~
 
 With:
-* -d to run the docker image in background
-* -v path1:path2 allows you to mount the local directory path1 and placed it in PhysiBoSS image as directory path2. 
+* `-d` to run the docker image in background
+* `-v path1:path2` allows you to mount the local directory `path1` and placed it in PhysiBoSS image as directory `path2`. 
 	You have to precise the full path to the directories. 
-	In the PhysiBoSS image, we created a folder '/home/PhysiBoSS/running' in which to place all running simulations. But of course you can specified another path.
-* 'gletort/physiboss" precises the image that you want to run
-* sh -c "cmd" allows you to define which commands you want to run in the image. 
+	In the PhysiBoSS image, we created a folder `/home/PhysiBoSS/running` in which to place all running simulations. But of course you can specified another path.
+* `gletort/physiboss` precises the image that you want to run
+* `sh -c "cmd"` allows you to define which commands you want to run in the image. 
 	Here, you move to the simulation folder, in the subfolder that you want to run. From there, you call PhysiBoSS executable and run the simulation.  
