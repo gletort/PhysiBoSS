@@ -34,7 +34,7 @@ Step-by-step examples with the necessary files to run them are also proposed in 
 
 ## Usage
 ### Compiling PhysiBoSS
-PhysiBoSS should run and be easily installed on Linux and MacOS system. We will provide (soon) a Docker version for Windows operating system or if it doesn't run on your machine.
+PhysiBoSS should run and be easily installed on Linux and MacOS system. We also provide a [Docker image](https://github.com/gletort/PhysiBoSS/tree/master/Docker) of PhysiBoSS that can be used if it cannot be installed in your machine.
 It requires moderatly recent version of C++ (at least c++11) and OpenMP support.
 
 To install it on Linux system, from a Terminal:
