@@ -35,7 +35,7 @@ Step-by-step examples with the necessary files to run them are also proposed in 
 ## Usage
 ### Compiling PhysiBoSS
 PhysiBoSS should run and be easily installed on Linux and MacOS system. We also provide a [Docker image](https://github.com/gletort/PhysiBoSS/tree/master/Docker) of PhysiBoSS that can be used if it cannot be installed in your machine.
-It requires moderatly recent version of C++ (at least c++11) and OpenMP support.
+It requires moderatly recent version of C++ (at least c++11) and OpenMP support. Compilation of MaBoSS library requires `flex` and `bison` library, usually already present (and can be easily installed on e.g. Linux ubuntu with `sudo apt-get install bison flex`).
 
 To install it on Linux system, from a Terminal:
 Clone the repository on your local machine, and go inside the main directory.
