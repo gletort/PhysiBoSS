@@ -66,6 +66,8 @@ class RandomGenerator {
   virtual void setSeed(int seed) { }
 
   static size_t getGeneratedNumberCount() {return generated_number_count;}
+
+  virtual ~RandomGenerator() {}
 };
 
 class PhysicalRandomGenerator : public RandomGenerator {
@@ -117,17 +119,19 @@ class PhysicalRandomGenerator : public RandomGenerator {
 class StandardRandomGenerator : public RandomGenerator {
 
   int seed;
-#ifdef HAS_DRAND48_T
+#ifdef HAS_RAND48_T
   drand48_data data;
 #endif
 
  public:
   StandardRandomGenerator(int seed) : seed(seed) {
-#ifdef HAS_DRAND48_T
+#ifdef HAS_RAND48_T
     memset(&data, 0, sizeof(data));
     srand48_r(seed, &data);
-#else
+#elif defined(HAS_RAND48)
     srand48(seed);
+#else
+    srand(seed);
 #endif
   }
 
@@ -144,15 +148,17 @@ class StandardRandomGenerator : public RandomGenerator {
 #ifdef USE_DUMMY_RANDOM
     return ~0U/2;
 #endif
-#ifdef HAS_DRAND48_T
+#ifdef HAS_RAND48_T
     long result;
     lrand48_r(&data, &result);
 #ifdef RANDOM_TRACE
     std::cout << (unsigned int)result << '\n';
 #endif
     return (unsigned int)result;
-#else
+#elif defined(HAS_RAND48)
     return lrand48();
+#else
+    return rand();
 #endif
   }
 
@@ -161,24 +167,28 @@ class StandardRandomGenerator : public RandomGenerator {
 #ifdef USE_DUMMY_RANDOM
     return 0.5;
 #endif
-#ifdef HAS_DRAND48_T
+#ifdef HAS_RAND48_T
     double result;
     drand48_r(&data, &result);
 #ifdef RANDOM_TRACE
     std::cout << result << '\n';
 #endif
     return result;
-#else
+#elif defined(HAS_RAND48)
     return drand48();
+#else
+    return (double(rand()) / RAND_MAX);
 #endif
   }
 
   virtual void setSeed(int seed) {
     this->seed = seed;
-#ifdef HAS_DRAND48_T
+#ifdef HAS_RAND48_T
     srand48_r(seed, &data);
-#else
+#elif defined(HAS_RAND48)
     srand48(seed);
+#else
+    srand(seed);
 #endif
   }
 };
@@ -236,7 +246,7 @@ public:
   bool isThreadSafe() const {
     switch(type) {
     case STANDARD:
-#ifdef HAS_DRAND48_T
+#ifdef HAS_RAND48_T
       return true;
 #else
       return false;

@@ -27,9 +27,28 @@ $CXX -c $tmpfile > /dev/null 2>&1
 
 if [ $? = 0 ]
 then
-   echo "#define HAS_DRAND48_T" > $CONFIG_H
+   echo "#define HAS_RAND48_T" > $CONFIG_H
 else
-   echo "//#define HAS_DRAND48_T" > $CONFIG_H
+   echo "//#define HAS_RAND48_T" > $CONFIG_H
+fi
+
+cat > $tmpfile <<EOF
+#include <stdlib.h>
+int main()
+{
+  lrand48();
+  drand48();
+  return 0;
+}
+EOF
+
+$CXX -c $tmpfile > /dev/null 2>&1
+
+if [ $? = 0 ]
+then
+   echo "#define HAS_RAND48" >> $CONFIG_H
+else
+   echo "//#define HAS_RAND48" >> $CONFIG_H
 fi
 
 rm -f $tmpfile ${CONFIG_NAME}*.o
