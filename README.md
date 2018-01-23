@@ -54,6 +54,8 @@ cd ..
 make
 ~~~
 
+If errors happened during the compilation, please refer to the [installation](https://github.com/gletort/PhysiBoSS/wiki/Installation) page.
+
 ### Running one simulation
 To run a simulation, you need (at least) a XML parameter file indicating the conditions of the simulation, and the networks file (you can find some on [MaBoSS website](http://maboss.curie.fr) and on our <a href="https://github.com/ArnauMontagud/Logical_modelling_pipeline">logical modelling pipeline repository</a>). 
 Other options are possible, cf the code-documentation or this repository wiki for more informations.  
@@ -89,10 +91,10 @@ Example of a parameter file (with only few parameters shown):
 
 Please, refer to the [Wiki](https://github.com/gletort/PhysiBoSS/wiki) of this repository for a much more extended documentation, with step by step examples instructions. 
  
-PhysiCell is developped in [Paul Macklin's lab](http://mathcancer.org). 
-MaBoSS and PhysiBoSS are developped in the [Computational Systems Biology of Cancer group](http://sysbio.curie.fr) at Institut Curie (Paris, France). 
+PhysiCell is developed in [Paul Macklin's lab](http://mathcancer.org). 
+MaBoSS and PhysiBoSS are developed in the [Computational Systems Biology of Cancer group](http://sysbio.curie.fr) at Institut Curie (Paris, France). 
 
-We invit you to use PhysiBoSS for you research and give feedbacks to us. Any help in developping it further is more than welcome.
+We invit you to use PhysiBoSS for you research and give feedbacks to us. Any help in developing it further is more than welcome.
 Do not hesitate to contact us for any comments or difficulties in using PhysiBoSS: physiboss@gmail.com.
 
 
