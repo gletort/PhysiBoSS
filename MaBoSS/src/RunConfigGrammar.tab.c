@@ -1511,7 +1511,7 @@ yyreduce:
   double value = (yyvsp[(5) - (6)].expr)->eval(NULL, network_state);
   if (!strcasecmp((yyvsp[(3) - (6)].str), "istate")) {
     if (backward_istate) {
-      node->setIState((bool)value);
+      node->setIRandomState(value);
     } else {
       if (value < 0) {
 	new IStateGroup(node);

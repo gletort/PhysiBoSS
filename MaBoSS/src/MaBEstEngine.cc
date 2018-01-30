@@ -42,10 +42,10 @@ MaBEstEngine::MaBEstEngine(Network* network, RunConfig* runconfig) :
   network(network), time_tick(runconfig->getTimeTick()), max_time(runconfig->getMaxTime()), sample_count(runconfig->getSampleCount()), discrete_time(runconfig->isDiscreteTime()), thread_count(runconfig->getThreadCount()) {
 
   tid = NULL;
-
-  if (thread_count > 1 && !runconfig->getRandomGeneratorFactory()->isThreadSafe()) {
-    std::cerr << "Warning: non reentrant random, may not work properly in multi-threaded mode\n";
-  }
+	// commented: n PhysiBoSS not multithreaded anyway
+  //if (thread_count > 1 && !runconfig->getRandomGeneratorFactory()->isThreadSafe()) {
+  //  std::cerr << "Warning: non reentrant random, may not work properly in multi-threaded mode\n";
+ // }
   network->updateRandomGenerator(runconfig);
 
   const std::vector<Node*>& nodes = network->getNodes();

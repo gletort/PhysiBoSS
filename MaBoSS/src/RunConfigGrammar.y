@@ -110,7 +110,7 @@ node_attr_decl: SYMBOL '.' SYMBOL '=' expression ';'
   double value = $5->eval(NULL, network_state);
   if (!strcasecmp($3, "istate")) {
     if (backward_istate) {
-      node->setIState((bool)value);
+      node->setIRandomState(value);
     } else {
       if (value < 0) {
 	new IStateGroup(node);

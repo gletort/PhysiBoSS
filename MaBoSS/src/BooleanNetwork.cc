@@ -233,7 +233,8 @@ NodeState Node::getIState( Network* network) const
 			if ( network->getRandomGenerator() == NULL )
 				network->updateRandomGenerator( RunConfig::getInstance() );
     double rand = network->getRandomGenerator()->generate();
-    istate = rand > 0.5; // >= 0.5 ?
+	//std::cout << rand << std::endl;
+	istate = rand > 0.5; // >= 0.5 ?
 #else
     istate = (network->getRandomGenerator()->generateUInt32() % 2) == 0;
 #endif
@@ -241,8 +242,9 @@ NodeState Node::getIState( Network* network) const
   return istate;
 }
 
-void Node::setIRandomState( Network* network, double val ) 
+void Node::setIRandomState( double val ) 
 {
+	//std::cout << "set " << val << std::endl;
     istate_set = true;
 	if( val == 0 )
 		this->istate = false;

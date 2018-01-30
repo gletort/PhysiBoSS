@@ -284,9 +284,10 @@ class Node
   void setIState(NodeState istate) {
     istate_set = true;
     this->istate = istate;
+	//setIRandomState( istate );
   }
   
-  void setIRandomState(  Network* network, double val ); 
+  void setIRandomState( double val ); 
 
   bool istateSetRandomly() const {
     return !istate_set;

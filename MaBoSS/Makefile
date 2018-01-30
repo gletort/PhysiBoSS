@@ -3,8 +3,6 @@
 #
 # Institut Curie, France
 # Gaelle Letort
-#
-# Contact: physiboss@gmail.com
 
 install:
 	cd src && make  && \
@@ -15,5 +13,7 @@ install:
 	cp *.h ../include/
 	
 all: install
-	
+
+clean:
+	cd src && make clean && cd ../ 
 

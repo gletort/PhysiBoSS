@@ -1,4 +1,5 @@
-#define HAS_DRAND48_T
+#define HAS_RAND48_T
+#define HAS_RAND48
 // @HAS_UNORDERED_MAP
 #define HAS_UNORDERED_MAP
 #include <unordered_map>
