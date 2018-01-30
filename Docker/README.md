@@ -23,7 +23,7 @@ For example, to run with docker the Hello World Example from this repository, th
 ~~~
 
 
-### Running a simulation
+### Running a simulation without the script
 To install/update the docker image of PhysiBoSS, you have to pull it on your machine:
 ~~~bash 
 docker pull gletort/physiboss
