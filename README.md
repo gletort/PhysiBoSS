@@ -38,9 +38,7 @@ PhysiBoSS should run and be easily installed on Linux and MacOS system. We also 
 It requires moderatly recent version of C++ (at least c++11) and OpenMP support. Compilation of MaBoSS library requires `flex` and `bison` library, usually already present (and can be easily installed on e.g. Linux ubuntu with `sudo apt-get install bison flex`).
 
 To install it on Linux system, from a Terminal:
-Clone the repository on your local machine, and go inside the main directory.
-Install and compile  MaBoSS, by going into the MaBoSS directory and type 'make'. Or directly type 'make maboss' in the main PhysiBoSS directory.
-Then type 'make' in the main directory to compile everything. The executables will be created in the 'bin' directory if all goes well. 
+Clone the repository on your local machine, and go inside the main directory. Type `make install`, which will install and compile MaBoSS then PhysiBoSS. The executables will be created in the 'bin' directory if all goes well. 
 It can be compiled in 'Debug', 'Release' or 'Proliling' modes, to set in the 'Makefile' file. Default is 'Release' mode (fastest).
 You might also have to change your c++ compiler in the Makefile according to your operating system.
 
@@ -83,6 +81,9 @@ Example of a parameter file (with only few parameters shown):
  		...
   </initial_configuration>
 ~~~ 
+
+### Image and analyse a simulation
+To visualize graphically the result of a simulation, with use the software Paraview (or you can also generate a `.svg` snapshot of the simulation). Analysis of the result files were done with python scripts proposed in this directory. For documentation on how to use Paraview to set-up the rendering of PhysiBoSS outputs, see [here](https://github.com/gletort/PhysiBoSS/wiki/Paraviewing), with the explication on how to draw spheres from a set of points (x, y, z, radius).
 
 ## Remarks
 
