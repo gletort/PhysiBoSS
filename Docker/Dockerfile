@@ -14,7 +14,7 @@ WORKDIR /home/
 RUN git clone https://github.com/gletort/PhysiBoSS.git
 
 ## compile PhysiBoSS
-RUN cd PhysiBoSS; cd MaBoSS; make; cd ..; make
+RUN cd PhysiBoSS; make install;
 # create directory where to mount local folders to run the simulation inside
 RUN mkdir running
 

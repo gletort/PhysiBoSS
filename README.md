@@ -48,10 +48,7 @@ Commands list:
 ~~~bash
 git clone https://github.com/gletort/PhysiBoSS.git
 cd PhysiBoSS
-cd MaBoSS
-make
-cd ..
-make
+make install
 ~~~
 
 If errors happened during the compilation, please refer to the [installation](https://github.com/gletort/PhysiBoSS/wiki/Installation) page.

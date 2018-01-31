@@ -66,6 +66,8 @@ MAIN3 := ./src/main/plotTxt.cpp
 
 all: make_lib physiboss create plot
 
+install: maboss make_lib physiboss create plot
+
 make_lib: $(ALL_OBJECTS) 
 
 build:
@@ -84,7 +86,7 @@ plot: $(BIN_DIR) $(MAIN3)
 	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS_Plot ./src/main/plotTxt.cpp $(BUILD_DIR)/*.o $(LIB)
 
 maboss:
-	cd $(BOSS) && make	
+	cd $(BOSS) && make clean && make	
 
 #---------- Generate doc with Doxygen
 .PHONY: doc clean cleanbin mrproper zip
