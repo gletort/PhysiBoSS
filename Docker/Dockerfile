@@ -18,4 +18,4 @@ RUN cd PhysiBoSS; make install;
 # create directory where to mount local folders to run the simulation inside
 RUN mkdir running
 
-CMD ["/bin/bash; cd PhysiBoSS"]
+CMD [""]
