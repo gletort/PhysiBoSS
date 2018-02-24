@@ -1,19 +1,19 @@
-/* A Bison parser, made by GNU Bison 2.7.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
-   
-      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
-   
+
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,7 +26,7 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "2.7"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -62,8 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-/* Line 371 of yacc.c  */
-#line 2 "BooleanGrammar.y"
+#line 2 "BooleanGrammar.y" /* yacc.c:339  */
 
 /* 
    MaBoSS (Markov Boolean Stochastic Simulator)
@@ -103,14 +102,13 @@ static void CTBNDLerror(const char *s);
 MAP<std::string, bool> NodeDecl::node_def_map;
 static Network* current_network;
 
-/* Line 371 of yacc.c  */
-#line 108 "BooleanGrammar.tab.c"
+#line 106 "BooleanGrammar.tab.c" /* yacc.c:339  */
 
-# ifndef YY_NULL
+# ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
-#   define YY_NULL nullptr
+#   define YY_NULLPTR nullptr
 #  else
-#   define YY_NULL 0
+#   define YY_NULLPTR 0
 #  endif
 # endif
 
@@ -123,7 +121,7 @@ static Network* current_network;
 #endif
 
 
-/* Enabling traces.  */
+/* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
 #endif
@@ -131,35 +129,34 @@ static Network* current_network;
 extern int CTBNDLdebug;
 #endif
 
-/* Tokens.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum CTBNDLtokentype {
-     IDENTIFIER = 258,
-     VARIABLE = 259,
-     STRING = 260,
-     DOUBLE = 261,
-     INTEGER = 262,
-     LOGAND = 263,
-     LOGOR = 264,
-     LOGXOR = 265,
-     LOGNOT = 266,
-     EQUAL = 267,
-     NOT_EQUAL = 268,
-     NODE = 269,
-     GTEQ = 270,
-     LTEQ = 271
-   };
+  enum CTBNDLtokentype
+  {
+    IDENTIFIER = 258,
+    VARIABLE = 259,
+    STRING = 260,
+    DOUBLE = 261,
+    INTEGER = 262,
+    LOGAND = 263,
+    LOGOR = 264,
+    LOGXOR = 265,
+    LOGNOT = 266,
+    EQUAL = 267,
+    NOT_EQUAL = 268,
+    NODE = 269,
+    GTEQ = 270,
+    LTEQ = 271
+  };
 #endif
 
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
+
+union YYSTYPE
 {
-/* Line 387 of yacc.c  */
-#line 42 "BooleanGrammar.y"
+#line 42 "BooleanGrammar.y" /* yacc.c:355  */
 
   std::vector<NodeDecl*>* node_decl_list;
   NodeDecl* node_decl;
@@ -170,37 +167,24 @@ typedef union YYSTYPE
   double d;
   long long l;
 
+#line 171 "BooleanGrammar.tab.c" /* yacc.c:355  */
+};
 
-/* Line 387 of yacc.c  */
-#line 176 "BooleanGrammar.tab.c"
-} YYSTYPE;
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
-# define CTBNDLstype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+
 extern YYSTYPE CTBNDLlval;
 
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int CTBNDLparse (void *YYPARSE_PARAM);
-#else
-int CTBNDLparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
 int CTBNDLparse (void);
-#else
-int CTBNDLparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
 
 
 
 /* Copy the second part of user declarations.  */
 
-/* Line 390 of yacc.c  */
-#line 204 "BooleanGrammar.tab.c"
+#line 188 "BooleanGrammar.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -214,11 +198,8 @@ typedef unsigned char CTBNDLtype_uint8;
 
 #ifdef YYTYPE_INT8
 typedef YYTYPE_INT8 CTBNDLtype_int8;
-#elif (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-typedef signed char CTBNDLtype_int8;
 #else
-typedef short int CTBNDLtype_int8;
+typedef signed char CTBNDLtype_int8;
 #endif
 
 #ifdef YYTYPE_UINT16
@@ -238,8 +219,7 @@ typedef short int CTBNDLtype_int16;
 #  define YYSIZE_T __SIZE_TYPE__
 # elif defined size_t
 #  define YYSIZE_T size_t
-# elif ! defined YYSIZE_T && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+# elif ! defined YYSIZE_T
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
@@ -261,6 +241,33 @@ typedef short int CTBNDLtype_int16;
 # endif
 #endif
 
+#ifndef YY_ATTRIBUTE
+# if (defined __GNUC__                                               \
+      && (2 < __GNUC__ || (__GNUC__ == 2 && 96 <= __GNUC_MINOR__)))  \
+     || defined __SUNPRO_C && 0x5110 <= __SUNPRO_C
+#  define YY_ATTRIBUTE(Spec) __attribute__(Spec)
+# else
+#  define YY_ATTRIBUTE(Spec) /* empty */
+# endif
+#endif
+
+#ifndef YY_ATTRIBUTE_PURE
+# define YY_ATTRIBUTE_PURE   YY_ATTRIBUTE ((__pure__))
+#endif
+
+#ifndef YY_ATTRIBUTE_UNUSED
+# define YY_ATTRIBUTE_UNUSED YY_ATTRIBUTE ((__unused__))
+#endif
+
+#if !defined _Noreturn \
+     && (!defined __STDC_VERSION__ || __STDC_VERSION__ < 201112)
+# if defined _MSC_VER && 1200 <= _MSC_VER
+#  define _Noreturn __declspec (noreturn)
+# else
+#  define _Noreturn YY_ATTRIBUTE ((__noreturn__))
+# endif
+#endif
+
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
 # define YYUSE(E) ((void) (E))
@@ -268,23 +275,25 @@ typedef short int CTBNDLtype_int16;
 # define YYUSE(E) /* empty */
 #endif
 
-/* Identity function, used to suppress warnings about constant conditions.  */
-#ifndef lint
-# define YYID(N) (N)
+#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+/* Suppress an incorrect diagnostic about CTBNDLlval being uninitialized.  */
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
+    _Pragma ("GCC diagnostic push") \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")\
+    _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END \
+    _Pragma ("GCC diagnostic pop")
 #else
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-static int
-YYID (int CTBNDLi)
-#else
-static int
-YYID (CTBNDLi)
-    int CTBNDLi;
+# define YY_INITIAL_VALUE(Value) Value
 #endif
-{
-  return CTBNDLi;
-}
+#ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END
 #endif
+#ifndef YY_INITIAL_VALUE
+# define YY_INITIAL_VALUE(Value) /* Nothing. */
+#endif
+
 
 #if ! defined CTBNDLoverflow || YYERROR_VERBOSE
 
@@ -303,8 +312,7 @@ YYID (CTBNDLi)
 #    define alloca _alloca
 #   else
 #    define YYSTACK_ALLOC alloca
-#    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS
 #     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
       /* Use EXIT_SUCCESS as a witness for stdlib.h.  */
 #     ifndef EXIT_SUCCESS
@@ -316,8 +324,8 @@ YYID (CTBNDLi)
 # endif
 
 # ifdef YYSTACK_ALLOC
-   /* Pacify GCC's `empty if-body' warning.  */
-#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (YYID (0))
+   /* Pacify GCC's 'empty if-body' warning.  */
+#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (0)
 #  ifndef YYSTACK_ALLOC_MAXIMUM
     /* The OS might guarantee only one guard page at the bottom of the stack,
        and a page size can be as small as 4096 bytes.  So we cannot safely
@@ -333,7 +341,7 @@ YYID (CTBNDLi)
 #  endif
 #  if (defined __cplusplus && ! defined EXIT_SUCCESS \
        && ! ((defined YYMALLOC || defined malloc) \
-	     && (defined YYFREE || defined free)))
+             && (defined YYFREE || defined free)))
 #   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
 #   ifndef EXIT_SUCCESS
 #    define EXIT_SUCCESS 0
@@ -341,15 +349,13 @@ YYID (CTBNDLi)
 #  endif
 #  ifndef YYMALLOC
 #   define YYMALLOC malloc
-#   if ! defined malloc && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#   if ! defined malloc && ! defined EXIT_SUCCESS
 void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 #  ifndef YYFREE
 #   define YYFREE free
-#   if ! defined free && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#   if ! defined free && ! defined EXIT_SUCCESS
 void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
@@ -359,7 +365,7 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 
 #if (! defined CTBNDLoverflow \
      && (! defined __cplusplus \
-	 || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
+         || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
 
 /* A type that is properly aligned for any stack member.  */
 union CTBNDLalloc
@@ -384,16 +390,16 @@ union CTBNDLalloc
    elements in the stack, and YYPTR gives the new location of the
    stack.  Advance YYPTR to a properly aligned location for the next
    stack.  */
-# define YYSTACK_RELOCATE(Stack_alloc, Stack)				\
-    do									\
-      {									\
-	YYSIZE_T CTBNDLnewbytes;						\
-	YYCOPY (&CTBNDLptr->Stack_alloc, Stack, CTBNDLsize);			\
-	Stack = &CTBNDLptr->Stack_alloc;					\
-	CTBNDLnewbytes = CTBNDLstacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
-	CTBNDLptr += CTBNDLnewbytes / sizeof (*CTBNDLptr);				\
-      }									\
-    while (YYID (0))
+# define YYSTACK_RELOCATE(Stack_alloc, Stack)                           \
+    do                                                                  \
+      {                                                                 \
+        YYSIZE_T CTBNDLnewbytes;                                            \
+        YYCOPY (&CTBNDLptr->Stack_alloc, Stack, CTBNDLsize);                    \
+        Stack = &CTBNDLptr->Stack_alloc;                                    \
+        CTBNDLnewbytes = CTBNDLstacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
+        CTBNDLptr += CTBNDLnewbytes / sizeof (*CTBNDLptr);                          \
+      }                                                                 \
+    while (0)
 
 #endif
 
@@ -412,7 +418,7 @@ union CTBNDLalloc
           for (CTBNDLi = 0; CTBNDLi < (Count); CTBNDLi++)   \
             (Dst)[CTBNDLi] = (Src)[CTBNDLi];            \
         }                                       \
-      while (YYID (0))
+      while (0)
 #  endif
 # endif
 #endif /* !YYCOPY_NEEDED */
@@ -428,17 +434,19 @@ union CTBNDLalloc
 #define YYNNTS  18
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  48
-/* YYNRULES -- Number of states.  */
+/* YYNSTATES -- Number of states.  */
 #define YYNSTATES  84
 
-/* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
+/* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
+   by CTBNDLlex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   271
 
-#define YYTRANSLATE(YYX)						\
+#define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? CTBNDLtranslate[YYX] : YYUNDEFTOK)
 
-/* YYTRANSLATE[YYLEX] -- Bison symbol number corresponding to YYLEX.  */
+/* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
+   as returned by CTBNDLlex, without out-of-bounds checking.  */
 static const CTBNDLtype_uint8 CTBNDLtranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -472,39 +480,7 @@ static const CTBNDLtype_uint8 CTBNDLtranslate[] =
 };
 
 #if YYDEBUG
-/* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
-   YYRHS.  */
-static const CTBNDLtype_uint8 CTBNDLprhs[] =
-{
-       0,     0,     3,     5,     8,    14,    19,    24,    26,    29,
-      34,    39,    41,    44,    46,    48,    50,    54,    56,    58,
-      61,    64,    67,    70,    72,    76,    80,    82,    86,    90,
-      92,    96,   100,   104,   108,   110,   114,   118,   120,   124,
-     126,   130,   132,   136,   140,   142,   148,   150,   151
-};
-
-/* YYRHS -- A `-1'-separated list of the rules' RHS.  */
-static const CTBNDLtype_int8 CTBNDLrhs[] =
-{
-      35,     0,    -1,    36,    -1,    35,    36,    -1,    14,     3,
-      17,    37,    18,    -1,    14,     3,    17,    18,    -1,     3,
-      19,    50,    51,    -1,    38,    -1,    37,    38,    -1,     3,
-      20,    50,    21,    -1,     3,    20,     5,    21,    -1,     3,
-      -1,    22,     3,    -1,     4,    -1,     7,    -1,     6,    -1,
-      23,    50,    24,    -1,    39,    -1,    40,    -1,    25,    41,
-      -1,    26,    41,    -1,    27,    41,    -1,    11,    41,    -1,
-      41,    -1,    42,    28,    41,    -1,    42,    29,    41,    -1,
-      42,    -1,    43,    25,    42,    -1,    43,    26,    42,    -1,
-      43,    -1,    44,    30,    43,    -1,    44,    31,    43,    -1,
-      44,    16,    43,    -1,    44,    15,    43,    -1,    44,    -1,
-      45,    12,    44,    -1,    45,    13,    44,    -1,    45,    -1,
-      46,     8,    45,    -1,    46,    -1,    47,     9,    46,    -1,
-      47,    -1,    48,    10,    47,    -1,    48,    32,    47,    -1,
-      48,    -1,    48,    33,    50,    19,    49,    -1,    49,    -1,
-      -1,    21,    -1
-};
-
-/* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
+  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const CTBNDLtype_uint16 CTBNDLrline[] =
 {
        0,    79,    79,    84,    91,    96,   101,   111,   116,   123,
@@ -530,13 +506,13 @@ static const char *const CTBNDLtname[] =
   "additive_expression", "relational_expression", "equality_expression",
   "logical_and_expression", "logical_or_expression",
   "logical_xor_expression", "conditional_expression", "expression",
-  "term_opt", YY_NULL
+  "term_opt", YY_NULLPTR
 };
 #endif
 
 # ifdef YYPRINT
-/* YYTOKNUM[YYLEX-NUM] -- Internal token number corresponding to
-   token YYLEX-NUM.  */
+/* YYTOKNUM[NUM] -- (External) token number corresponding to the
+   (internal) symbol number NUM (which must be that of a token).  */
 static const CTBNDLtype_uint16 CTBNDLtoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
@@ -546,52 +522,18 @@ static const CTBNDLtype_uint16 CTBNDLtoknum[] =
 };
 # endif
 
-/* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
-static const CTBNDLtype_uint8 CTBNDLr1[] =
-{
-       0,    34,    35,    35,    36,    36,    36,    37,    37,    38,
-      38,    39,    39,    39,    39,    39,    39,    40,    41,    41,
-      41,    41,    41,    42,    42,    42,    43,    43,    43,    44,
-      44,    44,    44,    44,    45,    45,    45,    46,    46,    47,
-      47,    48,    48,    48,    49,    49,    50,    51,    51
-};
-
-/* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
-static const CTBNDLtype_uint8 CTBNDLr2[] =
-{
-       0,     2,     1,     2,     5,     4,     4,     1,     2,     4,
-       4,     1,     2,     1,     1,     1,     3,     1,     1,     2,
-       2,     2,     2,     1,     3,     3,     1,     3,     3,     1,
-       3,     3,     3,     3,     1,     3,     3,     1,     3,     1,
-       3,     1,     3,     3,     1,     5,     1,     0,     1
-};
-
-/* YYDEFACT[STATE-NAME] -- Default reduction number in state STATE-NUM.
-   Performed when YYTABLE doesn't specify something else to do.  Zero
-   means the default is an error.  */
-static const CTBNDLtype_uint8 CTBNDLdefact[] =
-{
-       0,     0,     0,     0,     2,     0,     0,     1,     3,    11,
-      13,    15,    14,     0,     0,     0,     0,     0,     0,    17,
-      18,    23,    26,    29,    34,    37,    39,    41,    44,    46,
-      47,     0,    22,    12,     0,    19,    20,    21,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    48,     6,     0,     5,     0,     7,    16,
-      24,    25,    27,    28,    33,    32,    30,    31,    35,    36,
-      38,    40,    42,    43,     0,     0,     4,     8,     0,     0,
-       0,    45,    10,     9
-};
-
-/* YYDEFGOTO[NTERM-NUM].  */
-static const CTBNDLtype_int8 CTBNDLdefgoto[] =
-{
-      -1,     3,     4,    57,    58,    19,    20,    21,    22,    23,
-      24,    25,    26,    27,    28,    29,    30,    54
-};
-
-/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-   STATE-NUM.  */
 #define YYPACT_NINF -16
+
+#define CTBNDLpact_value_is_default(Yystate) \
+  (!!((Yystate) == (-16)))
+
+#define YYTABLE_NINF -1
+
+#define CTBNDLtable_value_is_error(Yytable_value) \
+  0
+
+  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+     STATE-NUM.  */
 static const CTBNDLtype_int8 CTBNDLpact[] =
 {
       20,   -11,    39,    16,   -16,    32,    36,   -16,   -16,   -16,
@@ -605,17 +547,39 @@ static const CTBNDLtype_int8 CTBNDLpact[] =
       53,   -16,   -16,   -16
 };
 
-/* YYPGOTO[NTERM-NUM].  */
+  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+     Performed when YYTABLE does not specify something else to do.  Zero
+     means the default is an error.  */
+static const CTBNDLtype_uint8 CTBNDLdefact[] =
+{
+       0,     0,     0,     0,     2,     0,     0,     1,     3,    11,
+      13,    15,    14,     0,     0,     0,     0,     0,     0,    17,
+      18,    23,    26,    29,    34,    37,    39,    41,    44,    46,
+      47,     0,    22,    12,     0,    19,    20,    21,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    48,     6,     0,     5,     0,     7,    16,
+      24,    25,    27,    28,    33,    32,    30,    31,    35,    36,
+      38,    40,    42,    43,     0,     0,     4,     8,     0,     0,
+       0,    45,    10,     9
+};
+
+  /* YYPGOTO[NTERM-NUM].  */
 static const CTBNDLtype_int8 CTBNDLpgoto[] =
 {
      -16,   -16,    70,   -16,    18,   -16,   -16,   -12,    23,     7,
       -2,    29,    27,    15,   -16,     1,   -15,   -16
 };
 
-/* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
-   positive, shift that token.  If negative, reduce the rule which
-   number is the opposite.  If YYTABLE_NINF, syntax error.  */
-#define YYTABLE_NINF -1
+  /* YYDEFGOTO[NTERM-NUM].  */
+static const CTBNDLtype_int8 CTBNDLdefgoto[] =
+{
+      -1,     3,     4,    57,    58,    19,    20,    21,    22,    23,
+      24,    25,    26,    27,    28,    29,    30,    54
+};
+
+  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+     positive, shift that token.  If negative, reduce the rule whose
+     number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const CTBNDLtype_uint8 CTBNDLtable[] =
 {
       34,    32,    50,    55,    35,    36,    37,    55,     5,     9,
@@ -627,12 +591,6 @@ static const CTBNDLtype_uint8 CTBNDLtable[] =
       80,    44,    45,    62,    63,    72,    73,    49,    53,    75,
       59,    78,    82,     8,    83,    77,    71,    70,     0,    81
 };
-
-#define CTBNDLpact_value_is_default(Yystate) \
-  (!!((Yystate) == (-16)))
-
-#define CTBNDLtable_value_is_error(Yytable_value) \
-  YYID (0)
 
 static const CTBNDLtype_int8 CTBNDLcheck[] =
 {
@@ -646,8 +604,8 @@ static const CTBNDLtype_int8 CTBNDLcheck[] =
       24,    19,    21,     3,    21,    57,    49,    48,    -1,    78
 };
 
-/* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-   symbol of state STATE-NUM.  */
+  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
+     symbol of state STATE-NUM.  */
 static const CTBNDLtype_uint8 CTBNDLstos[] =
 {
        0,     3,    14,    35,    36,    19,     3,     0,    36,     3,
@@ -661,30 +619,36 @@ static const CTBNDLtype_uint8 CTBNDLstos[] =
       50,    49,    21,    21
 };
 
-#define CTBNDLerrok		(CTBNDLerrstatus = 0)
-#define CTBNDLclearin	(CTBNDLchar = YYEMPTY)
-#define YYEMPTY		(-2)
-#define YYEOF		0
+  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+static const CTBNDLtype_uint8 CTBNDLr1[] =
+{
+       0,    34,    35,    35,    36,    36,    36,    37,    37,    38,
+      38,    39,    39,    39,    39,    39,    39,    40,    41,    41,
+      41,    41,    41,    42,    42,    42,    43,    43,    43,    44,
+      44,    44,    44,    44,    45,    45,    45,    46,    46,    47,
+      47,    48,    48,    48,    49,    49,    50,    51,    51
+};
 
-#define YYACCEPT	goto CTBNDLacceptlab
-#define YYABORT		goto CTBNDLabortlab
-#define YYERROR		goto CTBNDLerrorlab
+  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+static const CTBNDLtype_uint8 CTBNDLr2[] =
+{
+       0,     2,     1,     2,     5,     4,     4,     1,     2,     4,
+       4,     1,     2,     1,     1,     1,     3,     1,     1,     2,
+       2,     2,     2,     1,     3,     3,     1,     3,     3,     1,
+       3,     3,     3,     3,     1,     3,     3,     1,     3,     1,
+       3,     1,     3,     3,     1,     5,     1,     0,     1
+};
 
 
-/* Like YYERROR except do call CTBNDLerror.  This remains here temporarily
-   to ease the transition to the new meaning of YYERROR, for GCC.
-   Once GCC version 2 has supplanted version 1, this can go.  However,
-   YYFAIL appears to be in use.  Nevertheless, it is formally deprecated
-   in Bison 2.4.2's NEWS entry, where a plan to phase it out is
-   discussed.  */
+#define CTBNDLerrok         (CTBNDLerrstatus = 0)
+#define CTBNDLclearin       (CTBNDLchar = YYEMPTY)
+#define YYEMPTY         (-2)
+#define YYEOF           0
 
-#define YYFAIL		goto CTBNDLerrlab
-#if defined YYFAIL
-  /* This is here to suppress warnings from the GCC cpp's
-     -Wunused-macros.  Normally we don't worry about that warning, but
-     some users do, and we want to make it easy for users to remove
-     YYFAIL uses, which will produce warnings from Bison 2.5.  */
-#endif
+#define YYACCEPT        goto CTBNDLacceptlab
+#define YYABORT         goto CTBNDLabortlab
+#define YYERROR         goto CTBNDLerrorlab
+
 
 #define YYRECOVERING()  (!!CTBNDLerrstatus)
 
@@ -701,27 +665,15 @@ do                                                              \
   else                                                          \
     {                                                           \
       CTBNDLerror (YY_("syntax error: cannot back up")); \
-      YYERROR;							\
-    }								\
-while (YYID (0))
+      YYERROR;                                                  \
+    }                                                           \
+while (0)
 
 /* Error token number */
-#define YYTERROR	1
-#define YYERRCODE	256
+#define YYTERROR        1
+#define YYERRCODE       256
 
 
-/* This macro is provided for backward compatibility. */
-#ifndef YY_LOCATION_PRINT
-# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-#endif
-
-
-/* YYLEX -- calling `CTBNDLlex' with the right arguments.  */
-#ifdef YYLEX_PARAM
-# define YYLEX CTBNDLlex (YYLEX_PARAM)
-#else
-# define YYLEX CTBNDLlex ()
-#endif
 
 /* Enable debugging if requested.  */
 #if YYDEBUG
@@ -731,40 +683,36 @@ while (YYID (0))
 #  define YYFPRINTF fprintf
 # endif
 
-# define YYDPRINTF(Args)			\
-do {						\
-  if (CTBNDLdebug)					\
-    YYFPRINTF Args;				\
-} while (YYID (0))
+# define YYDPRINTF(Args)                        \
+do {                                            \
+  if (CTBNDLdebug)                                  \
+    YYFPRINTF Args;                             \
+} while (0)
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)			  \
-do {									  \
-  if (CTBNDLdebug)								  \
-    {									  \
-      YYFPRINTF (stderr, "%s ", Title);					  \
-      CTBNDL_symbol_print (stderr,						  \
-		  Type, Value); \
-      YYFPRINTF (stderr, "\n");						  \
-    }									  \
-} while (YYID (0))
+/* This macro is provided for backward compatibility. */
+#ifndef YY_LOCATION_PRINT
+# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+#endif
 
 
-/*--------------------------------.
-| Print this symbol on YYOUTPUT.  |
-`--------------------------------*/
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
+do {                                                                      \
+  if (CTBNDLdebug)                                                            \
+    {                                                                     \
+      YYFPRINTF (stderr, "%s ", Title);                                   \
+      CTBNDL_symbol_print (stderr,                                            \
+                  Type, Value); \
+      YYFPRINTF (stderr, "\n");                                           \
+    }                                                                     \
+} while (0)
 
-/*ARGSUSED*/
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+
+/*----------------------------------------.
+| Print this symbol's value on YYOUTPUT.  |
+`----------------------------------------*/
+
 static void
 CTBNDL_symbol_value_print (FILE *CTBNDLoutput, int CTBNDLtype, YYSTYPE const * const CTBNDLvaluep)
-#else
-static void
-CTBNDL_symbol_value_print (CTBNDLoutput, CTBNDLtype, CTBNDLvaluep)
-    FILE *CTBNDLoutput;
-    int CTBNDLtype;
-    YYSTYPE const * const CTBNDLvaluep;
-#endif
 {
   FILE *CTBNDLo = CTBNDLoutput;
   YYUSE (CTBNDLo);
@@ -773,14 +721,8 @@ CTBNDL_symbol_value_print (CTBNDLoutput, CTBNDLtype, CTBNDLvaluep)
 # ifdef YYPRINT
   if (CTBNDLtype < YYNTOKENS)
     YYPRINT (CTBNDLoutput, CTBNDLtoknum[CTBNDLtype], *CTBNDLvaluep);
-# else
-  YYUSE (CTBNDLoutput);
 # endif
-  switch (CTBNDLtype)
-    {
-      default:
-        break;
-    }
+  YYUSE (CTBNDLtype);
 }
 
 
@@ -788,22 +730,11 @@ CTBNDL_symbol_value_print (CTBNDLoutput, CTBNDLtype, CTBNDLvaluep)
 | Print this symbol on YYOUTPUT.  |
 `--------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
 CTBNDL_symbol_print (FILE *CTBNDLoutput, int CTBNDLtype, YYSTYPE const * const CTBNDLvaluep)
-#else
-static void
-CTBNDL_symbol_print (CTBNDLoutput, CTBNDLtype, CTBNDLvaluep)
-    FILE *CTBNDLoutput;
-    int CTBNDLtype;
-    YYSTYPE const * const CTBNDLvaluep;
-#endif
 {
-  if (CTBNDLtype < YYNTOKENS)
-    YYFPRINTF (CTBNDLoutput, "token %s (", CTBNDLtname[CTBNDLtype]);
-  else
-    YYFPRINTF (CTBNDLoutput, "nterm %s (", CTBNDLtname[CTBNDLtype]);
+  YYFPRINTF (CTBNDLoutput, "%s %s (",
+             CTBNDLtype < YYNTOKENS ? "token" : "nterm", CTBNDLtname[CTBNDLtype]);
 
   CTBNDL_symbol_value_print (CTBNDLoutput, CTBNDLtype, CTBNDLvaluep);
   YYFPRINTF (CTBNDLoutput, ")");
@@ -814,16 +745,8 @@ CTBNDL_symbol_print (CTBNDLoutput, CTBNDLtype, CTBNDLvaluep)
 | TOP (included).                                                   |
 `------------------------------------------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
 CTBNDL_stack_print (CTBNDLtype_int16 *CTBNDLbottom, CTBNDLtype_int16 *CTBNDLtop)
-#else
-static void
-CTBNDL_stack_print (CTBNDLbottom, CTBNDLtop)
-    CTBNDLtype_int16 *CTBNDLbottom;
-    CTBNDLtype_int16 *CTBNDLtop;
-#endif
 {
   YYFPRINTF (stderr, "Stack now");
   for (; CTBNDLbottom <= CTBNDLtop; CTBNDLbottom++)
@@ -834,49 +757,42 @@ CTBNDL_stack_print (CTBNDLbottom, CTBNDLtop)
   YYFPRINTF (stderr, "\n");
 }
 
-# define YY_STACK_PRINT(Bottom, Top)				\
-do {								\
-  if (CTBNDLdebug)							\
-    CTBNDL_stack_print ((Bottom), (Top));				\
-} while (YYID (0))
+# define YY_STACK_PRINT(Bottom, Top)                            \
+do {                                                            \
+  if (CTBNDLdebug)                                                  \
+    CTBNDL_stack_print ((Bottom), (Top));                           \
+} while (0)
 
 
 /*------------------------------------------------.
 | Report that the YYRULE is going to be reduced.  |
 `------------------------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
-CTBNDL_reduce_print (YYSTYPE *CTBNDLvsp, int CTBNDLrule)
-#else
-static void
-CTBNDL_reduce_print (CTBNDLvsp, CTBNDLrule)
-    YYSTYPE *CTBNDLvsp;
-    int CTBNDLrule;
-#endif
+CTBNDL_reduce_print (CTBNDLtype_int16 *CTBNDLssp, YYSTYPE *CTBNDLvsp, int CTBNDLrule)
 {
+  unsigned long int CTBNDLlno = CTBNDLrline[CTBNDLrule];
   int CTBNDLnrhs = CTBNDLr2[CTBNDLrule];
   int CTBNDLi;
-  unsigned long int CTBNDLlno = CTBNDLrline[CTBNDLrule];
   YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
-	     CTBNDLrule - 1, CTBNDLlno);
+             CTBNDLrule - 1, CTBNDLlno);
   /* The symbols being reduced.  */
   for (CTBNDLi = 0; CTBNDLi < CTBNDLnrhs; CTBNDLi++)
     {
       YYFPRINTF (stderr, "   $%d = ", CTBNDLi + 1);
-      CTBNDL_symbol_print (stderr, CTBNDLrhs[CTBNDLprhs[CTBNDLrule] + CTBNDLi],
-		       &(CTBNDLvsp[(CTBNDLi + 1) - (CTBNDLnrhs)])
-		       		       );
+      CTBNDL_symbol_print (stderr,
+                       CTBNDLstos[CTBNDLssp[CTBNDLi + 1 - CTBNDLnrhs]],
+                       &(CTBNDLvsp[(CTBNDLi + 1) - (CTBNDLnrhs)])
+                                              );
       YYFPRINTF (stderr, "\n");
     }
 }
 
-# define YY_REDUCE_PRINT(Rule)		\
-do {					\
-  if (CTBNDLdebug)				\
-    CTBNDL_reduce_print (CTBNDLvsp, Rule); \
-} while (YYID (0))
+# define YY_REDUCE_PRINT(Rule)          \
+do {                                    \
+  if (CTBNDLdebug)                          \
+    CTBNDL_reduce_print (CTBNDLssp, CTBNDLvsp, Rule); \
+} while (0)
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
    multiple parsers can coexist.  */
@@ -890,7 +806,7 @@ int CTBNDLdebug;
 
 
 /* YYINITDEPTH -- initial size of the parser's stacks.  */
-#ifndef	YYINITDEPTH
+#ifndef YYINITDEPTH
 # define YYINITDEPTH 200
 #endif
 
@@ -913,15 +829,8 @@ int CTBNDLdebug;
 #   define CTBNDLstrlen strlen
 #  else
 /* Return the length of YYSTR.  */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static YYSIZE_T
 CTBNDLstrlen (const char *CTBNDLstr)
-#else
-static YYSIZE_T
-CTBNDLstrlen (CTBNDLstr)
-    const char *CTBNDLstr;
-#endif
 {
   YYSIZE_T CTBNDLlen;
   for (CTBNDLlen = 0; CTBNDLstr[CTBNDLlen]; CTBNDLlen++)
@@ -937,16 +846,8 @@ CTBNDLstrlen (CTBNDLstr)
 #  else
 /* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
    YYDEST.  */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static char *
 CTBNDLstpcpy (char *CTBNDLdest, const char *CTBNDLsrc)
-#else
-static char *
-CTBNDLstpcpy (CTBNDLdest, CTBNDLsrc)
-    char *CTBNDLdest;
-    const char *CTBNDLsrc;
-#endif
 {
   char *CTBNDLd = CTBNDLdest;
   const char *CTBNDLs = CTBNDLsrc;
@@ -976,27 +877,27 @@ CTBNDLtnamerr (char *CTBNDLres, const char *CTBNDLstr)
       char const *CTBNDLp = CTBNDLstr;
 
       for (;;)
-	switch (*++CTBNDLp)
-	  {
-	  case '\'':
-	  case ',':
-	    goto do_not_strip_quotes;
+        switch (*++CTBNDLp)
+          {
+          case '\'':
+          case ',':
+            goto do_not_strip_quotes;
 
-	  case '\\':
-	    if (*++CTBNDLp != '\\')
-	      goto do_not_strip_quotes;
-	    /* Fall through.  */
-	  default:
-	    if (CTBNDLres)
-	      CTBNDLres[CTBNDLn] = *CTBNDLp;
-	    CTBNDLn++;
-	    break;
+          case '\\':
+            if (*++CTBNDLp != '\\')
+              goto do_not_strip_quotes;
+            /* Fall through.  */
+          default:
+            if (CTBNDLres)
+              CTBNDLres[CTBNDLn] = *CTBNDLp;
+            CTBNDLn++;
+            break;
 
-	  case '"':
-	    if (CTBNDLres)
-	      CTBNDLres[CTBNDLn] = '\0';
-	    return CTBNDLn;
-	  }
+          case '"':
+            if (CTBNDLres)
+              CTBNDLres[CTBNDLn] = '\0';
+            return CTBNDLn;
+          }
     do_not_strip_quotes: ;
     }
 
@@ -1019,11 +920,11 @@ static int
 CTBNDLsyntax_error (YYSIZE_T *CTBNDLmsg_alloc, char **CTBNDLmsg,
                 CTBNDLtype_int16 *CTBNDLssp, int CTBNDLtoken)
 {
-  YYSIZE_T CTBNDLsize0 = CTBNDLtnamerr (YY_NULL, CTBNDLtname[CTBNDLtoken]);
+  YYSIZE_T CTBNDLsize0 = CTBNDLtnamerr (YY_NULLPTR, CTBNDLtname[CTBNDLtoken]);
   YYSIZE_T CTBNDLsize = CTBNDLsize0;
   enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
   /* Internationalized format string. */
-  const char *CTBNDLformat = YY_NULL;
+  const char *CTBNDLformat = YY_NULLPTR;
   /* Arguments of CTBNDLformat. */
   char const *CTBNDLarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
   /* Number of reported tokens (one for the "unexpected", one per
@@ -1031,10 +932,6 @@ CTBNDLsyntax_error (YYSIZE_T *CTBNDLmsg_alloc, char **CTBNDLmsg,
   int CTBNDLcount = 0;
 
   /* There are many possibilities here to consider:
-     - Assume YYFAIL is not used.  It's too flawed to consider.  See
-       <http://lists.gnu.org/archive/html/bison-patches/2009-12/msg00024.html>
-       for details.  YYERROR is fine as it does not invoke this
-       function.
      - If this state is a consistent state with a default action, then
        the only way this function was invoked is if the default action
        is an error action.  In that case, don't check for expected
@@ -1084,7 +981,7 @@ CTBNDLsyntax_error (YYSIZE_T *CTBNDLmsg_alloc, char **CTBNDLmsg,
                   }
                 CTBNDLarg[CTBNDLcount++] = CTBNDLtname[CTBNDLx];
                 {
-                  YYSIZE_T CTBNDLsize1 = CTBNDLsize + CTBNDLtnamerr (YY_NULL, CTBNDLtname[CTBNDLx]);
+                  YYSIZE_T CTBNDLsize1 = CTBNDLsize + CTBNDLtnamerr (YY_NULLPTR, CTBNDLtname[CTBNDLx]);
                   if (! (CTBNDLsize <= CTBNDLsize1
                          && CTBNDLsize1 <= YYSTACK_ALLOC_MAXIMUM))
                     return 2;
@@ -1151,31 +1048,17 @@ CTBNDLsyntax_error (YYSIZE_T *CTBNDLmsg_alloc, char **CTBNDLmsg,
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
-/*ARGSUSED*/
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
 CTBNDLdestruct (const char *CTBNDLmsg, int CTBNDLtype, YYSTYPE *CTBNDLvaluep)
-#else
-static void
-CTBNDLdestruct (CTBNDLmsg, CTBNDLtype, CTBNDLvaluep)
-    const char *CTBNDLmsg;
-    int CTBNDLtype;
-    YYSTYPE *CTBNDLvaluep;
-#endif
 {
   YYUSE (CTBNDLvaluep);
-
   if (!CTBNDLmsg)
     CTBNDLmsg = "Deleting";
   YY_SYMBOL_PRINT (CTBNDLmsg, CTBNDLtype, CTBNDLvaluep, CTBNDLlocationp);
 
-  switch (CTBNDLtype)
-    {
-
-      default:
-        break;
-    }
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  YYUSE (CTBNDLtype);
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
 
@@ -1184,18 +1067,8 @@ CTBNDLdestruct (CTBNDLmsg, CTBNDLtype, CTBNDLvaluep)
 /* The lookahead symbol.  */
 int CTBNDLchar;
 
-
-#ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-# define YY_IGNORE_MAYBE_UNINITIALIZED_END
-#endif
-#ifndef YY_INITIAL_VALUE
-# define YY_INITIAL_VALUE(Value) /* Nothing. */
-#endif
-
 /* The semantic value of the lookahead symbol.  */
-YYSTYPE CTBNDLlval YY_INITIAL_VALUE(CTBNDLval_default);
-
+YYSTYPE CTBNDLlval;
 /* Number of syntax errors so far.  */
 int CTBNDLnerrs;
 
@@ -1204,35 +1077,16 @@ int CTBNDLnerrs;
 | CTBNDLparse.  |
 `----------*/
 
-#ifdef YYPARSE_PARAM
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-int
-CTBNDLparse (void *YYPARSE_PARAM)
-#else
-int
-CTBNDLparse (YYPARSE_PARAM)
-    void *YYPARSE_PARAM;
-#endif
-#else /* ! YYPARSE_PARAM */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 int
 CTBNDLparse (void)
-#else
-int
-CTBNDLparse ()
-
-#endif
-#endif
 {
     int CTBNDLstate;
     /* Number of tokens to shift before error messages enabled.  */
     int CTBNDLerrstatus;
 
     /* The stacks and their tools:
-       `CTBNDLss': related to states.
-       `CTBNDLvs': related to semantic values.
+       'CTBNDLss': related to states.
+       'CTBNDLvs': related to semantic values.
 
        Refer to the stacks through separate pointers, to allow CTBNDLoverflow
        to reallocate them elsewhere.  */
@@ -1300,23 +1154,23 @@ CTBNDLparse ()
 
 #ifdef CTBNDLoverflow
       {
-	/* Give user a chance to reallocate the stack.  Use copies of
-	   these so that the &'s don't force the real ones into
-	   memory.  */
-	YYSTYPE *CTBNDLvs1 = CTBNDLvs;
-	CTBNDLtype_int16 *CTBNDLss1 = CTBNDLss;
+        /* Give user a chance to reallocate the stack.  Use copies of
+           these so that the &'s don't force the real ones into
+           memory.  */
+        YYSTYPE *CTBNDLvs1 = CTBNDLvs;
+        CTBNDLtype_int16 *CTBNDLss1 = CTBNDLss;
 
-	/* Each stack pointer address is followed by the size of the
-	   data in use in that stack, in bytes.  This used to be a
-	   conditional around just the two extra args, but that might
-	   be undefined if CTBNDLoverflow is a macro.  */
-	CTBNDLoverflow (YY_("memory exhausted"),
-		    &CTBNDLss1, CTBNDLsize * sizeof (*CTBNDLssp),
-		    &CTBNDLvs1, CTBNDLsize * sizeof (*CTBNDLvsp),
-		    &CTBNDLstacksize);
+        /* Each stack pointer address is followed by the size of the
+           data in use in that stack, in bytes.  This used to be a
+           conditional around just the two extra args, but that might
+           be undefined if CTBNDLoverflow is a macro.  */
+        CTBNDLoverflow (YY_("memory exhausted"),
+                    &CTBNDLss1, CTBNDLsize * sizeof (*CTBNDLssp),
+                    &CTBNDLvs1, CTBNDLsize * sizeof (*CTBNDLvsp),
+                    &CTBNDLstacksize);
 
-	CTBNDLss = CTBNDLss1;
-	CTBNDLvs = CTBNDLvs1;
+        CTBNDLss = CTBNDLss1;
+        CTBNDLvs = CTBNDLvs1;
       }
 #else /* no CTBNDLoverflow */
 # ifndef YYSTACK_RELOCATE
@@ -1324,22 +1178,22 @@ CTBNDLparse ()
 # else
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= CTBNDLstacksize)
-	goto CTBNDLexhaustedlab;
+        goto CTBNDLexhaustedlab;
       CTBNDLstacksize *= 2;
       if (YYMAXDEPTH < CTBNDLstacksize)
-	CTBNDLstacksize = YYMAXDEPTH;
+        CTBNDLstacksize = YYMAXDEPTH;
 
       {
-	CTBNDLtype_int16 *CTBNDLss1 = CTBNDLss;
-	union CTBNDLalloc *CTBNDLptr =
-	  (union CTBNDLalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (CTBNDLstacksize));
-	if (! CTBNDLptr)
-	  goto CTBNDLexhaustedlab;
-	YYSTACK_RELOCATE (CTBNDLss_alloc, CTBNDLss);
-	YYSTACK_RELOCATE (CTBNDLvs_alloc, CTBNDLvs);
+        CTBNDLtype_int16 *CTBNDLss1 = CTBNDLss;
+        union CTBNDLalloc *CTBNDLptr =
+          (union CTBNDLalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (CTBNDLstacksize));
+        if (! CTBNDLptr)
+          goto CTBNDLexhaustedlab;
+        YYSTACK_RELOCATE (CTBNDLss_alloc, CTBNDLss);
+        YYSTACK_RELOCATE (CTBNDLvs_alloc, CTBNDLvs);
 #  undef YYSTACK_RELOCATE
-	if (CTBNDLss1 != CTBNDLssa)
-	  YYSTACK_FREE (CTBNDLss1);
+        if (CTBNDLss1 != CTBNDLssa)
+          YYSTACK_FREE (CTBNDLss1);
       }
 # endif
 #endif /* no CTBNDLoverflow */
@@ -1348,10 +1202,10 @@ CTBNDLparse ()
       CTBNDLvsp = CTBNDLvs + CTBNDLsize - 1;
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-		  (unsigned long int) CTBNDLstacksize));
+                  (unsigned long int) CTBNDLstacksize));
 
       if (CTBNDLss + CTBNDLstacksize - 1 <= CTBNDLssp)
-	YYABORT;
+        YYABORT;
     }
 
   YYDPRINTF ((stderr, "Entering state %d\n", CTBNDLstate));
@@ -1380,7 +1234,7 @@ CTBNDLbackup:
   if (CTBNDLchar == YYEMPTY)
     {
       YYDPRINTF ((stderr, "Reading a token: "));
-      CTBNDLchar = YYLEX;
+      CTBNDLchar = CTBNDLlex ();
     }
 
   if (CTBNDLchar <= YYEOF)
@@ -1445,7 +1299,7 @@ CTBNDLreduce:
   CTBNDLlen = CTBNDLr2[CTBNDLn];
 
   /* If YYLEN is nonzero, implement the default value of the action:
-     `$$ = $1'.
+     '$$ = $1'.
 
      Otherwise, the following line sets YYVAL to garbage.
      This behavior is undocumented and Bison
@@ -1459,385 +1313,384 @@ CTBNDLreduce:
   switch (CTBNDLn)
     {
         case 2:
-/* Line 1792 of yacc.c  */
-#line 80 "BooleanGrammar.y"
+#line 80 "BooleanGrammar.y" /* yacc.c:1646  */
     {
   (CTBNDLval.node_decl_list) = new std::vector<NodeDecl*>();
-  (CTBNDLval.node_decl_list)->push_back((CTBNDLvsp[(1) - (1)].node_decl));
+  (CTBNDLval.node_decl_list)->push_back((CTBNDLvsp[0].node_decl));
 }
+#line 1322 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-/* Line 1792 of yacc.c  */
-#line 85 "BooleanGrammar.y"
+#line 85 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLvsp[(1) - (2)].node_decl_list)->push_back((CTBNDLvsp[(2) - (2)].node_decl));
-  (CTBNDLval.node_decl_list) = (CTBNDLvsp[(1) - (2)].node_decl_list);
+  (CTBNDLvsp[-1].node_decl_list)->push_back((CTBNDLvsp[0].node_decl));
+  (CTBNDLval.node_decl_list) = (CTBNDLvsp[-1].node_decl_list);
 }
+#line 1331 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-/* Line 1792 of yacc.c  */
-#line 92 "BooleanGrammar.y"
+#line 92 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.node_decl) = new NodeDecl((CTBNDLvsp[(2) - (5)].str), (CTBNDLvsp[(4) - (5)].node_decl_item_list));
-  free((CTBNDLvsp[(2) - (5)].str));
+  (CTBNDLval.node_decl) = new NodeDecl((CTBNDLvsp[-3].str), (CTBNDLvsp[-1].node_decl_item_list));
+  free((CTBNDLvsp[-3].str));
 }
+#line 1340 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-/* Line 1792 of yacc.c  */
-#line 97 "BooleanGrammar.y"
+#line 97 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.node_decl) = new NodeDecl((CTBNDLvsp[(2) - (4)].str), NULL);
-  free((CTBNDLvsp[(2) - (4)].str));
+  (CTBNDLval.node_decl) = new NodeDecl((CTBNDLvsp[-2].str), NULL);
+  free((CTBNDLvsp[-2].str));
 }
+#line 1349 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-/* Line 1792 of yacc.c  */
-#line 102 "BooleanGrammar.y"
+#line 102 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  NodeDeclItem* decl_item = new NodeDeclItem("logic", (CTBNDLvsp[(3) - (4)].expr));
+  NodeDeclItem* decl_item = new NodeDeclItem("logic", (CTBNDLvsp[-1].expr));
   std::vector<NodeDeclItem*>* decl_item_v = new std::vector<NodeDeclItem*>();
   decl_item_v->push_back(decl_item);
-  (CTBNDLval.node_decl) = new NodeDecl((CTBNDLvsp[(1) - (4)].str), decl_item_v);
-  free((CTBNDLvsp[(1) - (4)].str));
+  (CTBNDLval.node_decl) = new NodeDecl((CTBNDLvsp[-3].str), decl_item_v);
+  free((CTBNDLvsp[-3].str));
 }
+#line 1361 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-/* Line 1792 of yacc.c  */
-#line 112 "BooleanGrammar.y"
+#line 112 "BooleanGrammar.y" /* yacc.c:1646  */
     {
   (CTBNDLval.node_decl_item_list) = new std::vector<NodeDeclItem*>();
-  (CTBNDLval.node_decl_item_list)->push_back((CTBNDLvsp[(1) - (1)].node_decl_item));
+  (CTBNDLval.node_decl_item_list)->push_back((CTBNDLvsp[0].node_decl_item));
 }
+#line 1370 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-/* Line 1792 of yacc.c  */
-#line 117 "BooleanGrammar.y"
+#line 117 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLvsp[(1) - (2)].node_decl_item_list)->push_back((CTBNDLvsp[(2) - (2)].node_decl_item));
-  (CTBNDLval.node_decl_item_list) = (CTBNDLvsp[(1) - (2)].node_decl_item_list);
+  (CTBNDLvsp[-1].node_decl_item_list)->push_back((CTBNDLvsp[0].node_decl_item));
+  (CTBNDLval.node_decl_item_list) = (CTBNDLvsp[-1].node_decl_item_list);
 }
+#line 1379 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-/* Line 1792 of yacc.c  */
-#line 124 "BooleanGrammar.y"
+#line 124 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.node_decl_item) = new NodeDeclItem((CTBNDLvsp[(1) - (4)].str), (CTBNDLvsp[(3) - (4)].expr));
-  free((CTBNDLvsp[(1) - (4)].str));
+  (CTBNDLval.node_decl_item) = new NodeDeclItem((CTBNDLvsp[-3].str), (CTBNDLvsp[-1].expr));
+  free((CTBNDLvsp[-3].str));
 }
+#line 1388 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-/* Line 1792 of yacc.c  */
-#line 129 "BooleanGrammar.y"
+#line 129 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.node_decl_item) = new NodeDeclItem((CTBNDLvsp[(1) - (4)].str), (CTBNDLvsp[(3) - (4)].str));
-  free((CTBNDLvsp[(1) - (4)].str));
-  free((CTBNDLvsp[(3) - (4)].str));
+  (CTBNDLval.node_decl_item) = new NodeDeclItem((CTBNDLvsp[-3].str), (CTBNDLvsp[-1].str));
+  free((CTBNDLvsp[-3].str));
+  free((CTBNDLvsp[-1].str));
 }
+#line 1398 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-/* Line 1792 of yacc.c  */
-#line 137 "BooleanGrammar.y"
+#line 137 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  Node* node = current_network->getOrMakeNode((CTBNDLvsp[(1) - (1)].str));
+  Node* node = current_network->getOrMakeNode((CTBNDLvsp[0].str));
   (CTBNDLval.expr) = new NodeExpression(node);
-  free((CTBNDLvsp[(1) - (1)].str));
+  free((CTBNDLvsp[0].str));
 }
+#line 1408 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-/* Line 1792 of yacc.c  */
-#line 143 "BooleanGrammar.y"
+#line 143 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new AliasExpression((CTBNDLvsp[(2) - (2)].str));
-  free((CTBNDLvsp[(2) - (2)].str));
+  (CTBNDLval.expr) = new AliasExpression((CTBNDLvsp[0].str));
+  free((CTBNDLvsp[0].str));
 }
+#line 1417 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-/* Line 1792 of yacc.c  */
-#line 148 "BooleanGrammar.y"
+#line 148 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new SymbolExpression(SymbolTable::getInstance()->getOrMakeSymbol((CTBNDLvsp[(1) - (1)].str)));
-  free((CTBNDLvsp[(1) - (1)].str));
+  (CTBNDLval.expr) = new SymbolExpression(SymbolTable::getInstance()->getOrMakeSymbol((CTBNDLvsp[0].str)));
+  free((CTBNDLvsp[0].str));
 }
+#line 1426 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-/* Line 1792 of yacc.c  */
-#line 153 "BooleanGrammar.y"
+#line 153 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new ConstantExpression((CTBNDLvsp[(1) - (1)].l));
+  (CTBNDLval.expr) = new ConstantExpression((CTBNDLvsp[0].l));
 }
+#line 1434 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-/* Line 1792 of yacc.c  */
-#line 157 "BooleanGrammar.y"
+#line 157 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new ConstantExpression((CTBNDLvsp[(1) - (1)].d));
+  (CTBNDLval.expr) = new ConstantExpression((CTBNDLvsp[0].d));
 }
+#line 1442 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-/* Line 1792 of yacc.c  */
-#line 161 "BooleanGrammar.y"
+#line 161 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new ParenthesisExpression((CTBNDLvsp[(2) - (3)].expr));
+  (CTBNDLval.expr) = new ParenthesisExpression((CTBNDLvsp[-1].expr));
 }
+#line 1450 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-/* Line 1792 of yacc.c  */
-#line 167 "BooleanGrammar.y"
+#line 167 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1458 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-/* Line 1792 of yacc.c  */
-#line 197 "BooleanGrammar.y"
+#line 197 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1466 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-/* Line 1792 of yacc.c  */
-#line 201 "BooleanGrammar.y"
+#line 201 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(2) - (2)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1474 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-/* Line 1792 of yacc.c  */
-#line 205 "BooleanGrammar.y"
+#line 205 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new SubExpression(new ConstantExpression(0.0), (CTBNDLvsp[(2) - (2)].expr));
+  (CTBNDLval.expr) = new SubExpression(new ConstantExpression(0.0), (CTBNDLvsp[0].expr));
 }
+#line 1482 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-/* Line 1792 of yacc.c  */
-#line 209 "BooleanGrammar.y"
+#line 209 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new NotLogicalExpression((CTBNDLvsp[(2) - (2)].expr));
+  (CTBNDLval.expr) = new NotLogicalExpression((CTBNDLvsp[0].expr));
 }
+#line 1490 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-/* Line 1792 of yacc.c  */
-#line 213 "BooleanGrammar.y"
+#line 213 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new NotLogicalExpression((CTBNDLvsp[(2) - (2)].expr));
+  (CTBNDLval.expr) = new NotLogicalExpression((CTBNDLvsp[0].expr));
 }
+#line 1498 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-/* Line 1792 of yacc.c  */
-#line 219 "BooleanGrammar.y"
+#line 219 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1506 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-/* Line 1792 of yacc.c  */
-#line 223 "BooleanGrammar.y"
+#line 223 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new MulExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new MulExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1514 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-/* Line 1792 of yacc.c  */
-#line 227 "BooleanGrammar.y"
+#line 227 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new DivExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new DivExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1522 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-/* Line 1792 of yacc.c  */
-#line 233 "BooleanGrammar.y"
+#line 233 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1530 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-/* Line 1792 of yacc.c  */
-#line 237 "BooleanGrammar.y"
+#line 237 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new AddExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new AddExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1538 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-/* Line 1792 of yacc.c  */
-#line 241 "BooleanGrammar.y"
+#line 241 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new SubExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new SubExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1546 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-/* Line 1792 of yacc.c  */
-#line 247 "BooleanGrammar.y"
+#line 247 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1554 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-/* Line 1792 of yacc.c  */
-#line 251 "BooleanGrammar.y"
+#line 251 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new LetterExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new LetterExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1562 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-/* Line 1792 of yacc.c  */
-#line 255 "BooleanGrammar.y"
+#line 255 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new GreaterExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new GreaterExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1570 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-/* Line 1792 of yacc.c  */
-#line 259 "BooleanGrammar.y"
+#line 259 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new LetterOrEqualExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new LetterOrEqualExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1578 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-/* Line 1792 of yacc.c  */
-#line 263 "BooleanGrammar.y"
+#line 263 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new GreaterOrEqualExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new GreaterOrEqualExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1586 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-/* Line 1792 of yacc.c  */
-#line 269 "BooleanGrammar.y"
+#line 269 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1594 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-/* Line 1792 of yacc.c  */
-#line 273 "BooleanGrammar.y"
+#line 273 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new EqualExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new EqualExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1602 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-/* Line 1792 of yacc.c  */
-#line 277 "BooleanGrammar.y"
+#line 277 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new NotEqualExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new NotEqualExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1610 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-/* Line 1792 of yacc.c  */
-#line 283 "BooleanGrammar.y"
+#line 283 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1618 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-/* Line 1792 of yacc.c  */
-#line 287 "BooleanGrammar.y"
+#line 287 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new AndLogicalExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new AndLogicalExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1626 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-/* Line 1792 of yacc.c  */
-#line 293 "BooleanGrammar.y"
+#line 293 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1634 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-/* Line 1792 of yacc.c  */
-#line 297 "BooleanGrammar.y"
+#line 297 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new OrLogicalExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new OrLogicalExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1642 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-/* Line 1792 of yacc.c  */
-#line 303 "BooleanGrammar.y"
+#line 303 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1650 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-/* Line 1792 of yacc.c  */
-#line 307 "BooleanGrammar.y"
+#line 307 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new XorLogicalExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new XorLogicalExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1658 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-/* Line 1792 of yacc.c  */
-#line 311 "BooleanGrammar.y"
+#line 311 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new XorLogicalExpression((CTBNDLvsp[(1) - (3)].expr), (CTBNDLvsp[(3) - (3)].expr));
+  (CTBNDLval.expr) = new XorLogicalExpression((CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1666 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-/* Line 1792 of yacc.c  */
-#line 317 "BooleanGrammar.y"
+#line 317 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1674 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-/* Line 1792 of yacc.c  */
-#line 321 "BooleanGrammar.y"
+#line 321 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = new CondExpression((CTBNDLvsp[(1) - (5)].expr), (CTBNDLvsp[(3) - (5)].expr), (CTBNDLvsp[(5) - (5)].expr));
+  (CTBNDLval.expr) = new CondExpression((CTBNDLvsp[-4].expr), (CTBNDLvsp[-2].expr), (CTBNDLvsp[0].expr));
 }
+#line 1682 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-/* Line 1792 of yacc.c  */
-#line 327 "BooleanGrammar.y"
+#line 327 "BooleanGrammar.y" /* yacc.c:1646  */
     {
-  (CTBNDLval.expr) = (CTBNDLvsp[(1) - (1)].expr);
+  (CTBNDLval.expr) = (CTBNDLvsp[0].expr);
 }
+#line 1690 "BooleanGrammar.tab.c" /* yacc.c:1646  */
     break;
 
 
-/* Line 1792 of yacc.c  */
-#line 1841 "BooleanGrammar.tab.c"
+#line 1694 "BooleanGrammar.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter CTBNDLchar, and that requires
@@ -1859,7 +1712,7 @@ CTBNDLreduce:
 
   *++CTBNDLvsp = CTBNDLval;
 
-  /* Now `shift' the result of the reduction.  Determine what state
+  /* Now 'shift' the result of the reduction.  Determine what state
      that goes to, based on the state we popped back to and the rule
      number reduced by.  */
 
@@ -1874,9 +1727,9 @@ CTBNDLreduce:
   goto CTBNDLnewstate;
 
 
-/*------------------------------------.
-| CTBNDLerrlab -- here on detecting error |
-`------------------------------------*/
+/*--------------------------------------.
+| CTBNDLerrlab -- here on detecting error.  |
+`--------------------------------------*/
 CTBNDLerrlab:
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
@@ -1927,20 +1780,20 @@ CTBNDLerrlab:
   if (CTBNDLerrstatus == 3)
     {
       /* If just tried and failed to reuse lookahead token after an
-	 error, discard it.  */
+         error, discard it.  */
 
       if (CTBNDLchar <= YYEOF)
-	{
-	  /* Return failure if at end of input.  */
-	  if (CTBNDLchar == YYEOF)
-	    YYABORT;
-	}
+        {
+          /* Return failure if at end of input.  */
+          if (CTBNDLchar == YYEOF)
+            YYABORT;
+        }
       else
-	{
-	  CTBNDLdestruct ("Error: discarding",
-		      CTBNDLtoken, &CTBNDLlval);
-	  CTBNDLchar = YYEMPTY;
-	}
+        {
+          CTBNDLdestruct ("Error: discarding",
+                      CTBNDLtoken, &CTBNDLlval);
+          CTBNDLchar = YYEMPTY;
+        }
     }
 
   /* Else will try to reuse lookahead token after shifting the error
@@ -1959,7 +1812,7 @@ CTBNDLerrorlab:
   if (/*CONSTCOND*/ 0)
      goto CTBNDLerrorlab;
 
-  /* Do not reclaim the symbols of the rule which action triggered
+  /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
   YYPOPSTACK (CTBNDLlen);
   CTBNDLlen = 0;
@@ -1972,29 +1825,29 @@ CTBNDLerrorlab:
 | CTBNDLerrlab1 -- common code for both syntax error and YYERROR.  |
 `-------------------------------------------------------------*/
 CTBNDLerrlab1:
-  CTBNDLerrstatus = 3;	/* Each real token shifted decrements this.  */
+  CTBNDLerrstatus = 3;      /* Each real token shifted decrements this.  */
 
   for (;;)
     {
       CTBNDLn = CTBNDLpact[CTBNDLstate];
       if (!CTBNDLpact_value_is_default (CTBNDLn))
-	{
-	  CTBNDLn += YYTERROR;
-	  if (0 <= CTBNDLn && CTBNDLn <= YYLAST && CTBNDLcheck[CTBNDLn] == YYTERROR)
-	    {
-	      CTBNDLn = CTBNDLtable[CTBNDLn];
-	      if (0 < CTBNDLn)
-		break;
-	    }
-	}
+        {
+          CTBNDLn += YYTERROR;
+          if (0 <= CTBNDLn && CTBNDLn <= YYLAST && CTBNDLcheck[CTBNDLn] == YYTERROR)
+            {
+              CTBNDLn = CTBNDLtable[CTBNDLn];
+              if (0 < CTBNDLn)
+                break;
+            }
+        }
 
       /* Pop the current state because it cannot handle the error token.  */
       if (CTBNDLssp == CTBNDLss)
-	YYABORT;
+        YYABORT;
 
 
       CTBNDLdestruct ("Error: popping",
-		  CTBNDLstos[CTBNDLstate], CTBNDLvsp);
+                  CTBNDLstos[CTBNDLstate], CTBNDLvsp);
       YYPOPSTACK (1);
       CTBNDLstate = *CTBNDLssp;
       YY_STACK_PRINT (CTBNDLss, CTBNDLssp);
@@ -2045,14 +1898,14 @@ CTBNDLreturn:
       CTBNDLdestruct ("Cleanup: discarding lookahead",
                   CTBNDLtoken, &CTBNDLlval);
     }
-  /* Do not reclaim the symbols of the rule which action triggered
+  /* Do not reclaim the symbols of the rule whose action triggered
      this YYABORT or YYACCEPT.  */
   YYPOPSTACK (CTBNDLlen);
   YY_STACK_PRINT (CTBNDLss, CTBNDLssp);
   while (CTBNDLssp != CTBNDLss)
     {
       CTBNDLdestruct ("Cleanup: popping",
-		  CTBNDLstos[*CTBNDLssp], CTBNDLvsp);
+                  CTBNDLstos[*CTBNDLssp], CTBNDLvsp);
       YYPOPSTACK (1);
     }
 #ifndef CTBNDLoverflow
@@ -2063,13 +1916,9 @@ CTBNDLreturn:
   if (CTBNDLmsg != CTBNDLmsgbuf)
     YYSTACK_FREE (CTBNDLmsg);
 #endif
-  /* Make sure YYID is used.  */
-  return YYID (CTBNDLresult);
+  return CTBNDLresult;
 }
-
-
-/* Line 2055 of yacc.c  */
-#line 336 "BooleanGrammar.y"
+#line 336 "BooleanGrammar.y" /* yacc.c:1906  */
 
 
 #include "lex.CTBNDL.cc"

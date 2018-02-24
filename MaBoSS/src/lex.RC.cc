@@ -7,8 +7,8 @@
 
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
-#define YY_FLEX_MINOR_VERSION 5
-#define YY_FLEX_SUBMINOR_VERSION 37
+#define YY_FLEX_MINOR_VERSION 6
+#define YY_FLEX_SUBMINOR_VERSION 0
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
 #endif
@@ -141,7 +141,15 @@ typedef unsigned int flex_uint32_t;
 
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
+#ifdef __ia64__
+/* On IA-64, the buffer size is 16k, not 8k.
+ * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
+ * Ditto for the __ia64__ case accordingly.
+ */
+#define YY_BUF_SIZE 32768
+#else
 #define YY_BUF_SIZE 16384
+#endif /* __ia64__ */
 #endif
 
 /* The state buf must be large enough to hold one state per character in the main buffer.
@@ -167,6 +175,7 @@ extern FILE *RCin, *RCout;
 #define EOB_ACT_LAST_MATCH 2
 
     #define YY_LESS_LINENO(n)
+    #define YY_LINENO_REWIND_TO(ptr)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define RCless(n) \
@@ -201,7 +210,7 @@ struct RC_buffer_state
 	/* Number of characters read into RC_ch_buf, not including EOB
 	 * characters.
 	 */
-	RC_size_t RC_n_chars;
+	int RC_n_chars;
 
 	/* Whether we "own" the buffer - i.e., we know we created it,
 	 * and can realloc() it to grow it, and should free() it to
@@ -271,7 +280,7 @@ static YY_BUFFER_STATE * RC_buffer_stack = 0; /**< Stack as an array. */
 
 /* RC_hold_char holds the character lost when RCtext is formed. */
 static char RC_hold_char;
-static RC_size_t RC_n_chars;		/* number of characters read into RC_ch_buf */
+static int RC_n_chars;		/* number of characters read into RC_ch_buf */
 RC_size_t RCleng;
 
 /* Points to current character in buffer. */
@@ -343,11 +352,17 @@ extern int RClineno;
 int RClineno = 1;
 
 extern char *RCtext;
+#ifdef RCtext_ptr
+#undef RCtext_ptr
+#endif
 #define RCtext_ptr RCtext
 
 static RC_state_type RC_get_previous_state (void );
 static RC_state_type RC_try_NUL_trans (RC_state_type current_state  );
 static int RC_get_next_buffer (void );
+#if defined(__GNUC__) && __GNUC__ >= 3
+__attribute__((__noreturn__))
+#endif
 static void RC_fatal_error (RCconst char msg[]  );
 
 /* Done after the current pattern has been matched and before the
@@ -377,7 +392,7 @@ static RCconst flex_int16_t RC_accept[39] =
         8,    8,    0,   10,    8,    5,    6,    0
     } ;
 
-static RCconst flex_int32_t RC_ec[256] =
+static RCconst YY_CHAR RC_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         2,    2,    2,    1,    1,    1,    1,    1,    1,    1,
@@ -409,13 +424,13 @@ static RCconst flex_int32_t RC_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static RCconst flex_int32_t RC_meta[20] =
+static RCconst YY_CHAR RC_meta[20] =
     {   0,
         1,    1,    2,    1,    1,    1,    1,    1,    1,    3,
         4,    4,    4,    4,    4,    4,    4,    4,    4
     } ;
 
-static RCconst flex_int16_t RC_base[43] =
+static RCconst flex_uint16_t RC_base[43] =
     {   0,
         0,    0,   59,   60,   56,   60,    0,   47,   15,   17,
         0,   45,   39,   52,    0,   13,   60,    0,   18,    0,
@@ -433,7 +448,7 @@ static RCconst flex_int16_t RC_def[43] =
        38,   38
     } ;
 
-static RCconst flex_int16_t RC_nxt[80] =
+static RCconst flex_uint16_t RC_nxt[80] =
     {   0,
         4,    5,    6,    7,    4,    4,    4,    8,    9,   10,
        11,   11,   11,   12,   11,   11,   11,   13,   11,   17,
@@ -511,7 +526,7 @@ static unsigned int input_lineno = 1;
 static const char* file;
 static const char* expr;
 static void skip_comment(void);
-#line 515 "<stdout>"
+#line 530 "<stdout>"
 
 #define INITIAL 0
 
@@ -544,11 +559,11 @@ void RCset_extra (YY_EXTRA_TYPE user_defined  );
 
 FILE *RCget_in (void );
 
-void RCset_in  (FILE * in_str  );
+void RCset_in  (FILE * _in_str  );
 
 FILE *RCget_out (void );
 
-void RCset_out  (FILE * out_str  );
+void RCset_out  (FILE * _out_str  );
 
 RC_size_t RCget_leng (void );
 
@@ -556,7 +571,7 @@ char *RCget_text (void );
 
 int RCget_lineno (void );
 
-void RCset_lineno (int line_number  );
+void RCset_lineno (int _line_number  );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -570,8 +585,12 @@ extern int RCwrap (void );
 #endif
 #endif
 
+#ifndef YY_NO_UNPUT
+    
     static void RCunput (int c,char *buf_ptr  );
     
+#endif
+
 #ifndef RCtext_ptr
 static void RC_flex_strncpy (char *,RCconst char *,int );
 #endif
@@ -592,7 +611,12 @@ static int input (void );
 
 /* Amount of stuff to slurp up with each read. */
 #ifndef YY_READ_BUF_SIZE
+#ifdef __ia64__
+/* On IA-64, the buffer size is 16k, not 8k */
+#define YY_READ_BUF_SIZE 16384
+#else
 #define YY_READ_BUF_SIZE 8192
+#endif /* __ia64__ */
 #endif
 
 /* Copy whatever the last rule matched to the standard output. */
@@ -679,7 +703,7 @@ extern int RClex (void);
 
 /* Code executed at the end of each rule. */
 #ifndef YY_BREAK
-#define YY_BREAK break;
+#define YY_BREAK /*LINTED*/break;
 #endif
 
 #define YY_RULE_SETUP \
@@ -689,15 +713,10 @@ extern int RClex (void);
  */
 YY_DECL
 {
-	register RC_state_type RC_current_state;
-	register char *RC_cp, *RC_bp;
-	register int RC_act;
+	RC_state_type RC_current_state;
+	char *RC_cp, *RC_bp;
+	int RC_act;
     
-#line 46 "RunConfigGrammar.l"
-
-
-#line 700 "<stdout>"
-
 	if ( !(RC_init) )
 		{
 		(RC_init) = 1;
@@ -724,7 +743,13 @@ YY_DECL
 		RC_load_buffer_state( );
 		}
 
-	while ( 1 )		/* loops until end-of-file is reached */
+	{
+#line 46 "RunConfigGrammar.l"
+
+
+#line 751 "<stdout>"
+
+	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
 		RC_cp = (RC_c_buf_p);
 
@@ -740,7 +765,7 @@ YY_DECL
 RC_match:
 		do
 			{
-			register YY_CHAR RC_c = RC_ec[YY_SC_TO_UI(*RC_cp)];
+			YY_CHAR RC_c = RC_ec[YY_SC_TO_UI(*RC_cp)] ;
 			if ( RC_accept[RC_current_state] )
 				{
 				(RC_last_accepting_state) = RC_current_state;
@@ -851,7 +876,7 @@ YY_RULE_SETUP
 #line 67 "RunConfigGrammar.l"
 ECHO;
 	YY_BREAK
-#line 855 "<stdout>"
+#line 880 "<stdout>"
 case YY_STATE_EOF(INITIAL):
 	RCterminate();
 
@@ -982,6 +1007,7 @@ case YY_STATE_EOF(INITIAL):
 			"fatal flex scanner internal error--no action found" );
 	} /* end of action switch */
 		} /* end of scanning one token */
+	} /* end of user's declarations */
 } /* end of RClex */
 
 /* RC_get_next_buffer - try to read in a new buffer
@@ -993,9 +1019,9 @@ case YY_STATE_EOF(INITIAL):
  */
 static int RC_get_next_buffer (void)
 {
-    	register char *dest = YY_CURRENT_BUFFER_LVALUE->RC_ch_buf;
-	register char *source = (RCtext_ptr);
-	register int number_to_move, i;
+    	char *dest = YY_CURRENT_BUFFER_LVALUE->RC_ch_buf;
+	char *source = (RCtext_ptr);
+	RC_size_t number_to_move, i;
 	int ret_val;
 
 	if ( (RC_c_buf_p) > &YY_CURRENT_BUFFER_LVALUE->RC_ch_buf[(RC_n_chars) + 1] )
@@ -1024,7 +1050,7 @@ static int RC_get_next_buffer (void)
 	/* Try to read more data. */
 
 	/* First move last chars to start of buffer. */
-	number_to_move = (int) ((RC_c_buf_p) - (RCtext_ptr)) - 1;
+	number_to_move = (RC_size_t) ((RC_c_buf_p) - (RCtext_ptr)) - 1;
 
 	for ( i = 0; i < number_to_move; ++i )
 		*(dest++) = *(source++);
@@ -1106,9 +1132,9 @@ static int RC_get_next_buffer (void)
 	else
 		ret_val = EOB_ACT_CONTINUE_SCAN;
 
-	if ((RC_size_t) ((RC_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->RC_buf_size) {
+	if ((int) ((RC_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->RC_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
-		RC_size_t new_size = (RC_n_chars) + number_to_move + ((RC_n_chars) >> 1);
+		int new_size = (RC_n_chars) + number_to_move + ((RC_n_chars) >> 1);
 		YY_CURRENT_BUFFER_LVALUE->RC_ch_buf = (char *) RCrealloc((void *) YY_CURRENT_BUFFER_LVALUE->RC_ch_buf,new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->RC_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in RC_get_next_buffer()" );
@@ -1127,14 +1153,14 @@ static int RC_get_next_buffer (void)
 
     static RC_state_type RC_get_previous_state (void)
 {
-	register RC_state_type RC_current_state;
-	register char *RC_cp;
+	RC_state_type RC_current_state;
+	char *RC_cp;
     
 	RC_current_state = (RC_start);
 
 	for ( RC_cp = (RCtext_ptr) + YY_MORE_ADJ; RC_cp < (RC_c_buf_p); ++RC_cp )
 		{
-		register YY_CHAR RC_c = (*RC_cp ? RC_ec[YY_SC_TO_UI(*RC_cp)] : 1);
+		YY_CHAR RC_c = (*RC_cp ? RC_ec[YY_SC_TO_UI(*RC_cp)] : 1);
 		if ( RC_accept[RC_current_state] )
 			{
 			(RC_last_accepting_state) = RC_current_state;
@@ -1159,10 +1185,10 @@ static int RC_get_next_buffer (void)
  */
     static RC_state_type RC_try_NUL_trans  (RC_state_type RC_current_state )
 {
-	register int RC_is_jam;
-    	register char *RC_cp = (RC_c_buf_p);
+	int RC_is_jam;
+    	char *RC_cp = (RC_c_buf_p);
 
-	register YY_CHAR RC_c = 1;
+	YY_CHAR RC_c = 1;
 	if ( RC_accept[RC_current_state] )
 		{
 		(RC_last_accepting_state) = RC_current_state;
@@ -1180,9 +1206,11 @@ static int RC_get_next_buffer (void)
 		return RC_is_jam ? 0 : RC_current_state;
 }
 
-    static void RCunput (int c, register char * RC_bp )
+#ifndef YY_NO_UNPUT
+
+    static void RCunput (int c, char * RC_bp )
 {
-	register char *RC_cp;
+	char *RC_cp;
     
     RC_cp = (RC_c_buf_p);
 
@@ -1192,10 +1220,10 @@ static int RC_get_next_buffer (void)
 	if ( RC_cp < YY_CURRENT_BUFFER_LVALUE->RC_ch_buf + 2 )
 		{ /* need to shift things up to make room */
 		/* +2 for EOB chars. */
-		register RC_size_t number_to_move = (RC_n_chars) + 2;
-		register char *dest = &YY_CURRENT_BUFFER_LVALUE->RC_ch_buf[
+		RC_size_t number_to_move = (RC_n_chars) + 2;
+		char *dest = &YY_CURRENT_BUFFER_LVALUE->RC_ch_buf[
 					YY_CURRENT_BUFFER_LVALUE->RC_buf_size + 2];
-		register char *source =
+		char *source =
 				&YY_CURRENT_BUFFER_LVALUE->RC_ch_buf[number_to_move];
 
 		while ( source > YY_CURRENT_BUFFER_LVALUE->RC_ch_buf )
@@ -1216,6 +1244,8 @@ static int RC_get_next_buffer (void)
 	(RC_hold_char) = *RC_cp;
 	(RC_c_buf_p) = RC_cp;
 }
+
+#endif
 
 #ifndef YY_NO_INPUT
 #ifdef __cplusplus
@@ -1366,7 +1396,7 @@ static void RC_load_buffer_state  (void)
 	if ( ! b )
 		YY_FATAL_ERROR( "out of dynamic memory in RC_create_buffer()" );
 
-	b->RC_buf_size = size;
+	b->RC_buf_size = (RC_size_t)size;
 
 	/* RC_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
@@ -1521,7 +1551,7 @@ static void RCensure_buffer_stack (void)
 		 * scanner will even need a stack. We use 2 instead of 1 to avoid an
 		 * immediate realloc on the next call.
          */
-		num_to_alloc = 1;
+		num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
 		(RC_buffer_stack) = (struct RC_buffer_state**)RCalloc
 								(num_to_alloc * sizeof(struct RC_buffer_state*)
 								);
@@ -1538,7 +1568,7 @@ static void RCensure_buffer_stack (void)
 	if ((RC_buffer_stack_top) >= ((RC_buffer_stack_max)) - 1){
 
 		/* Increase the buffer to prepare for a possible push. */
-		int grow_size = 8 /* arbitrary grow size */;
+		RC_size_t grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (RC_buffer_stack_max) + grow_size;
 		(RC_buffer_stack) = (struct RC_buffer_state**)RCrealloc
@@ -1615,7 +1645,7 @@ YY_BUFFER_STATE RC_scan_bytes  (RCconst char * RCbytes, RC_size_t  _RCbytes_len 
 	YY_BUFFER_STATE b;
 	char *buf;
 	RC_size_t n;
-	int i;
+	RC_size_t i;
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = _RCbytes_len + 2;
@@ -1646,7 +1676,7 @@ YY_BUFFER_STATE RC_scan_bytes  (RCconst char * RCbytes, RC_size_t  _RCbytes_len 
 
 static void RC_fatal_error (RCconst char* msg )
 {
-    	(void) fprintf( stderr, "%s\n", msg );
+			(void) fprintf( stderr, "%s\n", msg );
 	exit( YY_EXIT_FAILURE );
 }
 
@@ -1712,29 +1742,29 @@ char *RCget_text  (void)
 }
 
 /** Set the current line number.
- * @param line_number
+ * @param _line_number line number
  * 
  */
-void RCset_lineno (int  line_number )
+void RCset_lineno (int  _line_number )
 {
     
-    RClineno = line_number;
+    RClineno = _line_number;
 }
 
 /** Set the input stream. This does not discard the current
  * input buffer.
- * @param in_str A readable stream.
+ * @param _in_str A readable stream.
  * 
  * @see RC_switch_to_buffer
  */
-void RCset_in (FILE *  in_str )
+void RCset_in (FILE *  _in_str )
 {
-        RCin = in_str ;
+        RCin = _in_str ;
 }
 
-void RCset_out (FILE *  out_str )
+void RCset_out (FILE *  _out_str )
 {
-        RCout = out_str ;
+        RCout = _out_str ;
 }
 
 int RCget_debug  (void)
@@ -1742,9 +1772,9 @@ int RCget_debug  (void)
         return RC_flex_debug;
 }
 
-void RCset_debug (int  bdebug )
+void RCset_debug (int  _bdebug )
 {
-        RC_flex_debug = bdebug ;
+        RC_flex_debug = _bdebug ;
 }
 
 static int RC_init_globals (void)
@@ -1804,7 +1834,8 @@ int RClex_destroy  (void)
 #ifndef RCtext_ptr
 static void RC_flex_strncpy (char* s1, RCconst char * s2, int n )
 {
-	register int i;
+		
+	int i;
 	for ( i = 0; i < n; ++i )
 		s1[i] = s2[i];
 }
@@ -1813,7 +1844,7 @@ static void RC_flex_strncpy (char* s1, RCconst char * s2, int n )
 #ifdef YY_NEED_STRLEN
 static int RC_flex_strlen (RCconst char * s )
 {
-	register int n;
+	int n;
 	for ( n = 0; s[n]; ++n )
 		;
 
@@ -1823,11 +1854,12 @@ static int RC_flex_strlen (RCconst char * s )
 
 void *RCalloc (RC_size_t  size )
 {
-	return (void *) malloc( size );
+			return (void *) malloc( size );
 }
 
 void *RCrealloc  (void * ptr, RC_size_t  size )
 {
+		
 	/* The cast to (char *) in the following accommodates both
 	 * implementations that use char* generic pointers, and those
 	 * that use void* generic pointers.  It works with the latter
@@ -1840,7 +1872,7 @@ void *RCrealloc  (void * ptr, RC_size_t  size )
 
 void RCfree (void * ptr )
 {
-	free( (char *) ptr );	/* see RCrealloc() for (char *) cast */
+			free( (char *) ptr );	/* see RCrealloc() for (char *) cast */
 }
 
 #define YYTABLES_NAME "RCtables"

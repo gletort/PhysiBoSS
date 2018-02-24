@@ -7,8 +7,8 @@
 
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
-#define YY_FLEX_MINOR_VERSION 5
-#define YY_FLEX_SUBMINOR_VERSION 37
+#define YY_FLEX_MINOR_VERSION 6
+#define YY_FLEX_SUBMINOR_VERSION 0
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
 #endif
@@ -141,7 +141,15 @@ typedef unsigned int flex_uint32_t;
 
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
+#ifdef __ia64__
+/* On IA-64, the buffer size is 16k, not 8k.
+ * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
+ * Ditto for the __ia64__ case accordingly.
+ */
+#define YY_BUF_SIZE 32768
+#else
 #define YY_BUF_SIZE 16384
+#endif /* __ia64__ */
 #endif
 
 /* The state buf must be large enough to hold one state per character in the main buffer.
@@ -167,6 +175,7 @@ extern FILE *CTBNDLin, *CTBNDLout;
 #define EOB_ACT_LAST_MATCH 2
 
     #define YY_LESS_LINENO(n)
+    #define YY_LINENO_REWIND_TO(ptr)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define CTBNDLless(n) \
@@ -201,7 +210,7 @@ struct CTBNDL_buffer_state
 	/* Number of characters read into CTBNDL_ch_buf, not including EOB
 	 * characters.
 	 */
-	CTBNDL_size_t CTBNDL_n_chars;
+	int CTBNDL_n_chars;
 
 	/* Whether we "own" the buffer - i.e., we know we created it,
 	 * and can realloc() it to grow it, and should free() it to
@@ -271,7 +280,7 @@ static YY_BUFFER_STATE * CTBNDL_buffer_stack = 0; /**< Stack as an array. */
 
 /* CTBNDL_hold_char holds the character lost when CTBNDLtext is formed. */
 static char CTBNDL_hold_char;
-static CTBNDL_size_t CTBNDL_n_chars;		/* number of characters read into CTBNDL_ch_buf */
+static int CTBNDL_n_chars;		/* number of characters read into CTBNDL_ch_buf */
 CTBNDL_size_t CTBNDLleng;
 
 /* Points to current character in buffer. */
@@ -343,11 +352,17 @@ extern int CTBNDLlineno;
 int CTBNDLlineno = 1;
 
 extern char *CTBNDLtext;
+#ifdef CTBNDLtext_ptr
+#undef CTBNDLtext_ptr
+#endif
 #define CTBNDLtext_ptr CTBNDLtext
 
 static CTBNDL_state_type CTBNDL_get_previous_state (void );
 static CTBNDL_state_type CTBNDL_try_NUL_trans (CTBNDL_state_type current_state  );
 static int CTBNDL_get_next_buffer (void );
+#if defined(__GNUC__) && __GNUC__ >= 3
+__attribute__((__noreturn__))
+#endif
 static void CTBNDL_fatal_error (CTBNDLconst char msg[]  );
 
 /* Done after the current pattern has been matched and before the
@@ -378,7 +393,7 @@ static CTBNDLconst flex_int16_t CTBNDL_accept[43] =
        16,    0
     } ;
 
-static CTBNDLconst flex_int32_t CTBNDL_ec[256] =
+static CTBNDLconst YY_CHAR CTBNDL_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         2,    2,    2,    1,    1,    1,    1,    1,    1,    1,
@@ -410,13 +425,13 @@ static CTBNDLconst flex_int32_t CTBNDL_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static CTBNDLconst flex_int32_t CTBNDL_meta[20] =
+static CTBNDLconst YY_CHAR CTBNDL_meta[20] =
     {   0,
         1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    3,    1,    1,    1,    3,    3,    1
     } ;
 
-static CTBNDLconst flex_int16_t CTBNDL_base[46] =
+static CTBNDLconst flex_uint16_t CTBNDL_base[46] =
     {   0,
         0,    0,   56,   57,   53,   57,   39,   57,    3,   46,
        39,   14,   16,   36,   35,   34,    0,   29,   44,   57,
@@ -434,7 +449,7 @@ static CTBNDLconst flex_int16_t CTBNDL_def[46] =
        42,    0,   42,   42,   42
     } ;
 
-static CTBNDLconst flex_int16_t CTBNDL_nxt[77] =
+static CTBNDLconst flex_uint16_t CTBNDL_nxt[77] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,    4,    4,    4,
        11,   12,   13,   14,   15,   16,   17,   17,   18,   21,
@@ -510,7 +525,7 @@ char *CTBNDLtext;
 static char *CTBNDLtokstr();
 static unsigned int input_lineno = 1;
 static void skip_comment(void);
-#line 514 "<stdout>"
+#line 529 "<stdout>"
 
 #define INITIAL 0
 
@@ -543,11 +558,11 @@ void CTBNDLset_extra (YY_EXTRA_TYPE user_defined  );
 
 FILE *CTBNDLget_in (void );
 
-void CTBNDLset_in  (FILE * in_str  );
+void CTBNDLset_in  (FILE * _in_str  );
 
 FILE *CTBNDLget_out (void );
 
-void CTBNDLset_out  (FILE * out_str  );
+void CTBNDLset_out  (FILE * _out_str  );
 
 CTBNDL_size_t CTBNDLget_leng (void );
 
@@ -555,7 +570,7 @@ char *CTBNDLget_text (void );
 
 int CTBNDLget_lineno (void );
 
-void CTBNDLset_lineno (int line_number  );
+void CTBNDLset_lineno (int _line_number  );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -569,8 +584,12 @@ extern int CTBNDLwrap (void );
 #endif
 #endif
 
+#ifndef YY_NO_UNPUT
+    
     static void CTBNDLunput (int c,char *buf_ptr  );
     
+#endif
+
 #ifndef CTBNDLtext_ptr
 static void CTBNDL_flex_strncpy (char *,CTBNDLconst char *,int );
 #endif
@@ -591,7 +610,12 @@ static int input (void );
 
 /* Amount of stuff to slurp up with each read. */
 #ifndef YY_READ_BUF_SIZE
+#ifdef __ia64__
+/* On IA-64, the buffer size is 16k, not 8k */
+#define YY_READ_BUF_SIZE 16384
+#else
 #define YY_READ_BUF_SIZE 8192
+#endif /* __ia64__ */
 #endif
 
 /* Copy whatever the last rule matched to the standard output. */
@@ -678,7 +702,7 @@ extern int CTBNDLlex (void);
 
 /* Code executed at the end of each rule. */
 #ifndef YY_BREAK
-#define YY_BREAK break;
+#define YY_BREAK /*LINTED*/break;
 #endif
 
 #define YY_RULE_SETUP \
@@ -688,15 +712,10 @@ extern int CTBNDLlex (void);
  */
 YY_DECL
 {
-	register CTBNDL_state_type CTBNDL_current_state;
-	register char *CTBNDL_cp, *CTBNDL_bp;
-	register int CTBNDL_act;
+	CTBNDL_state_type CTBNDL_current_state;
+	char *CTBNDL_cp, *CTBNDL_bp;
+	int CTBNDL_act;
     
-#line 44 "BooleanGrammar.l"
-
-
-#line 699 "<stdout>"
-
 	if ( !(CTBNDL_init) )
 		{
 		(CTBNDL_init) = 1;
@@ -723,7 +742,13 @@ YY_DECL
 		CTBNDL_load_buffer_state( );
 		}
 
-	while ( 1 )		/* loops until end-of-file is reached */
+	{
+#line 44 "BooleanGrammar.l"
+
+
+#line 750 "<stdout>"
+
+	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
 		CTBNDL_cp = (CTBNDL_c_buf_p);
 
@@ -739,7 +764,7 @@ YY_DECL
 CTBNDL_match:
 		do
 			{
-			register YY_CHAR CTBNDL_c = CTBNDL_ec[YY_SC_TO_UI(*CTBNDL_cp)];
+			YY_CHAR CTBNDL_c = CTBNDL_ec[YY_SC_TO_UI(*CTBNDL_cp)] ;
 			if ( CTBNDL_accept[CTBNDL_current_state] )
 				{
 				(CTBNDL_last_accepting_state) = CTBNDL_current_state;
@@ -898,7 +923,7 @@ YY_RULE_SETUP
 #line 89 "BooleanGrammar.l"
 ECHO;
 	YY_BREAK
-#line 902 "<stdout>"
+#line 927 "<stdout>"
 case YY_STATE_EOF(INITIAL):
 	CTBNDLterminate();
 
@@ -1029,6 +1054,7 @@ case YY_STATE_EOF(INITIAL):
 			"fatal flex scanner internal error--no action found" );
 	} /* end of action switch */
 		} /* end of scanning one token */
+	} /* end of user's declarations */
 } /* end of CTBNDLlex */
 
 /* CTBNDL_get_next_buffer - try to read in a new buffer
@@ -1040,9 +1066,9 @@ case YY_STATE_EOF(INITIAL):
  */
 static int CTBNDL_get_next_buffer (void)
 {
-    	register char *dest = YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf;
-	register char *source = (CTBNDLtext_ptr);
-	register int number_to_move, i;
+    	char *dest = YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf;
+	char *source = (CTBNDLtext_ptr);
+	CTBNDL_size_t number_to_move, i;
 	int ret_val;
 
 	if ( (CTBNDL_c_buf_p) > &YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf[(CTBNDL_n_chars) + 1] )
@@ -1071,7 +1097,7 @@ static int CTBNDL_get_next_buffer (void)
 	/* Try to read more data. */
 
 	/* First move last chars to start of buffer. */
-	number_to_move = (int) ((CTBNDL_c_buf_p) - (CTBNDLtext_ptr)) - 1;
+	number_to_move = (CTBNDL_size_t) ((CTBNDL_c_buf_p) - (CTBNDLtext_ptr)) - 1;
 
 	for ( i = 0; i < number_to_move; ++i )
 		*(dest++) = *(source++);
@@ -1153,9 +1179,9 @@ static int CTBNDL_get_next_buffer (void)
 	else
 		ret_val = EOB_ACT_CONTINUE_SCAN;
 
-	if ((CTBNDL_size_t) ((CTBNDL_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->CTBNDL_buf_size) {
+	if ((int) ((CTBNDL_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->CTBNDL_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
-		CTBNDL_size_t new_size = (CTBNDL_n_chars) + number_to_move + ((CTBNDL_n_chars) >> 1);
+		int new_size = (CTBNDL_n_chars) + number_to_move + ((CTBNDL_n_chars) >> 1);
 		YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf = (char *) CTBNDLrealloc((void *) YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf,new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in CTBNDL_get_next_buffer()" );
@@ -1174,14 +1200,14 @@ static int CTBNDL_get_next_buffer (void)
 
     static CTBNDL_state_type CTBNDL_get_previous_state (void)
 {
-	register CTBNDL_state_type CTBNDL_current_state;
-	register char *CTBNDL_cp;
+	CTBNDL_state_type CTBNDL_current_state;
+	char *CTBNDL_cp;
     
 	CTBNDL_current_state = (CTBNDL_start);
 
 	for ( CTBNDL_cp = (CTBNDLtext_ptr) + YY_MORE_ADJ; CTBNDL_cp < (CTBNDL_c_buf_p); ++CTBNDL_cp )
 		{
-		register YY_CHAR CTBNDL_c = (*CTBNDL_cp ? CTBNDL_ec[YY_SC_TO_UI(*CTBNDL_cp)] : 1);
+		YY_CHAR CTBNDL_c = (*CTBNDL_cp ? CTBNDL_ec[YY_SC_TO_UI(*CTBNDL_cp)] : 1);
 		if ( CTBNDL_accept[CTBNDL_current_state] )
 			{
 			(CTBNDL_last_accepting_state) = CTBNDL_current_state;
@@ -1206,10 +1232,10 @@ static int CTBNDL_get_next_buffer (void)
  */
     static CTBNDL_state_type CTBNDL_try_NUL_trans  (CTBNDL_state_type CTBNDL_current_state )
 {
-	register int CTBNDL_is_jam;
-    	register char *CTBNDL_cp = (CTBNDL_c_buf_p);
+	int CTBNDL_is_jam;
+    	char *CTBNDL_cp = (CTBNDL_c_buf_p);
 
-	register YY_CHAR CTBNDL_c = 1;
+	YY_CHAR CTBNDL_c = 1;
 	if ( CTBNDL_accept[CTBNDL_current_state] )
 		{
 		(CTBNDL_last_accepting_state) = CTBNDL_current_state;
@@ -1227,9 +1253,11 @@ static int CTBNDL_get_next_buffer (void)
 		return CTBNDL_is_jam ? 0 : CTBNDL_current_state;
 }
 
-    static void CTBNDLunput (int c, register char * CTBNDL_bp )
+#ifndef YY_NO_UNPUT
+
+    static void CTBNDLunput (int c, char * CTBNDL_bp )
 {
-	register char *CTBNDL_cp;
+	char *CTBNDL_cp;
     
     CTBNDL_cp = (CTBNDL_c_buf_p);
 
@@ -1239,10 +1267,10 @@ static int CTBNDL_get_next_buffer (void)
 	if ( CTBNDL_cp < YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf + 2 )
 		{ /* need to shift things up to make room */
 		/* +2 for EOB chars. */
-		register CTBNDL_size_t number_to_move = (CTBNDL_n_chars) + 2;
-		register char *dest = &YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf[
+		CTBNDL_size_t number_to_move = (CTBNDL_n_chars) + 2;
+		char *dest = &YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf[
 					YY_CURRENT_BUFFER_LVALUE->CTBNDL_buf_size + 2];
-		register char *source =
+		char *source =
 				&YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf[number_to_move];
 
 		while ( source > YY_CURRENT_BUFFER_LVALUE->CTBNDL_ch_buf )
@@ -1263,6 +1291,8 @@ static int CTBNDL_get_next_buffer (void)
 	(CTBNDL_hold_char) = *CTBNDL_cp;
 	(CTBNDL_c_buf_p) = CTBNDL_cp;
 }
+
+#endif
 
 #ifndef YY_NO_INPUT
 #ifdef __cplusplus
@@ -1413,7 +1443,7 @@ static void CTBNDL_load_buffer_state  (void)
 	if ( ! b )
 		YY_FATAL_ERROR( "out of dynamic memory in CTBNDL_create_buffer()" );
 
-	b->CTBNDL_buf_size = size;
+	b->CTBNDL_buf_size = (CTBNDL_size_t)size;
 
 	/* CTBNDL_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
@@ -1568,7 +1598,7 @@ static void CTBNDLensure_buffer_stack (void)
 		 * scanner will even need a stack. We use 2 instead of 1 to avoid an
 		 * immediate realloc on the next call.
          */
-		num_to_alloc = 1;
+		num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
 		(CTBNDL_buffer_stack) = (struct CTBNDL_buffer_state**)CTBNDLalloc
 								(num_to_alloc * sizeof(struct CTBNDL_buffer_state*)
 								);
@@ -1585,7 +1615,7 @@ static void CTBNDLensure_buffer_stack (void)
 	if ((CTBNDL_buffer_stack_top) >= ((CTBNDL_buffer_stack_max)) - 1){
 
 		/* Increase the buffer to prepare for a possible push. */
-		int grow_size = 8 /* arbitrary grow size */;
+		CTBNDL_size_t grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (CTBNDL_buffer_stack_max) + grow_size;
 		(CTBNDL_buffer_stack) = (struct CTBNDL_buffer_state**)CTBNDLrealloc
@@ -1662,7 +1692,7 @@ YY_BUFFER_STATE CTBNDL_scan_bytes  (CTBNDLconst char * CTBNDLbytes, CTBNDL_size_
 	YY_BUFFER_STATE b;
 	char *buf;
 	CTBNDL_size_t n;
-	int i;
+	CTBNDL_size_t i;
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = _CTBNDLbytes_len + 2;
@@ -1693,7 +1723,7 @@ YY_BUFFER_STATE CTBNDL_scan_bytes  (CTBNDLconst char * CTBNDLbytes, CTBNDL_size_
 
 static void CTBNDL_fatal_error (CTBNDLconst char* msg )
 {
-    	(void) fprintf( stderr, "%s\n", msg );
+			(void) fprintf( stderr, "%s\n", msg );
 	exit( YY_EXIT_FAILURE );
 }
 
@@ -1759,29 +1789,29 @@ char *CTBNDLget_text  (void)
 }
 
 /** Set the current line number.
- * @param line_number
+ * @param _line_number line number
  * 
  */
-void CTBNDLset_lineno (int  line_number )
+void CTBNDLset_lineno (int  _line_number )
 {
     
-    CTBNDLlineno = line_number;
+    CTBNDLlineno = _line_number;
 }
 
 /** Set the input stream. This does not discard the current
  * input buffer.
- * @param in_str A readable stream.
+ * @param _in_str A readable stream.
  * 
  * @see CTBNDL_switch_to_buffer
  */
-void CTBNDLset_in (FILE *  in_str )
+void CTBNDLset_in (FILE *  _in_str )
 {
-        CTBNDLin = in_str ;
+        CTBNDLin = _in_str ;
 }
 
-void CTBNDLset_out (FILE *  out_str )
+void CTBNDLset_out (FILE *  _out_str )
 {
-        CTBNDLout = out_str ;
+        CTBNDLout = _out_str ;
 }
 
 int CTBNDLget_debug  (void)
@@ -1789,9 +1819,9 @@ int CTBNDLget_debug  (void)
         return CTBNDL_flex_debug;
 }
 
-void CTBNDLset_debug (int  bdebug )
+void CTBNDLset_debug (int  _bdebug )
 {
-        CTBNDL_flex_debug = bdebug ;
+        CTBNDL_flex_debug = _bdebug ;
 }
 
 static int CTBNDL_init_globals (void)
@@ -1851,7 +1881,8 @@ int CTBNDLlex_destroy  (void)
 #ifndef CTBNDLtext_ptr
 static void CTBNDL_flex_strncpy (char* s1, CTBNDLconst char * s2, int n )
 {
-	register int i;
+		
+	int i;
 	for ( i = 0; i < n; ++i )
 		s1[i] = s2[i];
 }
@@ -1860,7 +1891,7 @@ static void CTBNDL_flex_strncpy (char* s1, CTBNDLconst char * s2, int n )
 #ifdef YY_NEED_STRLEN
 static int CTBNDL_flex_strlen (CTBNDLconst char * s )
 {
-	register int n;
+	int n;
 	for ( n = 0; s[n]; ++n )
 		;
 
@@ -1870,11 +1901,12 @@ static int CTBNDL_flex_strlen (CTBNDLconst char * s )
 
 void *CTBNDLalloc (CTBNDL_size_t  size )
 {
-	return (void *) malloc( size );
+			return (void *) malloc( size );
 }
 
 void *CTBNDLrealloc  (void * ptr, CTBNDL_size_t  size )
 {
+		
 	/* The cast to (char *) in the following accommodates both
 	 * implementations that use char* generic pointers, and those
 	 * that use void* generic pointers.  It works with the latter
@@ -1887,7 +1919,7 @@ void *CTBNDLrealloc  (void * ptr, CTBNDL_size_t  size )
 
 void CTBNDLfree (void * ptr )
 {
-	free( (char *) ptr );	/* see CTBNDLrealloc() for (char *) cast */
+			free( (char *) ptr );	/* see CTBNDLrealloc() for (char *) cast */
 }
 
 #define YYTABLES_NAME "CTBNDLtables"

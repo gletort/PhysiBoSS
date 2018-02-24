@@ -33,6 +33,7 @@ Simul::Simul(): microenvironment(), reader(), cell_container()
 
 Simul::~Simul()
 {
+	// free memory
 	if (maboss) 
 		delete maboss;
 }
@@ -269,7 +270,6 @@ void Simul::initEnvironment()
 	// create a Multiscale_Microenvironment; 
 	microenvironment.name="substrate scale";
 	// add a microenvironment for simulating substrates 	
-	// microenvironment.create_microenvironment( "substrate scale"); 
 	microenvironment.set_density(0, conc_names[0] , "mmHg" );
 	for ( int i = 1; i < ndensities; i++ )
 	{
@@ -285,19 +285,8 @@ void Simul::initEnvironment()
 	cell_container.initialize( bounding_box[0] , bounding_box[3] , bounding_box[1], bounding_box[4] , bounding_box[2] , bounding_box[5], min_voxel_size );
 	std::cout << "num voxels4: " << cell_container.mesh_size() << std::endl;
 
-	// Add given initial concentration (everywhere or on the extremities only or on one point only (first voxel))
-	/**Vector3d cent;
-	for( int n=0; n < microenvironment.number_of_voxels() ; n++ )
-	{
-		cent = microenvironment.voxel_center(n); 
-		if ( ! cell_container.inside_BM( &cent ) )
-		{
-			for ( int k = 0; k < ndensities; k++ )	
-				microenvironment.density_vector(n)[k] = concentrations[k]; 	
-		}
-	}*/
 	// Calculate concentrations to add by voxel:
-	max_z = zmax * 0.85;
+	//max_z = zmax * 0.85;
 	for ( int k = 0; k < ndensities; k++ )
 	{
 			concentrations[k] *= microenvironment.voxel_volume(0) * 0.000001;  // in fg/µm^3, to add to have given concentrations	
@@ -329,8 +318,6 @@ void Simul::initEnvironment()
 	}	
 
 	microenvironment.display_information( std::cout );
-
-	/** \todo put ratio of voxels to write as a parameter */
 	microenvironment.list_indexes( ratio_write );	
 
 	//add Dirichlet node for all the voxels located outside of the limits for the first density (\todo to make more flexible)

@@ -1,19 +1,19 @@
-/* A Bison parser, made by GNU Bison 2.7.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
-   
-      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
-   
+
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,7 +26,7 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "2.7"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -62,8 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-/* Line 371 of yacc.c  */
-#line 2 "RunConfigGrammar.y"
+#line 2 "RunConfigGrammar.y" /* yacc.c:339  */
 
 /* 
    MaBoSS (Markov Boolean Stochastic Simulator)
@@ -107,14 +106,13 @@ static Network* network;
 
 extern std::string RC_error_head();
 
-/* Line 371 of yacc.c  */
-#line 112 "RunConfigGrammar.tab.c"
+#line 110 "RunConfigGrammar.tab.c" /* yacc.c:339  */
 
-# ifndef YY_NULL
+# ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
-#   define YY_NULL nullptr
+#   define YY_NULLPTR nullptr
 #  else
-#   define YY_NULL 0
+#   define YY_NULLPTR 0
 #  endif
 # endif
 
@@ -127,7 +125,7 @@ extern std::string RC_error_head();
 #endif
 
 
-/* Enabling traces.  */
+/* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
 #endif
@@ -135,34 +133,33 @@ extern std::string RC_error_head();
 extern int RCdebug;
 #endif
 
-/* Tokens.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum RCtokentype {
-     VARIABLE = 258,
-     SYMBOL = 259,
-     DOUBLE = 260,
-     INTEGER = 261,
-     LOGAND = 262,
-     LOGOR = 263,
-     LOGXOR = 264,
-     LOGNOT = 265,
-     EQUAL = 266,
-     NOT_EQUAL = 267,
-     NODE = 268,
-     GTEQ = 269,
-     LTEQ = 270
-   };
+  enum RCtokentype
+  {
+    VARIABLE = 258,
+    SYMBOL = 259,
+    DOUBLE = 260,
+    INTEGER = 261,
+    LOGAND = 262,
+    LOGOR = 263,
+    LOGXOR = 264,
+    LOGNOT = 265,
+    EQUAL = 266,
+    NOT_EQUAL = 267,
+    NODE = 268,
+    GTEQ = 269,
+    LTEQ = 270
+  };
 #endif
 
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
+
+union YYSTYPE
 {
-/* Line 387 of yacc.c  */
-#line 46 "RunConfigGrammar.y"
+#line 46 "RunConfigGrammar.y" /* yacc.c:355  */
 
   Expression* expr;
   char* str;
@@ -173,37 +170,24 @@ typedef union YYSTYPE
   IStateGroup::ProbaIState* istate_expr;
   std::vector<IStateGroup::ProbaIState*>* istate_expr_list;
 
+#line 174 "RunConfigGrammar.tab.c" /* yacc.c:355  */
+};
 
-/* Line 387 of yacc.c  */
-#line 179 "RunConfigGrammar.tab.c"
-} YYSTYPE;
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
-# define RCstype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
+
 extern YYSTYPE RClval;
 
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int RCparse (void *YYPARSE_PARAM);
-#else
-int RCparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
 int RCparse (void);
-#else
-int RCparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
 
 
 
 /* Copy the second part of user declarations.  */
 
-/* Line 390 of yacc.c  */
-#line 207 "RunConfigGrammar.tab.c"
+#line 191 "RunConfigGrammar.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -217,11 +201,8 @@ typedef unsigned char RCtype_uint8;
 
 #ifdef YYTYPE_INT8
 typedef YYTYPE_INT8 RCtype_int8;
-#elif (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-typedef signed char RCtype_int8;
 #else
-typedef short int RCtype_int8;
+typedef signed char RCtype_int8;
 #endif
 
 #ifdef YYTYPE_UINT16
@@ -241,8 +222,7 @@ typedef short int RCtype_int16;
 #  define YYSIZE_T __SIZE_TYPE__
 # elif defined size_t
 #  define YYSIZE_T size_t
-# elif ! defined YYSIZE_T && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+# elif ! defined YYSIZE_T
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
@@ -264,6 +244,33 @@ typedef short int RCtype_int16;
 # endif
 #endif
 
+#ifndef YY_ATTRIBUTE
+# if (defined __GNUC__                                               \
+      && (2 < __GNUC__ || (__GNUC__ == 2 && 96 <= __GNUC_MINOR__)))  \
+     || defined __SUNPRO_C && 0x5110 <= __SUNPRO_C
+#  define YY_ATTRIBUTE(Spec) __attribute__(Spec)
+# else
+#  define YY_ATTRIBUTE(Spec) /* empty */
+# endif
+#endif
+
+#ifndef YY_ATTRIBUTE_PURE
+# define YY_ATTRIBUTE_PURE   YY_ATTRIBUTE ((__pure__))
+#endif
+
+#ifndef YY_ATTRIBUTE_UNUSED
+# define YY_ATTRIBUTE_UNUSED YY_ATTRIBUTE ((__unused__))
+#endif
+
+#if !defined _Noreturn \
+     && (!defined __STDC_VERSION__ || __STDC_VERSION__ < 201112)
+# if defined _MSC_VER && 1200 <= _MSC_VER
+#  define _Noreturn __declspec (noreturn)
+# else
+#  define _Noreturn YY_ATTRIBUTE ((__noreturn__))
+# endif
+#endif
+
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
 # define YYUSE(E) ((void) (E))
@@ -271,23 +278,25 @@ typedef short int RCtype_int16;
 # define YYUSE(E) /* empty */
 #endif
 
-/* Identity function, used to suppress warnings about constant conditions.  */
-#ifndef lint
-# define YYID(N) (N)
+#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+/* Suppress an incorrect diagnostic about RClval being uninitialized.  */
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
+    _Pragma ("GCC diagnostic push") \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")\
+    _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END \
+    _Pragma ("GCC diagnostic pop")
 #else
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-static int
-YYID (int RCi)
-#else
-static int
-YYID (RCi)
-    int RCi;
+# define YY_INITIAL_VALUE(Value) Value
 #endif
-{
-  return RCi;
-}
+#ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+# define YY_IGNORE_MAYBE_UNINITIALIZED_END
 #endif
+#ifndef YY_INITIAL_VALUE
+# define YY_INITIAL_VALUE(Value) /* Nothing. */
+#endif
+
 
 #if ! defined RCoverflow || YYERROR_VERBOSE
 
@@ -306,8 +315,7 @@ YYID (RCi)
 #    define alloca _alloca
 #   else
 #    define YYSTACK_ALLOC alloca
-#    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS
 #     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
       /* Use EXIT_SUCCESS as a witness for stdlib.h.  */
 #     ifndef EXIT_SUCCESS
@@ -319,8 +327,8 @@ YYID (RCi)
 # endif
 
 # ifdef YYSTACK_ALLOC
-   /* Pacify GCC's `empty if-body' warning.  */
-#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (YYID (0))
+   /* Pacify GCC's 'empty if-body' warning.  */
+#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (0)
 #  ifndef YYSTACK_ALLOC_MAXIMUM
     /* The OS might guarantee only one guard page at the bottom of the stack,
        and a page size can be as small as 4096 bytes.  So we cannot safely
@@ -336,7 +344,7 @@ YYID (RCi)
 #  endif
 #  if (defined __cplusplus && ! defined EXIT_SUCCESS \
        && ! ((defined YYMALLOC || defined malloc) \
-	     && (defined YYFREE || defined free)))
+             && (defined YYFREE || defined free)))
 #   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
 #   ifndef EXIT_SUCCESS
 #    define EXIT_SUCCESS 0
@@ -344,15 +352,13 @@ YYID (RCi)
 #  endif
 #  ifndef YYMALLOC
 #   define YYMALLOC malloc
-#   if ! defined malloc && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#   if ! defined malloc && ! defined EXIT_SUCCESS
 void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 #  ifndef YYFREE
 #   define YYFREE free
-#   if ! defined free && ! defined EXIT_SUCCESS && (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+#   if ! defined free && ! defined EXIT_SUCCESS
 void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
@@ -362,7 +368,7 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 
 #if (! defined RCoverflow \
      && (! defined __cplusplus \
-	 || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
+         || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
 
 /* A type that is properly aligned for any stack member.  */
 union RCalloc
@@ -387,16 +393,16 @@ union RCalloc
    elements in the stack, and YYPTR gives the new location of the
    stack.  Advance YYPTR to a properly aligned location for the next
    stack.  */
-# define YYSTACK_RELOCATE(Stack_alloc, Stack)				\
-    do									\
-      {									\
-	YYSIZE_T RCnewbytes;						\
-	YYCOPY (&RCptr->Stack_alloc, Stack, RCsize);			\
-	Stack = &RCptr->Stack_alloc;					\
-	RCnewbytes = RCstacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
-	RCptr += RCnewbytes / sizeof (*RCptr);				\
-      }									\
-    while (YYID (0))
+# define YYSTACK_RELOCATE(Stack_alloc, Stack)                           \
+    do                                                                  \
+      {                                                                 \
+        YYSIZE_T RCnewbytes;                                            \
+        YYCOPY (&RCptr->Stack_alloc, Stack, RCsize);                    \
+        Stack = &RCptr->Stack_alloc;                                    \
+        RCnewbytes = RCstacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
+        RCptr += RCnewbytes / sizeof (*RCptr);                          \
+      }                                                                 \
+    while (0)
 
 #endif
 
@@ -415,7 +421,7 @@ union RCalloc
           for (RCi = 0; RCi < (Count); RCi++)   \
             (Dst)[RCi] = (Src)[RCi];            \
         }                                       \
-      while (YYID (0))
+      while (0)
 #  endif
 # endif
 #endif /* !YYCOPY_NEEDED */
@@ -431,17 +437,19 @@ union RCalloc
 #define YYNNTS  23
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  53
-/* YYNRULES -- Number of states.  */
+/* YYNSTATES -- Number of states.  */
 #define YYNSTATES  101
 
-/* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
+/* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
+   by RClex, with out-of-bounds checking.  */
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   270
 
-#define YYTRANSLATE(YYX)						\
+#define YYTRANSLATE(YYX)                                                \
   ((unsigned int) (YYX) <= YYMAXUTOK ? RCtranslate[YYX] : YYUNDEFTOK)
 
-/* YYTRANSLATE[YYLEX] -- Bison symbol number corresponding to YYLEX.  */
+/* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
+   as returned by RClex, without out-of-bounds checking.  */
 static const RCtype_uint8 RCtranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -475,42 +483,7 @@ static const RCtype_uint8 RCtranslate[] =
 };
 
 #if YYDEBUG
-/* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
-   YYRHS.  */
-static const RCtype_uint8 RCprhs[] =
-{
-       0,     0,     3,     5,     8,    10,    12,    14,    16,    21,
-      28,    35,    39,    41,    45,    47,    51,    56,    58,    62,
-      67,    69,    71,    73,    77,    79,    81,    84,    87,    90,
-      93,    95,    99,   103,   105,   109,   113,   115,   119,   123,
-     127,   131,   133,   137,   141,   143,   147,   149,   153,   155,
-     159,   163,   165,   171
-};
-
-/* YYRHS -- A `-1'-separated list of the rules' RHS.  */
-static const RCtype_int8 RCrhs[] =
-{
-      35,     0,    -1,    36,    -1,    35,    36,    -1,    44,    -1,
-      37,    -1,    38,    -1,    16,    -1,     4,    17,    56,    16,
-      -1,     4,    18,     4,    17,    56,    16,    -1,    39,    18,
-       4,    17,    41,    16,    -1,    19,    40,    20,    -1,     4,
-      -1,    40,    21,     4,    -1,    42,    -1,    41,    21,    42,
-      -1,    45,    19,    43,    20,    -1,    45,    -1,    43,    21,
-      45,    -1,     3,    17,    56,    16,    -1,     6,    -1,     5,
-      -1,     3,    -1,    22,    56,    23,    -1,    45,    -1,    46,
-      -1,    24,    47,    -1,    25,    47,    -1,    26,    47,    -1,
-      10,    47,    -1,    47,    -1,    48,    27,    47,    -1,    48,
-      28,    47,    -1,    48,    -1,    49,    24,    48,    -1,    49,
-      25,    48,    -1,    49,    -1,    50,    29,    49,    -1,    50,
-      30,    49,    -1,    50,    15,    49,    -1,    50,    14,    49,
-      -1,    50,    -1,    51,    11,    50,    -1,    51,    12,    50,
-      -1,    51,    -1,    52,     7,    51,    -1,    52,    -1,    53,
-       8,    52,    -1,    53,    -1,    54,     9,    53,    -1,    54,
-      31,    53,    -1,    54,    -1,    54,    32,    56,    33,    55,
-      -1,    55,    -1
-};
-
-/* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
+  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const RCtype_uint16 RCrline[] =
 {
        0,    84,    84,    87,    92,    93,    94,    95,    98,   106,
@@ -538,13 +511,13 @@ static const char *const RCtname[] =
   "unary_expression", "multiplicative_expression", "additive_expression",
   "relational_expression", "equality_expression", "logical_and_expression",
   "logical_or_expression", "logical_xor_expression",
-  "conditional_expression", "expression", YY_NULL
+  "conditional_expression", "expression", YY_NULLPTR
 };
 #endif
 
 # ifdef YYPRINT
-/* YYTOKNUM[YYLEX-NUM] -- Internal token number corresponding to
-   token YYLEX-NUM.  */
+/* YYTOKNUM[NUM] -- (External) token number corresponding to the
+   (internal) symbol number NUM (which must be that of a token).  */
 static const RCtype_uint16 RCtoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
@@ -554,57 +527,18 @@ static const RCtype_uint16 RCtoknum[] =
 };
 # endif
 
-/* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
-static const RCtype_uint8 RCr1[] =
-{
-       0,    34,    35,    35,    36,    36,    36,    36,    37,    38,
-      38,    39,    40,    40,    41,    41,    42,    43,    43,    44,
-      45,    45,    45,    45,    46,    47,    47,    47,    47,    47,
-      48,    48,    48,    49,    49,    49,    50,    50,    50,    50,
-      50,    51,    51,    51,    52,    52,    53,    53,    54,    54,
-      54,    55,    55,    56
-};
-
-/* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
-static const RCtype_uint8 RCr2[] =
-{
-       0,     2,     1,     2,     1,     1,     1,     1,     4,     6,
-       6,     3,     1,     3,     1,     3,     4,     1,     3,     4,
-       1,     1,     1,     3,     1,     1,     2,     2,     2,     2,
-       1,     3,     3,     1,     3,     3,     1,     3,     3,     3,
-       3,     1,     3,     3,     1,     3,     1,     3,     1,     3,
-       3,     1,     5,     1
-};
-
-/* YYDEFACT[STATE-NAME] -- Default reduction number in state STATE-NUM.
-   Performed when YYTABLE doesn't specify something else to do.  Zero
-   means the default is an error.  */
-static const RCtype_uint8 RCdefact[] =
-{
-       0,     0,     0,     7,     0,     0,     2,     5,     6,     0,
-       4,     0,     0,     0,    12,     0,     1,     3,     0,    22,
-      21,    20,     0,     0,     0,     0,     0,    24,    25,    30,
-      33,    36,    41,    44,    46,    48,    51,    53,     0,     0,
-       0,    11,     0,     0,    29,     0,    26,    27,    28,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    19,     8,     0,    13,     0,    23,
-      31,    32,    34,    35,    40,    39,    37,    38,    42,    43,
-      45,    47,    49,    50,     0,     0,     0,    14,     0,     0,
-       9,    10,     0,     0,    52,    15,     0,    17,    16,     0,
-      18
-};
-
-/* YYDEFGOTO[NTERM-NUM].  */
-static const RCtype_int8 RCdefgoto[] =
-{
-      -1,     5,     6,     7,     8,     9,    15,    86,    87,    96,
-      10,    27,    28,    29,    30,    31,    32,    33,    34,    35,
-      36,    37,    38
-};
-
-/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-   STATE-NUM.  */
 #define YYPACT_NINF -68
+
+#define RCpact_value_is_default(Yystate) \
+  (!!((Yystate) == (-68)))
+
+#define YYTABLE_NINF -1
+
+#define RCtable_value_is_error(Yytable_value) \
+  0
+
+  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+     STATE-NUM.  */
 static const RCtype_int8 RCpact[] =
 {
       41,   -14,    -8,   -68,    13,    24,   -68,   -68,   -68,    -5,
@@ -620,7 +554,25 @@ static const RCtype_int8 RCpact[] =
      -68
 };
 
-/* YYPGOTO[NTERM-NUM].  */
+  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+     Performed when YYTABLE does not specify something else to do.  Zero
+     means the default is an error.  */
+static const RCtype_uint8 RCdefact[] =
+{
+       0,     0,     0,     7,     0,     0,     2,     5,     6,     0,
+       4,     0,     0,     0,    12,     0,     1,     3,     0,    22,
+      21,    20,     0,     0,     0,     0,     0,    24,    25,    30,
+      33,    36,    41,    44,    46,    48,    51,    53,     0,     0,
+       0,    11,     0,     0,    29,     0,    26,    27,    28,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    19,     8,     0,    13,     0,    23,
+      31,    32,    34,    35,    40,    39,    37,    38,    42,    43,
+      45,    47,    49,    50,     0,     0,     0,    14,     0,     0,
+       9,    10,     0,     0,    52,    15,     0,    17,    16,     0,
+      18
+};
+
+  /* YYPGOTO[NTERM-NUM].  */
 static const RCtype_int8 RCpgoto[] =
 {
      -68,   -68,    76,   -68,   -68,   -68,   -68,   -68,    -9,   -68,
@@ -628,10 +580,17 @@ static const RCtype_int8 RCpgoto[] =
      -68,    -4,   -12
 };
 
-/* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
-   positive, shift that token.  If negative, reduce the rule which
-   number is the opposite.  If YYTABLE_NINF, syntax error.  */
-#define YYTABLE_NINF -1
+  /* YYDEFGOTO[NTERM-NUM].  */
+static const RCtype_int8 RCdefgoto[] =
+{
+      -1,     5,     6,     7,     8,     9,    15,    86,    87,    96,
+      10,    27,    28,    29,    30,    31,    32,    33,    34,    35,
+      36,    37,    38
+};
+
+  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+     positive, shift that token.  If negative, reduce the rule whose
+     number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const RCtype_uint8 RCtable[] =
 {
       39,    88,    44,    11,    46,    47,    48,    53,    54,    12,
@@ -644,12 +603,6 @@ static const RCtype_uint8 RCtable[] =
       83,    59,    64,    60,    65,    67,    66,    68,    69,    89,
       93,    17,    90,    95,    80,    94,    81
 };
-
-#define RCpact_value_is_default(Yystate) \
-  (!!((Yystate) == (-68)))
-
-#define RCtable_value_is_error(Yytable_value) \
-  YYID (0)
 
 static const RCtype_uint8 RCcheck[] =
 {
@@ -664,8 +617,8 @@ static const RCtype_uint8 RCcheck[] =
       19,     5,    16,    92,    59,    89,    60
 };
 
-/* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-   symbol of state STATE-NUM.  */
+  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
+     symbol of state STATE-NUM.  */
 static const RCtype_uint8 RCstos[] =
 {
        0,     3,     4,    16,    19,    35,    36,    37,    38,    39,
@@ -681,30 +634,38 @@ static const RCtype_uint8 RCstos[] =
       45
 };
 
-#define RCerrok		(RCerrstatus = 0)
-#define RCclearin	(RCchar = YYEMPTY)
-#define YYEMPTY		(-2)
-#define YYEOF		0
+  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+static const RCtype_uint8 RCr1[] =
+{
+       0,    34,    35,    35,    36,    36,    36,    36,    37,    38,
+      38,    39,    40,    40,    41,    41,    42,    43,    43,    44,
+      45,    45,    45,    45,    46,    47,    47,    47,    47,    47,
+      48,    48,    48,    49,    49,    49,    50,    50,    50,    50,
+      50,    51,    51,    51,    52,    52,    53,    53,    54,    54,
+      54,    55,    55,    56
+};
 
-#define YYACCEPT	goto RCacceptlab
-#define YYABORT		goto RCabortlab
-#define YYERROR		goto RCerrorlab
+  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+static const RCtype_uint8 RCr2[] =
+{
+       0,     2,     1,     2,     1,     1,     1,     1,     4,     6,
+       6,     3,     1,     3,     1,     3,     4,     1,     3,     4,
+       1,     1,     1,     3,     1,     1,     2,     2,     2,     2,
+       1,     3,     3,     1,     3,     3,     1,     3,     3,     3,
+       3,     1,     3,     3,     1,     3,     1,     3,     1,     3,
+       3,     1,     5,     1
+};
 
 
-/* Like YYERROR except do call RCerror.  This remains here temporarily
-   to ease the transition to the new meaning of YYERROR, for GCC.
-   Once GCC version 2 has supplanted version 1, this can go.  However,
-   YYFAIL appears to be in use.  Nevertheless, it is formally deprecated
-   in Bison 2.4.2's NEWS entry, where a plan to phase it out is
-   discussed.  */
+#define RCerrok         (RCerrstatus = 0)
+#define RCclearin       (RCchar = YYEMPTY)
+#define YYEMPTY         (-2)
+#define YYEOF           0
 
-#define YYFAIL		goto RCerrlab
-#if defined YYFAIL
-  /* This is here to suppress warnings from the GCC cpp's
-     -Wunused-macros.  Normally we don't worry about that warning, but
-     some users do, and we want to make it easy for users to remove
-     YYFAIL uses, which will produce warnings from Bison 2.5.  */
-#endif
+#define YYACCEPT        goto RCacceptlab
+#define YYABORT         goto RCabortlab
+#define YYERROR         goto RCerrorlab
+
 
 #define YYRECOVERING()  (!!RCerrstatus)
 
@@ -721,27 +682,15 @@ do                                                              \
   else                                                          \
     {                                                           \
       RCerror (YY_("syntax error: cannot back up")); \
-      YYERROR;							\
-    }								\
-while (YYID (0))
+      YYERROR;                                                  \
+    }                                                           \
+while (0)
 
 /* Error token number */
-#define YYTERROR	1
-#define YYERRCODE	256
+#define YYTERROR        1
+#define YYERRCODE       256
 
 
-/* This macro is provided for backward compatibility. */
-#ifndef YY_LOCATION_PRINT
-# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-#endif
-
-
-/* YYLEX -- calling `RClex' with the right arguments.  */
-#ifdef YYLEX_PARAM
-# define YYLEX RClex (YYLEX_PARAM)
-#else
-# define YYLEX RClex ()
-#endif
 
 /* Enable debugging if requested.  */
 #if YYDEBUG
@@ -751,40 +700,36 @@ while (YYID (0))
 #  define YYFPRINTF fprintf
 # endif
 
-# define YYDPRINTF(Args)			\
-do {						\
-  if (RCdebug)					\
-    YYFPRINTF Args;				\
-} while (YYID (0))
+# define YYDPRINTF(Args)                        \
+do {                                            \
+  if (RCdebug)                                  \
+    YYFPRINTF Args;                             \
+} while (0)
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)			  \
-do {									  \
-  if (RCdebug)								  \
-    {									  \
-      YYFPRINTF (stderr, "%s ", Title);					  \
-      RC_symbol_print (stderr,						  \
-		  Type, Value); \
-      YYFPRINTF (stderr, "\n");						  \
-    }									  \
-} while (YYID (0))
+/* This macro is provided for backward compatibility. */
+#ifndef YY_LOCATION_PRINT
+# define YY_LOCATION_PRINT(File, Loc) ((void) 0)
+#endif
 
 
-/*--------------------------------.
-| Print this symbol on YYOUTPUT.  |
-`--------------------------------*/
+# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
+do {                                                                      \
+  if (RCdebug)                                                            \
+    {                                                                     \
+      YYFPRINTF (stderr, "%s ", Title);                                   \
+      RC_symbol_print (stderr,                                            \
+                  Type, Value); \
+      YYFPRINTF (stderr, "\n");                                           \
+    }                                                                     \
+} while (0)
 
-/*ARGSUSED*/
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
+
+/*----------------------------------------.
+| Print this symbol's value on YYOUTPUT.  |
+`----------------------------------------*/
+
 static void
 RC_symbol_value_print (FILE *RCoutput, int RCtype, YYSTYPE const * const RCvaluep)
-#else
-static void
-RC_symbol_value_print (RCoutput, RCtype, RCvaluep)
-    FILE *RCoutput;
-    int RCtype;
-    YYSTYPE const * const RCvaluep;
-#endif
 {
   FILE *RCo = RCoutput;
   YYUSE (RCo);
@@ -793,14 +738,8 @@ RC_symbol_value_print (RCoutput, RCtype, RCvaluep)
 # ifdef YYPRINT
   if (RCtype < YYNTOKENS)
     YYPRINT (RCoutput, RCtoknum[RCtype], *RCvaluep);
-# else
-  YYUSE (RCoutput);
 # endif
-  switch (RCtype)
-    {
-      default:
-        break;
-    }
+  YYUSE (RCtype);
 }
 
 
@@ -808,22 +747,11 @@ RC_symbol_value_print (RCoutput, RCtype, RCvaluep)
 | Print this symbol on YYOUTPUT.  |
 `--------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
 RC_symbol_print (FILE *RCoutput, int RCtype, YYSTYPE const * const RCvaluep)
-#else
-static void
-RC_symbol_print (RCoutput, RCtype, RCvaluep)
-    FILE *RCoutput;
-    int RCtype;
-    YYSTYPE const * const RCvaluep;
-#endif
 {
-  if (RCtype < YYNTOKENS)
-    YYFPRINTF (RCoutput, "token %s (", RCtname[RCtype]);
-  else
-    YYFPRINTF (RCoutput, "nterm %s (", RCtname[RCtype]);
+  YYFPRINTF (RCoutput, "%s %s (",
+             RCtype < YYNTOKENS ? "token" : "nterm", RCtname[RCtype]);
 
   RC_symbol_value_print (RCoutput, RCtype, RCvaluep);
   YYFPRINTF (RCoutput, ")");
@@ -834,16 +762,8 @@ RC_symbol_print (RCoutput, RCtype, RCvaluep)
 | TOP (included).                                                   |
 `------------------------------------------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
 RC_stack_print (RCtype_int16 *RCbottom, RCtype_int16 *RCtop)
-#else
-static void
-RC_stack_print (RCbottom, RCtop)
-    RCtype_int16 *RCbottom;
-    RCtype_int16 *RCtop;
-#endif
 {
   YYFPRINTF (stderr, "Stack now");
   for (; RCbottom <= RCtop; RCbottom++)
@@ -854,49 +774,42 @@ RC_stack_print (RCbottom, RCtop)
   YYFPRINTF (stderr, "\n");
 }
 
-# define YY_STACK_PRINT(Bottom, Top)				\
-do {								\
-  if (RCdebug)							\
-    RC_stack_print ((Bottom), (Top));				\
-} while (YYID (0))
+# define YY_STACK_PRINT(Bottom, Top)                            \
+do {                                                            \
+  if (RCdebug)                                                  \
+    RC_stack_print ((Bottom), (Top));                           \
+} while (0)
 
 
 /*------------------------------------------------.
 | Report that the YYRULE is going to be reduced.  |
 `------------------------------------------------*/
 
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
-RC_reduce_print (YYSTYPE *RCvsp, int RCrule)
-#else
-static void
-RC_reduce_print (RCvsp, RCrule)
-    YYSTYPE *RCvsp;
-    int RCrule;
-#endif
+RC_reduce_print (RCtype_int16 *RCssp, YYSTYPE *RCvsp, int RCrule)
 {
+  unsigned long int RClno = RCrline[RCrule];
   int RCnrhs = RCr2[RCrule];
   int RCi;
-  unsigned long int RClno = RCrline[RCrule];
   YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
-	     RCrule - 1, RClno);
+             RCrule - 1, RClno);
   /* The symbols being reduced.  */
   for (RCi = 0; RCi < RCnrhs; RCi++)
     {
       YYFPRINTF (stderr, "   $%d = ", RCi + 1);
-      RC_symbol_print (stderr, RCrhs[RCprhs[RCrule] + RCi],
-		       &(RCvsp[(RCi + 1) - (RCnrhs)])
-		       		       );
+      RC_symbol_print (stderr,
+                       RCstos[RCssp[RCi + 1 - RCnrhs]],
+                       &(RCvsp[(RCi + 1) - (RCnrhs)])
+                                              );
       YYFPRINTF (stderr, "\n");
     }
 }
 
-# define YY_REDUCE_PRINT(Rule)		\
-do {					\
-  if (RCdebug)				\
-    RC_reduce_print (RCvsp, Rule); \
-} while (YYID (0))
+# define YY_REDUCE_PRINT(Rule)          \
+do {                                    \
+  if (RCdebug)                          \
+    RC_reduce_print (RCssp, RCvsp, Rule); \
+} while (0)
 
 /* Nonzero means print parse trace.  It is left uninitialized so that
    multiple parsers can coexist.  */
@@ -910,7 +823,7 @@ int RCdebug;
 
 
 /* YYINITDEPTH -- initial size of the parser's stacks.  */
-#ifndef	YYINITDEPTH
+#ifndef YYINITDEPTH
 # define YYINITDEPTH 200
 #endif
 
@@ -933,15 +846,8 @@ int RCdebug;
 #   define RCstrlen strlen
 #  else
 /* Return the length of YYSTR.  */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static YYSIZE_T
 RCstrlen (const char *RCstr)
-#else
-static YYSIZE_T
-RCstrlen (RCstr)
-    const char *RCstr;
-#endif
 {
   YYSIZE_T RClen;
   for (RClen = 0; RCstr[RClen]; RClen++)
@@ -957,16 +863,8 @@ RCstrlen (RCstr)
 #  else
 /* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
    YYDEST.  */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static char *
 RCstpcpy (char *RCdest, const char *RCsrc)
-#else
-static char *
-RCstpcpy (RCdest, RCsrc)
-    char *RCdest;
-    const char *RCsrc;
-#endif
 {
   char *RCd = RCdest;
   const char *RCs = RCsrc;
@@ -996,27 +894,27 @@ RCtnamerr (char *RCres, const char *RCstr)
       char const *RCp = RCstr;
 
       for (;;)
-	switch (*++RCp)
-	  {
-	  case '\'':
-	  case ',':
-	    goto do_not_strip_quotes;
+        switch (*++RCp)
+          {
+          case '\'':
+          case ',':
+            goto do_not_strip_quotes;
 
-	  case '\\':
-	    if (*++RCp != '\\')
-	      goto do_not_strip_quotes;
-	    /* Fall through.  */
-	  default:
-	    if (RCres)
-	      RCres[RCn] = *RCp;
-	    RCn++;
-	    break;
+          case '\\':
+            if (*++RCp != '\\')
+              goto do_not_strip_quotes;
+            /* Fall through.  */
+          default:
+            if (RCres)
+              RCres[RCn] = *RCp;
+            RCn++;
+            break;
 
-	  case '"':
-	    if (RCres)
-	      RCres[RCn] = '\0';
-	    return RCn;
-	  }
+          case '"':
+            if (RCres)
+              RCres[RCn] = '\0';
+            return RCn;
+          }
     do_not_strip_quotes: ;
     }
 
@@ -1039,11 +937,11 @@ static int
 RCsyntax_error (YYSIZE_T *RCmsg_alloc, char **RCmsg,
                 RCtype_int16 *RCssp, int RCtoken)
 {
-  YYSIZE_T RCsize0 = RCtnamerr (YY_NULL, RCtname[RCtoken]);
+  YYSIZE_T RCsize0 = RCtnamerr (YY_NULLPTR, RCtname[RCtoken]);
   YYSIZE_T RCsize = RCsize0;
   enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
   /* Internationalized format string. */
-  const char *RCformat = YY_NULL;
+  const char *RCformat = YY_NULLPTR;
   /* Arguments of RCformat. */
   char const *RCarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
   /* Number of reported tokens (one for the "unexpected", one per
@@ -1051,10 +949,6 @@ RCsyntax_error (YYSIZE_T *RCmsg_alloc, char **RCmsg,
   int RCcount = 0;
 
   /* There are many possibilities here to consider:
-     - Assume YYFAIL is not used.  It's too flawed to consider.  See
-       <http://lists.gnu.org/archive/html/bison-patches/2009-12/msg00024.html>
-       for details.  YYERROR is fine as it does not invoke this
-       function.
      - If this state is a consistent state with a default action, then
        the only way this function was invoked is if the default action
        is an error action.  In that case, don't check for expected
@@ -1104,7 +998,7 @@ RCsyntax_error (YYSIZE_T *RCmsg_alloc, char **RCmsg,
                   }
                 RCarg[RCcount++] = RCtname[RCx];
                 {
-                  YYSIZE_T RCsize1 = RCsize + RCtnamerr (YY_NULL, RCtname[RCx]);
+                  YYSIZE_T RCsize1 = RCsize + RCtnamerr (YY_NULLPTR, RCtname[RCx]);
                   if (! (RCsize <= RCsize1
                          && RCsize1 <= YYSTACK_ALLOC_MAXIMUM))
                     return 2;
@@ -1171,31 +1065,17 @@ RCsyntax_error (YYSIZE_T *RCmsg_alloc, char **RCmsg,
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
-/*ARGSUSED*/
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 static void
 RCdestruct (const char *RCmsg, int RCtype, YYSTYPE *RCvaluep)
-#else
-static void
-RCdestruct (RCmsg, RCtype, RCvaluep)
-    const char *RCmsg;
-    int RCtype;
-    YYSTYPE *RCvaluep;
-#endif
 {
   YYUSE (RCvaluep);
-
   if (!RCmsg)
     RCmsg = "Deleting";
   YY_SYMBOL_PRINT (RCmsg, RCtype, RCvaluep, RClocationp);
 
-  switch (RCtype)
-    {
-
-      default:
-        break;
-    }
+  YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
+  YYUSE (RCtype);
+  YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
 
@@ -1204,18 +1084,8 @@ RCdestruct (RCmsg, RCtype, RCvaluep)
 /* The lookahead symbol.  */
 int RCchar;
 
-
-#ifndef YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-# define YY_IGNORE_MAYBE_UNINITIALIZED_END
-#endif
-#ifndef YY_INITIAL_VALUE
-# define YY_INITIAL_VALUE(Value) /* Nothing. */
-#endif
-
 /* The semantic value of the lookahead symbol.  */
-YYSTYPE RClval YY_INITIAL_VALUE(RCval_default);
-
+YYSTYPE RClval;
 /* Number of syntax errors so far.  */
 int RCnerrs;
 
@@ -1224,35 +1094,16 @@ int RCnerrs;
 | RCparse.  |
 `----------*/
 
-#ifdef YYPARSE_PARAM
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
-int
-RCparse (void *YYPARSE_PARAM)
-#else
-int
-RCparse (YYPARSE_PARAM)
-    void *YYPARSE_PARAM;
-#endif
-#else /* ! YYPARSE_PARAM */
-#if (defined __STDC__ || defined __C99__FUNC__ \
-     || defined __cplusplus || defined _MSC_VER)
 int
 RCparse (void)
-#else
-int
-RCparse ()
-
-#endif
-#endif
 {
     int RCstate;
     /* Number of tokens to shift before error messages enabled.  */
     int RCerrstatus;
 
     /* The stacks and their tools:
-       `RCss': related to states.
-       `RCvs': related to semantic values.
+       'RCss': related to states.
+       'RCvs': related to semantic values.
 
        Refer to the stacks through separate pointers, to allow RCoverflow
        to reallocate them elsewhere.  */
@@ -1320,23 +1171,23 @@ RCparse ()
 
 #ifdef RCoverflow
       {
-	/* Give user a chance to reallocate the stack.  Use copies of
-	   these so that the &'s don't force the real ones into
-	   memory.  */
-	YYSTYPE *RCvs1 = RCvs;
-	RCtype_int16 *RCss1 = RCss;
+        /* Give user a chance to reallocate the stack.  Use copies of
+           these so that the &'s don't force the real ones into
+           memory.  */
+        YYSTYPE *RCvs1 = RCvs;
+        RCtype_int16 *RCss1 = RCss;
 
-	/* Each stack pointer address is followed by the size of the
-	   data in use in that stack, in bytes.  This used to be a
-	   conditional around just the two extra args, but that might
-	   be undefined if RCoverflow is a macro.  */
-	RCoverflow (YY_("memory exhausted"),
-		    &RCss1, RCsize * sizeof (*RCssp),
-		    &RCvs1, RCsize * sizeof (*RCvsp),
-		    &RCstacksize);
+        /* Each stack pointer address is followed by the size of the
+           data in use in that stack, in bytes.  This used to be a
+           conditional around just the two extra args, but that might
+           be undefined if RCoverflow is a macro.  */
+        RCoverflow (YY_("memory exhausted"),
+                    &RCss1, RCsize * sizeof (*RCssp),
+                    &RCvs1, RCsize * sizeof (*RCvsp),
+                    &RCstacksize);
 
-	RCss = RCss1;
-	RCvs = RCvs1;
+        RCss = RCss1;
+        RCvs = RCvs1;
       }
 #else /* no RCoverflow */
 # ifndef YYSTACK_RELOCATE
@@ -1344,22 +1195,22 @@ RCparse ()
 # else
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= RCstacksize)
-	goto RCexhaustedlab;
+        goto RCexhaustedlab;
       RCstacksize *= 2;
       if (YYMAXDEPTH < RCstacksize)
-	RCstacksize = YYMAXDEPTH;
+        RCstacksize = YYMAXDEPTH;
 
       {
-	RCtype_int16 *RCss1 = RCss;
-	union RCalloc *RCptr =
-	  (union RCalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (RCstacksize));
-	if (! RCptr)
-	  goto RCexhaustedlab;
-	YYSTACK_RELOCATE (RCss_alloc, RCss);
-	YYSTACK_RELOCATE (RCvs_alloc, RCvs);
+        RCtype_int16 *RCss1 = RCss;
+        union RCalloc *RCptr =
+          (union RCalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (RCstacksize));
+        if (! RCptr)
+          goto RCexhaustedlab;
+        YYSTACK_RELOCATE (RCss_alloc, RCss);
+        YYSTACK_RELOCATE (RCvs_alloc, RCvs);
 #  undef YYSTACK_RELOCATE
-	if (RCss1 != RCssa)
-	  YYSTACK_FREE (RCss1);
+        if (RCss1 != RCssa)
+          YYSTACK_FREE (RCss1);
       }
 # endif
 #endif /* no RCoverflow */
@@ -1368,10 +1219,10 @@ RCparse ()
       RCvsp = RCvs + RCsize - 1;
 
       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
-		  (unsigned long int) RCstacksize));
+                  (unsigned long int) RCstacksize));
 
       if (RCss + RCstacksize - 1 <= RCssp)
-	YYABORT;
+        YYABORT;
     }
 
   YYDPRINTF ((stderr, "Entering state %d\n", RCstate));
@@ -1400,7 +1251,7 @@ RCbackup:
   if (RCchar == YYEMPTY)
     {
       YYDPRINTF ((stderr, "Reading a token: "));
-      RCchar = YYLEX;
+      RCchar = RClex ();
     }
 
   if (RCchar <= YYEOF)
@@ -1465,7 +1316,7 @@ RCreduce:
   RClen = RCr2[RCn];
 
   /* If YYLEN is nonzero, implement the default value of the action:
-     `$$ = $1'.
+     '$$ = $1'.
 
      Otherwise, the following line sets YYVAL to garbage.
      This behavior is undocumented and Bison
@@ -1479,431 +1330,430 @@ RCreduce:
   switch (RCn)
     {
         case 2:
-/* Line 1792 of yacc.c  */
-#line 85 "RunConfigGrammar.y"
+#line 85 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
 }
+#line 1337 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-/* Line 1792 of yacc.c  */
-#line 88 "RunConfigGrammar.y"
+#line 88 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
 }
+#line 1344 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-/* Line 1792 of yacc.c  */
-#line 99 "RunConfigGrammar.y"
+#line 99 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
   NetworkState network_state;
-  double value = (RCvsp[(3) - (4)].expr)->eval(NULL, network_state);
-  RunConfig::getInstance()->setParameter((RCvsp[(1) - (4)].str), value);
+  double value = (RCvsp[-1].expr)->eval(NULL, network_state);
+  RunConfig::getInstance()->setParameter((RCvsp[-3].str), value);
 }
+#line 1354 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-/* Line 1792 of yacc.c  */
-#line 107 "RunConfigGrammar.y"
+#line 107 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  Node* node = network->getNode((RCvsp[(1) - (6)].str));
+  Node* node = network->getNode((RCvsp[-5].str));
   NetworkState network_state;
-  double value = (RCvsp[(5) - (6)].expr)->eval(NULL, network_state);
-  if (!strcasecmp((RCvsp[(3) - (6)].str), "istate")) {
+  double value = (RCvsp[-1].expr)->eval(NULL, network_state);
+  if (!strcasecmp((RCvsp[-3].str), "istate")) {
     if (backward_istate) {
       node->setIRandomState(value);
     } else {
       if (value < 0) {
 	new IStateGroup(node);
       } else {
-	new IStateGroup(node, (RCvsp[(5) - (6)].expr));
+	new IStateGroup(node, (RCvsp[-1].expr));
       }
     }
-  } else if (!strcasecmp((RCvsp[(3) - (6)].str), "is_internal")) {
+  } else if (!strcasecmp((RCvsp[-3].str), "is_internal")) {
     node->isInternal((bool)value);
-  } else if (!strcasecmp((RCvsp[(3) - (6)].str), "refstate")) {
+  } else if (!strcasecmp((RCvsp[-3].str), "refstate")) {
     if (value < 0) {
       node->setReference(false);
     } else {
       node->setReferenceState((NodeState)value);
     }
   } else {
-    throw BNException(std::string(RC_error_head() + "invalid node attribute: ") + (RCvsp[(3) - (6)].str) + ", valid attributes are: istate or is_internal");
+    throw BNException(std::string(RC_error_head() + "invalid node attribute: ") + (RCvsp[-3].str) + ", valid attributes are: istate or is_internal");
   }
 }
+#line 1385 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-/* Line 1792 of yacc.c  */
-#line 134 "RunConfigGrammar.y"
+#line 134 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  if (strcasecmp((RCvsp[(3) - (6)].str), "istate")) {
-    throw BNException(std::string(RC_error_head() + "invalid node group attribute: ") + (RCvsp[(3) - (6)].str) + ", valid attribute is istate");
+  if (strcasecmp((RCvsp[-3].str), "istate")) {
+    throw BNException(std::string(RC_error_head() + "invalid node group attribute: ") + (RCvsp[-3].str) + ", valid attribute is istate");
   }
   std::string error_msg;
-  new IStateGroup((RCvsp[(1) - (6)].node_list), (RCvsp[(5) - (6)].istate_expr_list), error_msg);
+  new IStateGroup((RCvsp[-5].node_list), (RCvsp[-1].istate_expr_list), error_msg);
   if (error_msg.length() > 0) {
     throw BNException(std::string(RC_error_head() + error_msg));
   }
 }
+#line 1400 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-/* Line 1792 of yacc.c  */
-#line 147 "RunConfigGrammar.y"
+#line 147 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.node_list) = (RCvsp[(2) - (3)].node_list);
+  (RCval.node_list) = (RCvsp[-1].node_list);
 }
+#line 1408 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-/* Line 1792 of yacc.c  */
-#line 153 "RunConfigGrammar.y"
+#line 153 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
   (RCval.node_list) = new std::vector<const Node*>();
-  (RCval.node_list)->push_back(network->getNode((RCvsp[(1) - (1)].str)));
+  (RCval.node_list)->push_back(network->getNode((RCvsp[0].str)));
 }
+#line 1417 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-/* Line 1792 of yacc.c  */
-#line 158 "RunConfigGrammar.y"
+#line 158 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.node_list) = (RCvsp[(1) - (3)].node_list);
-  (RCval.node_list)->push_back(network->getNode((RCvsp[(3) - (3)].str)));
+  (RCval.node_list) = (RCvsp[-2].node_list);
+  (RCval.node_list)->push_back(network->getNode((RCvsp[0].str)));
 }
+#line 1426 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-/* Line 1792 of yacc.c  */
-#line 165 "RunConfigGrammar.y"
+#line 165 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
   (RCval.istate_expr_list) = new std::vector<IStateGroup::ProbaIState*>();
-  (RCval.istate_expr_list)->push_back((RCvsp[(1) - (1)].istate_expr));
+  (RCval.istate_expr_list)->push_back((RCvsp[0].istate_expr));
 }
+#line 1435 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-/* Line 1792 of yacc.c  */
-#line 170 "RunConfigGrammar.y"
+#line 170 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.istate_expr_list) = (RCvsp[(1) - (3)].istate_expr_list);
-  (RCval.istate_expr_list)->push_back((RCvsp[(3) - (3)].istate_expr));
+  (RCval.istate_expr_list) = (RCvsp[-2].istate_expr_list);
+  (RCval.istate_expr_list)->push_back((RCvsp[0].istate_expr));
 }
+#line 1444 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-/* Line 1792 of yacc.c  */
-#line 177 "RunConfigGrammar.y"
+#line 177 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.istate_expr) = new IStateGroup::ProbaIState((RCvsp[(1) - (4)].expr), (RCvsp[(3) - (4)].expr_list));
+  (RCval.istate_expr) = new IStateGroup::ProbaIState((RCvsp[-3].expr), (RCvsp[-1].expr_list));
 }
+#line 1452 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-/* Line 1792 of yacc.c  */
-#line 183 "RunConfigGrammar.y"
+#line 183 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
   (RCval.expr_list) = new std::vector<Expression*>();
-  (RCval.expr_list)->push_back((RCvsp[(1) - (1)].expr));
+  (RCval.expr_list)->push_back((RCvsp[0].expr));
 }
+#line 1461 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-/* Line 1792 of yacc.c  */
-#line 188 "RunConfigGrammar.y"
+#line 188 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr_list) = (RCvsp[(1) - (3)].expr_list);
-  (RCval.expr_list)->push_back((RCvsp[(3) - (3)].expr));
+  (RCval.expr_list) = (RCvsp[-2].expr_list);
+  (RCval.expr_list)->push_back((RCvsp[0].expr));
 }
+#line 1470 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-/* Line 1792 of yacc.c  */
-#line 195 "RunConfigGrammar.y"
+#line 195 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
   SymbolTable* symtab = SymbolTable::getInstance();
-  const Symbol* symbol = symtab->getOrMakeSymbol((RCvsp[(1) - (4)].str));
+  const Symbol* symbol = symtab->getOrMakeSymbol((RCvsp[-3].str));
   NetworkState dummy_state;
-  symtab->setSymbolValue(symbol, (RCvsp[(3) - (4)].expr)->eval(NULL, dummy_state));
+  symtab->setSymbolValue(symbol, (RCvsp[-1].expr)->eval(NULL, dummy_state));
 }
+#line 1481 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-/* Line 1792 of yacc.c  */
-#line 204 "RunConfigGrammar.y"
+#line 204 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new ConstantExpression((RCvsp[(1) - (1)].l));
+  (RCval.expr) = new ConstantExpression((RCvsp[0].l));
 }
+#line 1489 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-/* Line 1792 of yacc.c  */
-#line 208 "RunConfigGrammar.y"
+#line 208 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new ConstantExpression((RCvsp[(1) - (1)].d));
+  (RCval.expr) = new ConstantExpression((RCvsp[0].d));
 }
+#line 1497 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-/* Line 1792 of yacc.c  */
-#line 212 "RunConfigGrammar.y"
+#line 212 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new SymbolExpression(SymbolTable::getInstance()->getOrMakeSymbol((RCvsp[(1) - (1)].str)));
+  (RCval.expr) = new SymbolExpression(SymbolTable::getInstance()->getOrMakeSymbol((RCvsp[0].str)));
 }
+#line 1505 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-/* Line 1792 of yacc.c  */
-#line 216 "RunConfigGrammar.y"
+#line 216 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new ParenthesisExpression((RCvsp[(2) - (3)].expr));
+  (RCval.expr) = new ParenthesisExpression((RCvsp[-1].expr));
 }
+#line 1513 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-/* Line 1792 of yacc.c  */
-#line 222 "RunConfigGrammar.y"
+#line 222 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1521 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-/* Line 1792 of yacc.c  */
-#line 228 "RunConfigGrammar.y"
+#line 228 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1529 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-/* Line 1792 of yacc.c  */
-#line 232 "RunConfigGrammar.y"
+#line 232 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(2) - (2)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1537 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-/* Line 1792 of yacc.c  */
-#line 236 "RunConfigGrammar.y"
+#line 236 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new SubExpression(new ConstantExpression(0.0), (RCvsp[(2) - (2)].expr));
+  (RCval.expr) = new SubExpression(new ConstantExpression(0.0), (RCvsp[0].expr));
 }
+#line 1545 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-/* Line 1792 of yacc.c  */
-#line 240 "RunConfigGrammar.y"
+#line 240 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new NotLogicalExpression((RCvsp[(2) - (2)].expr));
+  (RCval.expr) = new NotLogicalExpression((RCvsp[0].expr));
 }
+#line 1553 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-/* Line 1792 of yacc.c  */
-#line 244 "RunConfigGrammar.y"
+#line 244 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new NotLogicalExpression((RCvsp[(2) - (2)].expr));
+  (RCval.expr) = new NotLogicalExpression((RCvsp[0].expr));
 }
+#line 1561 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-/* Line 1792 of yacc.c  */
-#line 250 "RunConfigGrammar.y"
+#line 250 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1569 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-/* Line 1792 of yacc.c  */
-#line 254 "RunConfigGrammar.y"
+#line 254 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new MulExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new MulExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1577 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-/* Line 1792 of yacc.c  */
-#line 258 "RunConfigGrammar.y"
+#line 258 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new DivExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new DivExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1585 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-/* Line 1792 of yacc.c  */
-#line 264 "RunConfigGrammar.y"
+#line 264 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1593 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-/* Line 1792 of yacc.c  */
-#line 268 "RunConfigGrammar.y"
+#line 268 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new AddExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new AddExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1601 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-/* Line 1792 of yacc.c  */
-#line 272 "RunConfigGrammar.y"
+#line 272 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new SubExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new SubExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1609 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-/* Line 1792 of yacc.c  */
-#line 278 "RunConfigGrammar.y"
+#line 278 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1617 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-/* Line 1792 of yacc.c  */
-#line 282 "RunConfigGrammar.y"
+#line 282 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new LetterExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new LetterExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1625 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-/* Line 1792 of yacc.c  */
-#line 286 "RunConfigGrammar.y"
+#line 286 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new GreaterExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new GreaterExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1633 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-/* Line 1792 of yacc.c  */
-#line 290 "RunConfigGrammar.y"
+#line 290 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new LetterOrEqualExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new LetterOrEqualExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1641 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-/* Line 1792 of yacc.c  */
-#line 294 "RunConfigGrammar.y"
+#line 294 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new GreaterOrEqualExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new GreaterOrEqualExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1649 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-/* Line 1792 of yacc.c  */
-#line 300 "RunConfigGrammar.y"
+#line 300 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1657 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-/* Line 1792 of yacc.c  */
-#line 304 "RunConfigGrammar.y"
+#line 304 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new EqualExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new EqualExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1665 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-/* Line 1792 of yacc.c  */
-#line 308 "RunConfigGrammar.y"
+#line 308 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new NotEqualExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new NotEqualExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1673 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-/* Line 1792 of yacc.c  */
-#line 314 "RunConfigGrammar.y"
+#line 314 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1681 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-/* Line 1792 of yacc.c  */
-#line 318 "RunConfigGrammar.y"
+#line 318 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new AndLogicalExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new AndLogicalExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1689 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-/* Line 1792 of yacc.c  */
-#line 324 "RunConfigGrammar.y"
+#line 324 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1697 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-/* Line 1792 of yacc.c  */
-#line 328 "RunConfigGrammar.y"
+#line 328 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new OrLogicalExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new OrLogicalExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1705 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-/* Line 1792 of yacc.c  */
-#line 334 "RunConfigGrammar.y"
+#line 334 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1713 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-/* Line 1792 of yacc.c  */
-#line 338 "RunConfigGrammar.y"
+#line 338 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new XorLogicalExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new XorLogicalExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1721 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-/* Line 1792 of yacc.c  */
-#line 342 "RunConfigGrammar.y"
+#line 342 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new XorLogicalExpression((RCvsp[(1) - (3)].expr), (RCvsp[(3) - (3)].expr));
+  (RCval.expr) = new XorLogicalExpression((RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1729 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-/* Line 1792 of yacc.c  */
-#line 348 "RunConfigGrammar.y"
+#line 348 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1737 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-/* Line 1792 of yacc.c  */
-#line 352 "RunConfigGrammar.y"
+#line 352 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = new CondExpression((RCvsp[(1) - (5)].expr), (RCvsp[(3) - (5)].expr), (RCvsp[(5) - (5)].expr));
+  (RCval.expr) = new CondExpression((RCvsp[-4].expr), (RCvsp[-2].expr), (RCvsp[0].expr));
 }
+#line 1745 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-/* Line 1792 of yacc.c  */
-#line 358 "RunConfigGrammar.y"
+#line 358 "RunConfigGrammar.y" /* yacc.c:1646  */
     {
-  (RCval.expr) = (RCvsp[(1) - (1)].expr);
+  (RCval.expr) = (RCvsp[0].expr);
 }
+#line 1753 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
     break;
 
 
-/* Line 1792 of yacc.c  */
-#line 1907 "RunConfigGrammar.tab.c"
+#line 1757 "RunConfigGrammar.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter RCchar, and that requires
@@ -1925,7 +1775,7 @@ RCreduce:
 
   *++RCvsp = RCval;
 
-  /* Now `shift' the result of the reduction.  Determine what state
+  /* Now 'shift' the result of the reduction.  Determine what state
      that goes to, based on the state we popped back to and the rule
      number reduced by.  */
 
@@ -1940,9 +1790,9 @@ RCreduce:
   goto RCnewstate;
 
 
-/*------------------------------------.
-| RCerrlab -- here on detecting error |
-`------------------------------------*/
+/*--------------------------------------.
+| RCerrlab -- here on detecting error.  |
+`--------------------------------------*/
 RCerrlab:
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
@@ -1993,20 +1843,20 @@ RCerrlab:
   if (RCerrstatus == 3)
     {
       /* If just tried and failed to reuse lookahead token after an
-	 error, discard it.  */
+         error, discard it.  */
 
       if (RCchar <= YYEOF)
-	{
-	  /* Return failure if at end of input.  */
-	  if (RCchar == YYEOF)
-	    YYABORT;
-	}
+        {
+          /* Return failure if at end of input.  */
+          if (RCchar == YYEOF)
+            YYABORT;
+        }
       else
-	{
-	  RCdestruct ("Error: discarding",
-		      RCtoken, &RClval);
-	  RCchar = YYEMPTY;
-	}
+        {
+          RCdestruct ("Error: discarding",
+                      RCtoken, &RClval);
+          RCchar = YYEMPTY;
+        }
     }
 
   /* Else will try to reuse lookahead token after shifting the error
@@ -2025,7 +1875,7 @@ RCerrorlab:
   if (/*CONSTCOND*/ 0)
      goto RCerrorlab;
 
-  /* Do not reclaim the symbols of the rule which action triggered
+  /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
   YYPOPSTACK (RClen);
   RClen = 0;
@@ -2038,29 +1888,29 @@ RCerrorlab:
 | RCerrlab1 -- common code for both syntax error and YYERROR.  |
 `-------------------------------------------------------------*/
 RCerrlab1:
-  RCerrstatus = 3;	/* Each real token shifted decrements this.  */
+  RCerrstatus = 3;      /* Each real token shifted decrements this.  */
 
   for (;;)
     {
       RCn = RCpact[RCstate];
       if (!RCpact_value_is_default (RCn))
-	{
-	  RCn += YYTERROR;
-	  if (0 <= RCn && RCn <= YYLAST && RCcheck[RCn] == YYTERROR)
-	    {
-	      RCn = RCtable[RCn];
-	      if (0 < RCn)
-		break;
-	    }
-	}
+        {
+          RCn += YYTERROR;
+          if (0 <= RCn && RCn <= YYLAST && RCcheck[RCn] == YYTERROR)
+            {
+              RCn = RCtable[RCn];
+              if (0 < RCn)
+                break;
+            }
+        }
 
       /* Pop the current state because it cannot handle the error token.  */
       if (RCssp == RCss)
-	YYABORT;
+        YYABORT;
 
 
       RCdestruct ("Error: popping",
-		  RCstos[RCstate], RCvsp);
+                  RCstos[RCstate], RCvsp);
       YYPOPSTACK (1);
       RCstate = *RCssp;
       YY_STACK_PRINT (RCss, RCssp);
@@ -2111,14 +1961,14 @@ RCreturn:
       RCdestruct ("Cleanup: discarding lookahead",
                   RCtoken, &RClval);
     }
-  /* Do not reclaim the symbols of the rule which action triggered
+  /* Do not reclaim the symbols of the rule whose action triggered
      this YYABORT or YYACCEPT.  */
   YYPOPSTACK (RClen);
   YY_STACK_PRINT (RCss, RCssp);
   while (RCssp != RCss)
     {
       RCdestruct ("Cleanup: popping",
-		  RCstos[*RCssp], RCvsp);
+                  RCstos[*RCssp], RCvsp);
       YYPOPSTACK (1);
     }
 #ifndef RCoverflow
@@ -2129,13 +1979,9 @@ RCreturn:
   if (RCmsg != RCmsgbuf)
     YYSTACK_FREE (RCmsg);
 #endif
-  /* Make sure YYID is used.  */
-  return YYID (RCresult);
+  return RCresult;
 }
-
-
-/* Line 2055 of yacc.c  */
-#line 363 "RunConfigGrammar.y"
+#line 363 "RunConfigGrammar.y" /* yacc.c:1906  */
 
 
 void runconfig_setNetwork(Network* _network)

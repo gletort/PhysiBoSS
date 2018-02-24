@@ -60,14 +60,13 @@ void MaBossNetwork::init( std::string networkFile, std::string configFile )
 		conffile = configFile;
 		runConfig->parse(network, conffile.c_str());
 		initNetworkState();
- 		std::cout << "BN initialization done \n";
+ 		std::cout << "BN initialization done " << std::endl;
 }
 
 void MaBossNetwork::initNetworkState()
 {
 	runConfig->setSeedPseudoRandom( UniformInt() );
 	std::vector<Node *> nodes = network->getNodes();
-	//std::cout << "Retrieved " << nodes.size() << " nodes from the BN\n";
 	int i = 0;
 	def_nodes.resize( nodes.size() );
 	for (auto node : nodes)
@@ -76,7 +75,6 @@ void MaBossNetwork::initNetworkState()
 		def_nodes[i] = (bool) node->getIState( network );
 		i++;	
 		//std::cout << "initial state of node " << node->getLabel() << " = " << (bool)node->getIState(network) << std::endl;
-	//	mbNetwork_default_inits[node->getLabel()] = (bool)node->getIState(mbNetwork);
 	}
 }
 
@@ -132,15 +130,15 @@ bool MaBossNetwork::run( NetworkState* netStates, std::vector<bool>* nodes_val, 
 	loadSymbol( cellline );
 	load( netStates, nodes_val );
 	MaBEstEngine mabest( network, runConfig );
-	std::ostream* os = NULL; // don't output maboss run messages
+	std::ostream* os = NULL; // null osstream, don't show MaBoSS outputs
 	// And run it
 	mabest.run(os);
 		
 	// save fixed point as initial state for the network for the next time step
-	const STATE_MAP<NetworkState_Impl, unsigned int>& fps = mabest.getFixpoints();
-	if (fps.begin() != fps.end()) 
+	const STATE_MAP<NetworkState_Impl, unsigned int>& fixpts = mabest.getFixpoints();
+	if (fixpts.begin() != fixpts.end()) 
 	{
-		(*netStates) = fps.begin()->first;
+		(*netStates) = fixpts.begin()->first;
 	}
 	bool converged = true;	
 	/**if ( ! mabest.converges() )

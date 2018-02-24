@@ -33,9 +33,6 @@
 #include <fstream>
 #include <stdlib.h>
 
-//#define CELLSYS_RUN
-//#define CELLSYS_NEW_NETWORK
-
 static const char* prog;
 
 static int usage(std::ostream& os = std::cerr)
@@ -292,55 +289,13 @@ int main(int argc, char* argv[])
     output_fp = new std::ofstream((std::string(output) + "_fp.csv").c_str());
 
     time(&start_time);
-#ifdef CELLSYS_RUN
-    std::cout << "top -p " << getpid() << std::endl;
-    std::cout << "go? ";
-    getchar();
-    static const int CELLSYS_RUN_COUNT = getenv("CELLSYS_RUN_COUNT") ? atoi(getenv("CELLSYS_RUN_COUNT")) : 1000;
-    for (int nn = 0; nn < CELLSYS_RUN_COUNT; ++nn) {
-      std::cout << "time #" << nn << '\n';
-#ifdef CELLSYS_NEW_NETWORK
-      Network* nw = new Network(*network);
-#else
-      // WHEN NOT DOING A COPY, a little bit better, but not really
-      Network* nw = network;
-#endif
-      //Node* node;
-      NetworkState FP;
-      const Symbol* sb;
-      std::ostream* os = NULL;
-      STATE_MAP<NetworkState_Impl, unsigned int> fps;
-      //std::map<NetworkState, unsigned int> fps;
-      // set last fix point as initial state
-      /*
-      if (mbNetworks.find( cell->id ) != mbNetworks.end()) {
-	nw->initStates(mbNetworks[cell->id]);
-      }
-      */
-      // Set BN inputs based on cell environment
-      // ...
-      // run network
-      MaBEstEngine mabest(nw, runconfig);
-      mabest.run(os);
-      fps = mabest.getFixpoints();
-      FP = fps.begin()->first;
-      // save fixed point to use as initial state for next time step
-      /*mbNetworks[cell->id] = FP;*/
-
-      // Adapt cell-model parameters based on BN state
-      // ...
-#ifdef CELLSYS_NEW_NETWORK
-      delete nw;
-#endif
-    }
-#else
-    MaBEstEngine mabest(network, runconfig);
+    
+	MaBEstEngine mabest(network, runconfig);
     mabest.run(output_traj);
     mabest.display(*output_probtraj, *output_statdist, *output_fp);
     time(&end_time);
 
     runconfig->display(network, start_time, end_time, mabest, *output_run);
-#endif
 
     ((std::ofstream*)output_run)->close();
     if (NULL != output_traj) {
