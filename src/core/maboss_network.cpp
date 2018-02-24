@@ -52,23 +52,25 @@ void MaBossNetwork::write_properties(std::ostream& os)
 	os << std::endl;
 }
 
-/* Initialize the network by reading input files */
+/* Initialize the network by reading input files. Parse and read with MaBoSS */
 void MaBossNetwork::init( std::string networkFile, std::string configFile )
 {
-		std::cout << "Loading network files " << std::endl;
+		std::cout << "Loading MaBoSS network files " << std::endl;
 		network->parse(networkFile.c_str());
 		conffile = configFile;
 		runConfig->parse(network, conffile.c_str());
 		initNetworkState();
- 		std::cout << "BN initialization done " << std::endl;
+ 		std::cout << "MaBoSS network initialization done " << std::endl;
 }
 
 void MaBossNetwork::initNetworkState()
 {
+	// randomize MaBoSS seed
 	runConfig->setSeedPseudoRandom( UniformInt() );
+	// get all network nodes and read their initial value
 	std::vector<Node *> nodes = network->getNodes();
-	int i = 0;
 	def_nodes.resize( nodes.size() );
+	int i = 0;
 	for (auto node : nodes)
 	{
 		node_names[ node->getLabel() ] = i;
