@@ -65,13 +65,13 @@ class CellLine
 		/** \brief Amount of densities secretion when activated */
 		double secretion;
 
-		double glucose_necrosis_threshold;  // dimensionless 
-		//double maximum_stretch; 
+		double glucose_necrosis_threshold;  /// dimensionless 
+		/** \brief Maximum interaction distance at which cell can reach (filopodia/deformation). Ratio of its radius */
 		double max_interaction_distance_factor;
 
-		double Cccr; //used in calculating cell-cell repulsion			
-		double Ccba; //used in calculating cell-basement membrane repulsion	
-		double Ccbr; //used in calculating cell-basement membrane repulsion	
+		double Cccr; ///used in calculating cell-cell repulsion			
+		double Ccba; ///used in calculating cell-basement membrane repulsion	
+		double Ccbr; ///used in calculating cell-basement membrane repulsion	
 		
 		/** \brief Threshold value of concentration to be ON */
 		double prot_threshold;

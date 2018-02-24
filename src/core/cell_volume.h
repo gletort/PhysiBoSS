@@ -12,6 +12,8 @@
  * Cell has a nuclear radius, cytoplasm radius, and fluid/solid parts for each.
  *
  * Can convert radius to volume and inversely with base/utilities functions.
+ *
+ * \todo Propose a simpler mode (without fluid/solid fractions). 
  * */
 
 class CellVolume
