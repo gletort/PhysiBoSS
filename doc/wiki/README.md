@@ -43,7 +43,7 @@ git clone https://github.com/gletort/PhysiBoSS.git
 cd PhysiBoSS
 make install
 </pre>
-If the compilation fails, refer to this documentation <a class="el" href="Installation">page </a> for more explanations.
+If the compilation fails, refer to this Installation documentation page for more explanations.
 </p>
 
 <p>To generate/update code-specific documentation, type 'make doc' in the main directory. The documentation is generated with <code>doxygen</code>, which can be configured in the <code>Doxyfile</code> file present in this directory.
@@ -86,13 +86,13 @@ Input parameter file</h3>
 </pre><p> Complete examples of parameter files are given with the release of PhysiBoSS.</p>
 <h2><a class="anchor" id="sub1"></a>
 Create initial file</h2>
-<p>Simulation can be loaded from a given initial file containing the position of all initial cells, their state, size... With <code>PhysiBoSS</code> code, an executable <code>PhysiBoSS_CreateInitTxtFile</code> is given, which allows the user to create a .txt file containing those informations for given parameters and chosen modes (e.g. a sphere of radius 300 µm). See the page <a class="el" href="PhysiBoSS_CreateInitTxtFile">PhysiBoSS_CreateInitTxtFile</a> for more informations on what it can do and how to use it.</p>
+<p>Simulation can be loaded from a given initial file containing the position of all initial cells, their state, size... With <code>PhysiBoSS</code> code, an executable <code>PhysiBoSS_CreateInitTxtFile</code> is given, which allows the user to create a .txt file containing those informations for given parameters and chosen modes (e.g. a sphere of radius 300 µm). See the page PhysiBoSS_CreateInitTxtFile for more informations on what it can do and how to use it.</p>
 <p>It's also possible to create a custom initial file from a binary image like it was done to generate the initial state of the example image above. <br/>
 For this, we can use use an output of a previous simulation as the input initial file or build our own using semi-colon separated (';') columns such as: Time;ID;x;y;z;radius;volumetotal;volumenuclearsolid, etc. 
 Additionally, we have made an R script that generates such a file from the list of positive pixels in a binary image (that can be generated with ImageJ) <a class="el" href="https://github.com/gletort/PhysiBoSS/blob/master/scripts/presimu/prepareInitialFileFromBinary.R/">available here</a>. </p>
 <h2><a class="anchor" id="sub2"></a>
 Plot a given time point</h2>
-<p>The executable <code>PhysiBoSS_Plot</code> given with the release allows the user to plot a specific time point of the simulation after it has run, directly from the command line. The time point must have been saved in the 'output' directory, and the plot will be a .svg file. Several options can be specified to <code>PhysiBoSS_Plot</code>, as can be seen <a class="el" href="PhysiBoSS_Plot">here</a></p>
+<p>The executable <code>PhysiBoSS_Plot</code> given with the release allows the user to plot a specific time point of the simulation after it has run, directly from the command line. The time point must have been saved in the 'output' directory, and the plot will be a .svg file. Several options can be specified to <code>PhysiBoSS_Plot</code>, as can be seen at PhysiBoSS_Plot page.</p>
 <h2><a class="anchor" id="para"></a>
 Visualization</h2>
 <p>To visualize time evolution of 3D simulation results, we used the software <code>Paraview</code> which allows high flexibility and interactive viewing options. We provide within <code>PhysiBoSS</code> release several paraview state files to directly set-up the visualization of <code>PhysiBoSS</code> output files on <code>Paraview</code>. See the image below for an example of how a typical <code>PhysiBoSS</code> result looks in <code>Paraview</code> with our state files:</p>
@@ -100,16 +100,16 @@ Visualization</h2>
 ![](https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/paraview.png "Visualization with Paraview")
 
 <p>
-If you have issues using our state files or if you want to modify the initial set-up, the steps to visualize the output files as spheres in Paraview are explained <a class="el" href="Paraviewing">here</a>
+If you have issues using our state files or if you want to modify the initial set-up, the steps to visualize the output files as spheres in Paraview are explained at the Paraviewing page.
 </p> 
 <h1>Examples</h1>
 <ul>
-<li>Step by step simulation of a sphere of 100 µm radius of active cells, under TNF injection: <a class="el" href="Example_Spheroid_TNF">see here</a>.</li>
-<li>Step by step simulation of a cell population with initial 'Hello World' shape, under TNF injection: <a class="el" href="Example_Hello_World">see here</a>.</li>
-<li>Step by step simulation of cell sorting by differential adhesion, <a class="el" href="Example_Cell_Sorting">see here</a>.</li>
-<li>Step by step simulation of a cell population composed of 2 different strains <a class="el" href="Example_Mutants_paper">see here</a>.</li>
-<li>Step by step simulation of a cell population composed of 3 different strains <a class="el" href="Example_Mutants">see here</a>.</li>
-<li>Step by step simulation of a cell population surrounded by degradable ECM, constraining the growth of the population <a class="el" href="Example_Cells_With_ECM">see here</a>.</li>
+<li>Step by step simulation of a sphere of 100 µm radius of active cells, under TNF injection: Example_Spheroid_TNF page.</li>
+<li>Step by step simulation of a cell population with initial 'Hello World' shape, under TNF injection: Example_Hello_World page.</li>
+<li>Step by step simulation of cell sorting by differential adhesion, Example_Cell_Sorting page.</li>
+<li>Step by step simulation of a cell population composed of 2 different strains Example_Mutants_paper page.</li>
+<li>Step by step simulation of a cell population composed of 3 different strains Example_Mutants page.</li>
+<li>Step by step simulation of a cell population surrounded by degradable ECM, constraining the growth of the population Example_Cells_With_ECM page.</li>
 </ul>
 
 <h1><a class="anchor" id="sce"></a>
