@@ -33,7 +33,7 @@
         &lt;min_length&gt; 100 &lt;/min_length&gt;
         &lt;cell_spacing&gt; 1 &lt;/cell_spacing&gt;
 &lt;/passive_cells&gt;</pre><p> With this file, we created a spheroid of radius 100 µm, composed of cells with a mean radius of 9.5 µm, and spaced with 0.95% of their size (small overlap). The spheroid is surrounded by a spheric extra-cellular matrix, with a radius of 150 µm (but empty in the 100 µm internal sphere) represented by passive cells of mean radius 10 µm.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>Add more options of configurations (more geometries, distributions of cell size and phases...). </dd></dl>
+<dl class="todo"><dt><b><a class="el">Todo:</a></b></dt><dd>Add more options of configurations (more geometries, distributions of cell size and phases...). </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>G. Letort, Institut Curie </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>June 2017 </dd></dl>
 </div>
