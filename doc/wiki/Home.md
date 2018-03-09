@@ -3,8 +3,10 @@ Presentation</h1>
 <p><code>PhysiBoSS</code> (from the merging of PhysiCell and MaBoSS) is an adapted version of <code>PhysiCell</code> (see <a href="http://physicell.mathcancer.org">physicell.mathcancer.org </a>) to integrate in it Boolean network computation inside each cell. <code>PhysiCell</code> is developped in Paul Macklin's lab (<a href="mathcancer.org">mathcancer.org</a>). <code>MaBoSS</code> and <code>PhysiBoSS</code> are developped in the Computational Systems Biology of Cancer group (<a href="http://sysbio.curie.fr">sysbio.curie.fr</a>) <br/>
  Code is written in <code>C++</code> and open-source. In <code>PhysiCell</code>, there are two main part: <code><a class="el" href="namespace_bio_f_v_m.html">BioFVM</a></code> part which handle the diffusion/production of molecules (e.g. oxygen) and the <code>PhysiCell</code> part that handle the cells' physics. A cell can have a "classic" implementation of the cell cycle (adapted from <code>PhysiCell1.0</code> initial implementation), or a cell cycle progression mode determined by a Boolean network assigned to each individual cell by <code>MaBoSS</code>. Interestingly, this framework could be easily adapted to other networks or implementations.</p>
 <p><br/>
- </p>
-[[https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/hello.png|alt=PhysiCell-MaBoSS example]]
+</p>
+
+![](https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/hello.png "PhysiCell-MaBoSS example")
+
 <p> <br/>
 
 3 executables are proposed in the PhysiBoSS release: <code>PhysiBoSS</code> which handles the actual simulation, <code>PhysiBoSS_CreateInitTxtFile</code> which offers the possibility to automatically generate an initial state of the simulation file and <code>PhysiBoSS_Plot</code> which allows the user to create an svg file showing a snapshot of the simulation at a specific time point.</p>
@@ -51,7 +53,8 @@ It will generate the documentation files in the 'doc/html' folder (initially emp
 <h2><a class="anchor" id="ub0"></a>
 Running one simulation</h2>
 <p>An 'output' and 'microutput' directories should be present in the main directory of the simulation from which the executable will be called. Ideal structure would be to have a simulation directory containing the parameter file (e.g. <code>parameter.xml</code>), the initial configuration file (optional, e.g. <code>init.txt</code>) and the outputs folder. Informations files will be created in this directory (<code>report.txt</code>). Information on how the simulation is running (initialisation completed or not, current time, wall time) are printed to the terminal, we redirected them to the file <code>msg.txt</code> when running them using an automated script. <code>Report.txt</code> gives a quick summary of the simulation, with the number of cells that divided or died in between output times. In the folder 'output', txt files named 'cells_' followed by the time value are generated during the simulation, containing the current cells states (position/size/cycle state).</p>
-[[https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/simulation.png|alt=Simulation organization]]
+
+![](https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/simulation.png "Simulation organization")
 
  <h3><a class="anchor" id="sub0"></a>
 Input parameter file</h3>
@@ -93,7 +96,8 @@ Plot a given time point</h2>
 <h2><a class="anchor" id="para"></a>
 Visualization</h2>
 <p>To visualize time evolution of 3D simulation results, we used the software <code>Paraview</code> which allows high flexibility and interactive viewing options. We provide within <code>PhysiBoSS</code> release several paraview state files to directly set-up the visualization of <code>PhysiBoSS</code> output files on <code>Paraview</code>. See the image below for an example of how a typical <code>PhysiBoSS</code> result looks in <code>Paraview</code> with our state files:</p>
-[[https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/paraview.png|alt=Visualization with Paraview]]
+
+![](https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/paraview.png "Visualization with Paraview")
 
 <p>
 If you have issues using our state files or if you want to modify the initial set-up, the steps to visualize the output files as spheres in Paraview are explained <a class="el" href="Paraviewing">here</a>
