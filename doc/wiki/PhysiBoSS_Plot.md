@@ -21,6 +21,6 @@ Example</h1>
 It is also restricted to a 2D slice view of the simulation. </dd>
 <dd>
 In the current version, this executable is usefull to plot an overview of the simulation directly from the command line, and to automatize visualisation. However, in future development it is planned to propose graphical interface and visualisation which will make this tool deprecated.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000015">Todo:</a></b></dt><dd><p class="startdd">Modify to add possibility to read microenvironment file as well </p>
+<dl class="todo"><dt><b><a class="el">Todo:</a></b></dt><dd><p class="startdd">Modify to add possibility to read microenvironment file as well </p>
 <p class="enddd">Makes it more customizable, more parameters (an xml file maybe defining plotting options ?)</p>
 </dd></dl>
