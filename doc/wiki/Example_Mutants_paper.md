@@ -1,0 +1,2 @@
+Step-by-step example of running a simulation with PhysiBoSS: cell population composed of 2 strains in response to TNF continuous injection with and wihtout limiting oxygen.
+These results are also available as Supplementary files in our publication.
