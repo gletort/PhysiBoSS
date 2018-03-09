@@ -13,7 +13,7 @@ Example</h1>
 <p><br/></p>
 <p> Which gives the following svg file: <br/></p>
 
-<img src="https://github.com/gletort/PhysiBoSS/blob/master/doc/imgs/physiboss_plot_example.svg" alt="SVG output example" width="400"/>
+<img src="https://github.com/sysbio-curie/PhysiBoSS/blob/master/doc/imgs/physiboss_plot_example.svg" alt="SVG output example" width="400"/>
 
 <p> <br/> </p>
 <dl class="section remark"><dt>Remarks</dt><dd>This a first version, no microenvironment can be plotted. It will be extended and we will make it more customizable in future releases. </dd>
