@@ -92,7 +92,7 @@ Please, refer to the [Wiki](https://github.com/gletort/PhysiBoSS/wiki) of this r
 PhysiCell is developed in [Paul Macklin's lab](http://mathcancer.org). 
 MaBoSS and PhysiBoSS are developed in the [Computational Systems Biology of Cancer group](http://sysbio.curie.fr) at Institut Curie (Paris, France). 
 
-We invit you to use PhysiBoSS for you research and give feedbacks to us. Any help in developing it further is more than welcome.
+We invite you to use PhysiBoSS for you research and give feedbacks to us. Any help in developing it further is more than welcome.
 Do not hesitate to contact us for any comments or difficulties in using PhysiBoSS: physiboss@gmail.com.
 
 
