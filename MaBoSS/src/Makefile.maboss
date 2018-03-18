@@ -36,7 +36,7 @@ CHECK_BISON = $(BISON) --version > /dev/null
 all: $(PROG)
 
 $(PROG): MaBoSS$(INFIX).o MaBEstEngine$(INFIX).o Cumulator$(INFIX).o ProbaDist$(INFIX).o BooleanNetwork$(INFIX).o BooleanGrammar$(INFIX).o RunConfigGrammar$(INFIX).o RunConfig$(INFIX).o LogicalExprGen$(INFIX).o
-	g++ -o $(PROG) $+ -lpthread
+	$(CXX) $(CXXFLAGS) -o $(PROG) $+ -lpthread
 
 init:
 	@CXX=$(CXX) sh init-config.sh
