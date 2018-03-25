@@ -45,6 +45,12 @@ class CellLine
 
 		/** \brief Default initial volumes values */
 		std::vector<double> def_volumes;
+		
+		/** \brief Threshold value of concentration to be ON 
+		 *
+		 * First value is the name of the field to consider.
+		 * Second value is the corresponding threshold. */
+		std::map<std::string, double> prot_threshold;
 
 		/** \brief Cell line phenotype: set of cycle phases */
 		CellPhenotype line_phenotype;
@@ -65,16 +71,14 @@ class CellLine
 		/** \brief Amount of densities secretion when activated */
 		double secretion;
 
-		double glucose_necrosis_threshold;  /// dimensionless 
-		/** \brief Maximum interaction distance at which cell can reach (filopodia/deformation). Ratio of its radius */
+		double glucose_necrosis_threshold;  // dimensionless 
+		//double maximum_stretch; 
 		double max_interaction_distance_factor;
 
-		double Cccr; ///used in calculating cell-cell repulsion			
-		double Ccba; ///used in calculating cell-basement membrane repulsion	
-		double Ccbr; ///used in calculating cell-basement membrane repulsion	
+		double Cccr; //used in calculating cell-cell repulsion			
+		double Ccba; //used in calculating cell-basement membrane repulsion	
+		double Ccbr; //used in calculating cell-basement membrane repulsion	
 		
-		/** \brief Threshold value of concentration to be ON */
-		double prot_threshold;
 
 		/** \brief Threshold of cell_cell contact to be ON, relative to radius */
 	   double contact_cc_threshold;	
@@ -176,6 +180,16 @@ class CellLine
 		inline double get_persistence()
 		{ return persistence; };
 		
+		/** \brief Return the protein threshold defined for the given field
+		*
+		 * If no value has been set for this field, use default value */
+		double get_threshold( std::string field );
+	
+		/** \brief Read the value of threshold for given field 
+		 *
+		* Use the default value if not in the parameter file */
+		void read_threshold( ReadXML* reader, std::string what, std::string field );
+
 		/** \brief Write properties of the cell line */
 		void write_properties( std::ostream& os );
 

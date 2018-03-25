@@ -18,7 +18,7 @@ class MaBossNetwork
 {
 
 	private:
-		/** \brief MaBoSS instances: network defined */
+		/** \brief MaBoSS instances: network */
 		Network* network;
 		/** \brief MaBoSS instances: configurations */
 		RunConfig* runConfig;
@@ -40,7 +40,7 @@ class MaBossNetwork
 		 * Map value is the corresponding rate value */
 		std::map< std::pair<std::string,int>, double> mbRates;
 
-		/** \brief Keep default value of nodes from .cfg (configuration) file */
+		/** \brief Keep default value of nodes from CFG file */
 		std::vector<bool> def_nodes;
 
 	protected:

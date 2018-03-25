@@ -52,25 +52,21 @@ void MaBossNetwork::write_properties(std::ostream& os)
 	os << std::endl;
 }
 
-/* Initialize the network by reading input files. Parse and read with MaBoSS */
+/* Initialize the network by reading input files */
 void MaBossNetwork::init( std::string networkFile, std::string configFile )
 {
-		std::cout << "Loading MaBoSS network files " << std::endl;
 		network->parse(networkFile.c_str());
 		conffile = configFile;
 		runConfig->parse(network, conffile.c_str());
 		initNetworkState();
- 		std::cout << "MaBoSS network initialization done " << std::endl;
 }
 
 void MaBossNetwork::initNetworkState()
 {
-	// randomize MaBoSS seed
 	runConfig->setSeedPseudoRandom( UniformInt() );
-	// get all network nodes and read their initial value
 	std::vector<Node *> nodes = network->getNodes();
-	def_nodes.resize( nodes.size() );
 	int i = 0;
+	def_nodes.resize( nodes.size() );
 	for (auto node : nodes)
 	{
 		node_names[ node->getLabel() ] = i;
@@ -100,7 +96,6 @@ void MaBossNetwork::load( NetworkState* netState, std::vector<bool>* inputs )
 	for (auto node : nodes)
 	{
 		node->setIState( (*inputs)[ind] );
-	//	std::cout << node->getLabel() << " " << (bool) node->getIState(network) << std::endl;
 		ind ++;
 	}
 }
@@ -131,21 +126,22 @@ bool MaBossNetwork::run( NetworkState* netStates, std::vector<bool>* nodes_val, 
 	// Load network state and values of current cell in the network instance
 	loadSymbol( cellline );
 	load( netStates, nodes_val );
-	MaBEstEngine mabest( network, runConfig );
-	std::ostream* os = NULL; // null osstream, don't show MaBoSS outputs
+	MaBEstEngine mabossEngine( network, runConfig );
+	// No output from MaBoSS run
+	std::ostream* os = NULL; 
 	// And run it
-	mabest.run(os);
+	mabossEngine.run(os);
 		
 	// save fixed point as initial state for the network for the next time step
-	const STATE_MAP<NetworkState_Impl, unsigned int>& fixpts = mabest.getFixpoints();
+	const STATE_MAP<NetworkState_Impl, unsigned int>& fixpts = mabossEngine.getFixpoints();
 	if (fixpts.begin() != fixpts.end()) 
 	{
 		(*netStates) = fixpts.begin()->first;
 	}
 	bool converged = true;	
-	/**if ( ! mabest.converges() )
+	/**if ( ! mabossEngine.converges() )
 	{
-		std::cerr << "WARNING: BN did not converge;" << std::endl;
+		std::cerr << "WARNING: Network did not converge;" << std::endl;
 //		converged = false;
 	}*/
 
@@ -154,7 +150,7 @@ bool MaBossNetwork::run( NetworkState* netStates, std::vector<bool>* nodes_val, 
 	for ( auto node: node3 )
 	{
 		(*nodes_val)[i] = netStates->getNodeState( node ) ;
-	//std::cout << node->getLabel() << " " << (*nodes_val)[i] << std::endl;
+		//std::cout << node->getLabel() << " " << (*nodes_val)[i] << std::endl;
 		i ++;
 	}
 	//std::cout << std::endl;

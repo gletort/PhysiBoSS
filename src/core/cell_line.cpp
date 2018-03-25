@@ -109,7 +109,7 @@ CellLine::CellLine() : line_phenotype()
 	
 	contact_cc_threshold = 1;
 	contact_ecm_threshold = 1;
-	prot_threshold = 1;
+	prot_threshold.clear();
 	mmp = 0;
 
 	line_index = 0;
@@ -150,7 +150,9 @@ void CellLine::read_properties( ReadXML* reader, std::string what )
 	// threshold for network inputs	
 	reader->getDoubleValue( what, "contact_cell_cell_threshold", &contact_cc_threshold );
 	reader->getDoubleValue( what, "contact_cell_ECM_threshold", &contact_ecm_threshold );
-	reader->getDoubleValue( what, "protein_threshold", &prot_threshold );
+	double pthreshold = 1;
+	reader->getDoubleValue( what, "protein_threshold", &pthreshold );
+	prot_threshold["default"] = pthreshold;
 
 	def_volumes.resize(6);
 	reader->getDoubleValue( what, "cell_radius", &(def_volumes[0]) );
@@ -172,6 +174,28 @@ void CellLine::read_properties( ReadXML* reader, std::string what )
 	if ( pheno == 4 )
 		line_phenotype.set_G0_cells(); 
 }
+
+/* Read the value of threshold for given field 
+ *
+ * Use the default value if not in the parameter file */
+void CellLine::read_threshold( ReadXML* reader, std::string what, std::string field )
+{
+	double pth = prot_threshold["default"];
+	reader->getDoubleValue( what, field+"_threshold", &pth );
+	prot_threshold[field] = pth;
+}
+
+/* Return the protein threshold defined for the given field
+ *
+ * If no value has been set for this field, use default value */
+double CellLine::get_threshold( std::string field)
+{
+	auto it = prot_threshold.find( field );
+	if ( it != prot_threshold.end() )
+		return it->second;
+	return prot_threshold["default"];
+}
+
 
 /* Scale the oxygen parameters by given factor (voxel size) */
 void CellLine::scaleOxygenLevels( double fac )
@@ -261,7 +285,11 @@ void CellLine::write_properties( std::ostream& os )
 	os << "\t<mode_volume> " << mode_volume << " </mode_volume>" << std::endl;
 	os << "\t<contact_cell_cell_threshold> " << contact_cc_threshold << " </contact_cell_cell_threshold>" << std::endl;
 	os << "\t<contact_cell_ECM_threshold> " << contact_ecm_threshold << " </contact_cell_ECM_threshold>" << std::endl;
-	os << "\t<protein_threshold> " << prot_threshold << " </protein_threshold>" << std::endl;
+	os << "\t<protein_threshold> " << prot_threshold["default"] << " </protein_threshold>" << std::endl;
+	for ( std::map<std::string, double>::iterator fieldy = prot_threshold.begin(); fieldy != prot_threshold.end(); fieldy++ )
+	{
+		os << "\t<"+(fieldy->first)+"_threshold> " << fieldy->second << " </"+fieldy->first+"_threshold>" << std::endl;
+	}
 	os << "\t<secretion_rate> " << secretion << " </secretion_rate>" << std::endl;
 	os << "\t<initial_uptake_rate> " << init_uptake_rate << " </initial_uptake_rate>" << std::endl;
 

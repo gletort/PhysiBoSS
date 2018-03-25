@@ -308,7 +308,7 @@ friend class CellCycle;
 	
 
 		///// Functions related to motion		
-		/** \brief Save velocity vector values for later usage */	
+		
 		void set_previous_velocity(double xV, double yV, double zV);
 		
 		/** \brief Update cell current velocity */

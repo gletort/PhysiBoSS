@@ -72,7 +72,6 @@
 #include <random>
 #include <unordered_map>
 
-
 Cell::Cell() : Basic_Agent()
 {
 	container = NULL;
@@ -461,6 +460,8 @@ double Cell::max_interaction()
 	return cell_line->max_interaction_distance_factor * volume.get_radius(); 
 }
 
+/* (To simulate ellipsitic cells - radius in a given direction axis dir of the cell according to its polarity 
+ * Max radius is in polarity axis direction, and smaller in perpendicular direction ) */
 double Cell::polarized_radius( Vector3d dir ) 
 { 
 	double cosP = fabs( dir * polarization.dir() );
@@ -505,7 +506,7 @@ int Cell::feel_enough(std::string field)
 	//return local_density(field) > cell_line->prot_threshold; 
 	int ind = density_index(field);
 	if ( ind >= 0 )	
-		return bounded[ind] > cell_line->prot_threshold; 
+		return bounded[ind] > cell_line->get_threshold(field); 
 	return -1;
 }
 
