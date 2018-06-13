@@ -80,7 +80,7 @@ void Simul::addCell( double x, double y, double z, double rad, int cl, int pha, 
 		pCell->set_cell_line( cell_types[cl] );
 		pCell->set_cycle( maboss, pha, elap );
 		if (mode_cycle == 0)
-			pCell->init_cell_cycle_classic( 6, elap );		
+			pCell->init_cell_cycle_classic( 0, elap );		
 		pCell->load_default_values();
 
 		pCell->register_microenvironment(&microenvironment);
