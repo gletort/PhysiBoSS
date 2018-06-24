@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<simulation>
+	<time_step> 0.02 </time_step>
+	<mechanics_time_step> 0.1 </mechanics_time_step>
+	<cell_cycle_time_step> 2 </cell_cycle_time_step>
+	<maximal_time> 2000 </maximal_time>
+	<output_interval> 30 </output_interval>
+	<output_densities> 600 </output_densities>
+	<write_passive_cells> 1 </write_passive_cells>
+	<friction_passive_cells> 10 </friction_passive_cells>
+	<minimum_voxel_size> 15 </minimum_voxel_size>
+	<bounding_box_xmin> -300 </bounding_box_xmin>
+	<bounding_box_xmax> 300 </bounding_box_xmax>
+	<bounding_box_ymin> -300 </bounding_box_ymin>
+	<bounding_box_ymax> 300 </bounding_box_ymax>
+	<bounding_box_zmin> -300 </bounding_box_zmin>
+	<bounding_box_zmax> 300 </bounding_box_zmax>
+	<number_of_threads> 16 </number_of_threads>  <!-- parallelization with openmp -->
+	<mode_cell_cycle> 0  </mode_cell_cycle>
+	<number_of_densities> 1 </number_of_densities>
+	<density_0> oxygen </density_0>
+	<dirichlet_boundary> 0 </dirichlet_boundary>
+	<write_ratio_voxels> 0.3 </write_ratio_voxels>
+</simulation>
+
+<cell_properties>
+    <polarity_coefficient> 0.4 </polarity_coefficient>
+    <motility_amplitude_min> 2 </motility_amplitude_min>
+    <motility_amplitude_max> 2 </motility_amplitude_max>
+    <mode_motility> 1 </mode_motility>
+	<homotypic_adhesion_min> 4 </homotypic_adhesion_min>
+	<homotypic_adhesion_max> 4 </homotypic_adhesion_max>
+	<heterotypic_adhesion_min> 2 </heterotypic_adhesion_min>
+	<heterotypic_adhesion_max> 2 </heterotypic_adhesion_max>
+	<max_interaction_factor> 1.5 </max_interaction_factor>
+	<cell_cell_repulsion> 20 </cell_cell_repulsion>
+	<ecm_adhesion_min> 10 </ecm_adhesion_min>
+	<ecm_adhesion_max> 10 </ecm_adhesion_max>
+	<ecm_degradation> 0 </ecm_degradation>
+	<cell_ecm_repulsion> 20 </cell_ecm_repulsion>
+	<oxygen_necrotic> 0 </oxygen_necrotic>
+	<oxygen_critical> -1 </oxygen_critical>
+	<oxygen_no_proliferation> -1 </oxygen_no_proliferation>
+	<oxygen_hypoxic> 40 </oxygen_hypoxic>
+	<oxygen_reference> 40 </oxygen_reference>
+	<oxygen_saturation> 40 </oxygen_saturation>
+	<cell_radius> 8.413 </cell_radius>
+	<nucleus_radius> 5.052 </nucleus_radius>
+	<fluid_fraction> 0.75 </fluid_fraction>
+	<solid_nuclear> 135 </solid_nuclear>
+	<solid_cytoplasmic> 486 </solid_cytoplasmic>
+	<cytoplasmic_nuclear_fraction> 3.6 </cytoplasmic_nuclear_fraction>
+	<phenotype_number> 4 </phenotype_number>
+</cell_properties>
+
+<cell_properties>
+    <polarity_coefficient> 0.4 </polarity_coefficient>
+    <motility_amplitude_min> 2 </motility_amplitude_min>
+    <motility_amplitude_max> 2 </motility_amplitude_max>
+    <mode_motility> 1 </mode_motility>
+	<homotypic_adhesion_min> 1 </homotypic_adhesion_min>
+	<homotypic_adhesion_max> 1 </homotypic_adhesion_max>
+	<heterotypic_adhesion_min> 2 </heterotypic_adhesion_min>
+	<heterotypic_adhesion_max> 2 </heterotypic_adhesion_max>
+	<max_interaction_factor> 1.5 </max_interaction_factor>
+	<cell_cell_repulsion> 20 </cell_cell_repulsion>
+	<ecm_adhesion_min> 0 </ecm_adhesion_min>
+	<ecm_adhesion_max> 0 </ecm_adhesion_max>
+	<ecm_degradation> 0 </ecm_degradation>
+	<cell_ecm_repulsion> 20 </cell_ecm_repulsion>
+	<oxygen_necrotic> 0 </oxygen_necrotic>
+	<oxygen_critical> -1 </oxygen_critical>
+	<oxygen_no_proliferation> -1 </oxygen_no_proliferation>
+	<oxygen_hypoxic> 40 </oxygen_hypoxic>
+	<oxygen_reference> 40 </oxygen_reference>
+	<oxygen_saturation> 40 </oxygen_saturation>
+	<cell_radius> 8.413 </cell_radius>
+	<nucleus_radius> 5.052 </nucleus_radius>
+	<fluid_fraction> 0.75 </fluid_fraction>
+	<solid_nuclear> 135 </solid_nuclear>
+	<solid_cytoplasmic> 486 </solid_cytoplasmic>
+	<cytoplasmic_nuclear_fraction> 3.6 </cytoplasmic_nuclear_fraction>
+	<phenotype_number> 4 </phenotype_number>
+</cell_properties>
+
+
+<network>
+	<network_update_step> 10 </network_update_step>
+</network>
+
+
+
+<initial_configuration>
+	<load_cells_from_file> init.txt </load_cells_from_file>
+	<membrane_shape> sphere </membrane_shape>	
+	<membrane_length> 300 </membrane_length>
+	<time_passive_cells> 1 </time_passive_cells>
+	<oxygen_concentration> 40 </oxygen_concentration>
+</initial_configuration>
