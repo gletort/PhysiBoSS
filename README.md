@@ -6,6 +6,7 @@ Overview:
  * [Presentation](#presentation)
  * [Documentation](#documentation)
  * [Usage](#usage)
+ * [References](#references)
  * [Remarks](#remarks)
 
 ## Presentation 
@@ -84,6 +85,23 @@ Example of a parameter file (with only few parameters shown):
 
 ### Image and analyse a simulation
 To visualize graphically the result of a simulation, with use the software Paraview (or you can also generate a `.svg` snapshot of the simulation). Analysis of the result files were done with python scripts proposed in this directory. For documentation on how to use Paraview to set-up the rendering of PhysiBoSS outputs, see [here](https://github.com/gletort/PhysiBoSS/wiki/Paraviewing), with the explication on how to draw spheres from a set of points (x, y, z, radius).
+
+
+## References
+<p>For PhysiCell: </p>
+<ul>
+<li><a href="http://physicell.mathcancer.org">Paul Macklin's lab website </a> </li>
+<li>PhysiCell publication: A. Ghaffarizadeh, S.H. Friedman, S.M. Mumenthaler, and P. Macklin, PhysiCell: an Open Source Physics-Based <a class="el" href="class_cell.html" title="Dynamic (alive) cell (move, interact, divide, die...) ">Cell</a> Simulator for 3-D Multicellular Systems, bioRxiv 088773, 2016. DOI: 10.1101/088773. </li>
+<li><a href="http://biofvm.mathcancer.org">BioFVM website </a> </li>
+<li><a class="el" href="namespace_bio_f_v_m.html">BioFVM</a> publication: A. Ghaffarizadeh, S.H. Friedman, and P. Macklin. <a class="el" href="namespace_bio_f_v_m.html">BioFVM</a>: an efficient, parallelized diffusive transport solver for 3-D biological simulations. Bioinformatics, 2015. </li>
+ <br/>
+ For MaBoSS: </li>
+<li><a href="http://maboss.curie.fr">MaBoSS website </a> </li>
+<li>MaBoSS publication: Stoll G, Viara E, Barillot E, Calzone L. Continuous time Boolean modeling for biological signaling: application of Gillespie algorithm. BMC Syst Biol. 2012 Aug 29;6:116. doi: 10.1186/1752-0509-6-116. </li>
+ <br/>
+ For PhysiBoSS: </li>
+<li>PhysiBoSS publication: Letort G, Montagud A, Stoll G, Heiland R, Barillot E, Macklin P, Zinovyev A, Calzone L . <a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty766/5087713"> PhysiBoSS: a multi-scale agent-based modelling framework integrating physical dimension and cell signalling. </a> Bioinformatics, bty766, doi:10.1093/bioinformatics/bty766
+</li><br/>
 
 ## Remarks
 
