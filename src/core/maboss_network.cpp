@@ -133,10 +133,10 @@ bool MaBossNetwork::run( NetworkState* netStates, std::vector<bool>* nodes_val, 
 	mabossEngine.run(os);
 		
 	// save fixed point as initial state for the network for the next time step
-	const STATE_MAP<NetworkState_Impl, unsigned int>& fixpts = mabossEngine.getFixpoints();
-	if (fixpts.begin() != fixpts.end()) 
+	const STATE_MAP<NetworkState_Impl, double>& states = mabossEngine.getAsymptoticStateDist();
+	if (states.begin() != states.end()) 
 	{
-		(*netStates) = fixpts.begin()->first;
+		(*netStates) = states.begin()->first;
 	}
 	bool converged = true;	
 	/**if ( ! mabossEngine.converges() )
