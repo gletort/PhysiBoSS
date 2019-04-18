@@ -14,13 +14,15 @@ MODE := R
 
 
 #---------- Organize in classic directories, build, bin, src
+MABOSS_DIR = MaBoSS-env-2.0/engine/
 BUILD_DIR = build
 SRC_DIR = src
 BIN_DIR = bin
 CUR_DIR = $(shell pwd)
 
 ### MaBoSS directory
-BOSS := MaBoSS
+BOSS := MaBoSS-env-2.0/engine
+BOSS_SRC := $(BOSS)/src
 LIB := -L$(CUR_DIR)/$(BOSS)/lib -lMaBoSS
 INC := -I$(CUR_DIR)/$(BOSS)/include
 
@@ -77,16 +79,16 @@ $(ALL_OBJECTS): %.o: %.cpp %.h | build
 	$(COMPILE_COMMAND) $(CXXFLAGS) $(INC) -c $< -o $(BUILD_DIR)/$(@F)
 
 physiboss: $(BIN_DIR) $(MAIN)
-	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS ./src/main/PhysiBoSS.cpp $(BUILD_DIR)/*.o $(LIB)
+	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS ./src/main/PhysiBoSS.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
 
 create: $(BIN_DIR) $(MAIN2) 
-	$(COMPILE_COMMAND) -o $(BIN_DIR)/PhysiBoSS_CreateInitTxtFile ./src/main/createTxt.cpp $(BUILD_DIR)/*.o $(LIB)
+	$(COMPILE_COMMAND) -o $(BIN_DIR)/PhysiBoSS_CreateInitTxtFile ./src/main/createTxt.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
 
 plot: $(BIN_DIR) $(MAIN3) 
-	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS_Plot ./src/main/plotTxt.cpp $(BUILD_DIR)/*.o $(LIB)
+	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS_Plot ./src/main/plotTxt.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
 
 maboss:
-	cd $(BOSS) && make clean && make	
+	cd $(BOSS_SRC) && make clean && make install_alib	
 
 #---------- Generate doc with Doxygen
 .PHONY: doc clean cleanbin mrproper zip
