@@ -3,6 +3,8 @@
 
 MaBossNetwork::MaBossNetwork()
 {
+	// This is needed for the external functions
+	MaBEstEngine::init();
 	network = new Network();
 	runConfig = RunConfig::getInstance();
 	runConfig->setSeedPseudoRandom( UniformInt() );
@@ -58,6 +60,10 @@ void MaBossNetwork::init( std::string networkFile, std::string configFile )
 		network->parse(networkFile.c_str());
 		conffile = configFile;
 		runConfig->parse(network, conffile.c_str());
+		
+		// This was missing, for some reason
+		network->updateRandomGenerator(RunConfig::getInstance());
+		
 		initNetworkState();
 }
 
