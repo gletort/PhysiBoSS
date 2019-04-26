@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<active_cells>
+	<mode> 0 </mode>
+	<cell_radius> 8.5 </cell_radius>
+	<length> 100 </length>
+	<cell_spacing> 1 </cell_spacing>
+	<cell_proportion> 0.33 </cell_proportion>
+	<nb_cell_line> 3 </nb_cell_line>
+</active_cells>
+
+<passive_cells>
+	<mode> 0 </mode>
+	<cell_radius> 10 </cell_radius>
+	<length> 0 </length>
+	<min_length> 0 </min_length>
+	<cell_spacing> 1 </cell_spacing>
+</passive_cells>
+
+
