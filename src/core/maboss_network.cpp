@@ -69,14 +69,16 @@ void MaBossNetwork::init( std::string networkFile, std::string configFile )
 
 void MaBossNetwork::initNetworkState()
 {
-	runConfig->setSeedPseudoRandom( UniformInt() );
+	NetworkState initial_state;
+	network->initStates(initial_state);
+
 	std::vector<Node *> nodes = network->getNodes();
 	int i = 0;
 	def_nodes.resize( nodes.size() );
 	for (auto node : nodes)
 	{
 		node_names[ node->getLabel() ] = i;
-		def_nodes[i] = (bool) node->getIState( network );
+		def_nodes[i] = initial_state.getNodeState(node);
 		i++;	
 		//std::cout << "initial state of node " << node->getLabel() << " = " << (bool)node->getIState(network) << std::endl;
 	}
@@ -95,15 +97,17 @@ void MaBossNetwork::set_default( std::vector<bool>* nodes )
 /* Load previous network states and inputs */
 void MaBossNetwork::load( NetworkState* netState, std::vector<bool>* inputs )
 {
-	network->initStates( (*netState) );
 	std::vector<Node*> nodes;
 	nodes = network->getNodes();
 	int ind = 0;
 	for (auto node : nodes)
 	{
-		node->setIState( (*inputs)[ind] );
+		netState->setNodeState(node, (NodeState) (*inputs)[ind]);
 		ind ++;
 	}
+
+	// IStateGroup::reset();
+	IStateGroup::setInitialState(network, netState);
 }
 
 /* Load symbol rates value if they are in the map for the current cell line, usefull for mutations */
@@ -128,7 +132,8 @@ void MaBossNetwork::loadSymbol( int cellline )
 /* Run the current network */
 bool MaBossNetwork::run( NetworkState* netStates, std::vector<bool>* nodes_val, int cellline )
 {
-	runConfig->setSeedPseudoRandom( UniformInt() ); // pick random numbber
+	runConfig->setSeedPseudoRandom( UniformInt() ); // pick random number
+
 	// Load network state and values of current cell in the network instance
 	loadSymbol( cellline );
 	load( netStates, nodes_val );
