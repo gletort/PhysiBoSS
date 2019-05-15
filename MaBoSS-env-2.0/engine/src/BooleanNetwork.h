@@ -1500,14 +1500,14 @@ public:
           size_t i;
           for(i = 0; i < group_nodes->size(); i++) {
               if (group_nodes->at(i) == node) {
-                group_nodes->erase(group_nodes->begin() + (ptrdiff_t) i);
+                group_nodes->erase(group_nodes->begin() + (std::ptrdiff_t) i);
                 break;
               }
           }
 
           // Then we erase it from the state_value_list of each proba_istates
           for(std::vector<IStateGroup::ProbaIState*>::iterator it = proba_istates->begin(); it != proba_istates->end(); it++) {
-            (*it)->state_value_list->erase((*it)->state_value_list->begin() + (ptrdiff_t) i);
+            (*it)->state_value_list->erase((*it)->state_value_list->begin() + (std::ptrdiff_t) i);
           }
 
           // Finally, we add a proba_istate with the desired value
