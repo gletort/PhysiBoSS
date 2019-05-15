@@ -1,0 +1,36 @@
+/* ceci
+   est la description d'un reseau boolean en temps
+   continu
+*/
+
+node n_test {
+  rate_up = 1 + 2;
+}
+
+node node_test2 {
+  rate_up = 1 + 2;
+  rate_down = $var1 + 2.3;
+}
+
+node node_test3 {
+  description =
+"
+This is a node
+a real node
+that we can find somewhere
+";
+//  rate_up = N_TEST;
+  rate_up = (n_test OR node_test2) ? 1 +
+
+
+ 2.23e+33 * $var : 3.12;
+  rate_down = $var1 + 2;
+}
+
+node last_node {
+  coucou = 1 + 2;
+  logic = node_test3 OR node_test2;
+  rate_up = @logic * 1.;
+  rate_down = NOT @logic * 1.;
+  html_description = "<html><body>HTML description useable by </body></html>";
+}

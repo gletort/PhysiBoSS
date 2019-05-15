@@ -1,0 +1,20 @@
+
+MaBoSS Project
+--------------
+feb 2011
+
+Compiling
+---------
+
+cd src
+make
+
+Executing
+---------
+
+cd src
+./MaBoSS ../examples/example2.bnd ../examples/var2b.vd 
+./MaBoSS ../examples/example3.bnd ../examples/var3a.vd 
+./MaBoSS ../examples/example3.bnd ../examples/var3b.vd 
+./MaBoSS ../examples/example3.bnd ../examples/var3c.vd 
+

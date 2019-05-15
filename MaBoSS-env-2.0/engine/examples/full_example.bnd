@@ -1,0 +1,112 @@
+
+/*
+ 2011-01-11
+ Eric Viara for Curie (c) copyright 2011
+
+ Here is an example of the Continuous Time Boolean Network Description Language
+ introducing all concepts:
+   - node definition:
+      - description
+      - input logical expression
+      - rate_up and rate_down arithmetic expressions
+      - extra attributes
+      - variables
+      - attribute aliases
+   - ... and comments
+
+ This example is fully parsable by the CTBNDL compiler and produces a valid (dummy) boolean network.
+ This is a auto-documented example.
+*/
+
+// a node definition starts with the keyword 'node' and is followed by
+// an identifier, then {, then an attribute/value list and then a } to end the definition.
+
+// For instance:
+
+node my_first_node { // my_first_node is the label of the node
+   an_attribute = 1 + 23; // an_attribute has no special meaning, it is a user attribute
+   another_attribute = "this is a string"; // ditto
+}
+
+/*
+  Some attributes have a special meaning:
+   - description: the description of the node
+   - logic: the logic of the node which defines its state according to the state of other nodes. It must be assigned to a boolean expression
+   - rate_up: the rate to flip the node from 0 to 1. It must be assigned to a arithmetic/boolean expression 
+   - rate_down: the rate to flip the node from 1 to 0
+
+  The other attributes are user attributes with no special meaning. These attributes can be accessed by the API
+*/
+
+// For instance:
+
+node gene_A {
+  description = "This is the description of gene A"; // the description must be surrounded by double quotes
+
+  logic = gene_B OR gene_C; // this means that the state of gene_A will be 1 if and only if the state of gene_B is 1 or the state of gene_C is 1.
+  // note that gene_B and gene_C must be defined, before or after in this file
+
+  rate_up = (gene_B OR gene_C) * 0.2; // this means that the rate to flip this node from 0 to 1 is equals to the given expression
+
+  rate_down = NOT (gene_B OR gene_C) * 0.2 + 1.2; // this means that the rate to flip this node from 1 to 0 is equals to the given expression
+}
+
+node gene_B {  
+  description = "This is the description of gene B.
+The description can contain newlines
+If you want to include double quotes in it, you must prefixed them by a backslash
+as follows: \"hello world\"";
+
+  rate_up = gene_A * $gene_B_rate_up_coef; // $gene_B_rate_up_coef is a (double) variable that must be set by the user using the API, or can be read from another file
+
+  rate_down = $gene_B_rate_down_coef;
+}
+
+node gene_C {
+  
+  logic = gene_A XOR gene_B;
+
+  // these constructs:
+  rate_up = @logic * 0.2;
+  rate_down = NOT @logic * 0.3 + 0.1;
+
+  /* are functionaly equivalent to:    
+  rate_up = gene_A XOR gene_B * 0.2;
+  rate_down = NOT (gene_A XOR gene_B) * 0.3 + 0.1;
+  // -> @logic has been replaced by its value
+  // -> this has been introduced to avoid duplication
+  */
+}
+
+node gene_D {
+
+  a_user_attribute = gene_C AND gene_A;
+
+  // a conditional expression:
+  rate_up = gene_D ? 1.2 : 0.1; // rate_up is equals to 1.2 if gene_D state is 1, 0.1 otherwise
+
+  // a complex expression:
+  rate_up = (((@a_user_attribute * $var_1) / 1.2 - 3.2) / $var_2) ?
+                 $var_3 + + $var_4 : gene_A OR gene_C;
+}
+
+/*
+ The following operators are supported in expressions:
+   OR
+   AND
+   XOR
+   +
+   -
+   *
+   /
+   ==
+   !=
+   <
+   >
+   <=
+   >=
+   ? :
+   ()
+
+  The operator priority is the same as in the C, C++ and Java language
+*/

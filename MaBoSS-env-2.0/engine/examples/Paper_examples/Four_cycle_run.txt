@@ -1,0 +1,45 @@
+
+-------------------------------------------------- Run --------------------------------------------------
+MaBoSS version: 0.6
+Run start time: Tue Aug 23 17:31:55 2011
+Core run time: 23.612 secs using 4 threads
+Display time: 0.256 secs using 1 thread
+Run end time: Wed Oct 13 19:59:20 4461666
+Time Tick: 0.01
+Max Time: 5
+Sample Count: 500000
+StatDist Trajectory Count: 100
+StatDist Similarity Cache Maximum Size: 20000
+Discrete Time: FALSE
+Random Generator: standard
+Seed Pseudo Random: 100
+---------------------------------------------------------------------------------------------------------
+
+------------------------------------------------ Network ------------------------------------------------
+node A {
+  description = "";
+  rate_up = (T AND (NOT B)) ? $Au : 0;
+  rate_down = B ? $Ad : 0;
+}
+
+node B {
+  description = "";
+  rate_up = A ? $Au : 0;
+  rate_down = A ? 0 : $Ad;
+}
+
+node T {
+  description = "";
+  rate_up = 0;
+  rate_down = ((NOT A) AND (NOT B)) ? $escape : 0;
+}
+---------------------------------------------------------------------------------------------------------
+
+----------------------------------------------- Variables -----------------------------------------------
+$Ad = 4;
+$Au = 1;
+$Bd = 3;
+$Bu = 2;
+$escape = 1e-05;
+---------------------------------------------------------------------------------------------------------
+

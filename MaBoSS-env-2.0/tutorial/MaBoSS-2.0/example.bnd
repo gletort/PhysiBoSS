@@ -1,0 +1,30 @@
+Node p53_b1 {
+  logic = (!p53_b2 & !Mdm2nuc) | (p53_b2);
+  rate_up = @logic ? $u_p53_b1 : 0;
+  rate_down = @logic ? 0 : $d_p53_b1;
+}
+
+Node p53_b2 {
+  logic = (p53_b1 & !Mdm2nuc);
+  rate_up = @logic ? $u_p53_b2 : 0;
+  rate_down = @logic ? 0 : $d_p53_b2;
+}
+
+Node Mdm2cyt {
+  logic = (p53_b1 & p53_b2);
+  rate_up = @logic ? $u_Mdm2cyt : 0;
+  rate_down = @logic ? 0 : $d_Mdm2cyt;
+}
+
+Node Mdm2nuc {
+  logic = (!p53_b1 & !Mdm2cyt & !DNAdam) | (!p53_b1 & Mdm2cyt) | (p53_b1 & Mdm2cyt);
+  rate_up = @logic ? $u_Mdm2nuc : 0;
+  rate_down = @logic ? 0 : $d_Mdm2nuc;
+}
+
+Node DNAdam {
+  logic = (!p53_b1 & DNAdam);
+  rate_up = @logic ? $u_DNAdam : 0;
+  rate_down = @logic ? 0 : $d_DNAdam;
+}
+

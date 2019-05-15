@@ -1,4 +1,0 @@
-[submodule "MaBoSS-env-2.0"]
-	path = MaBoSS-env-2.0
-	url = https://github.com/maboss-bkmc/MaBoSS-env-2.0.git
-	branch = master

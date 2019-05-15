@@ -1,0 +1,78 @@
+
+-------------------------------------------------- Run --------------------------------------------------
+MaBoSS version: 0.6
+Run start time: Tue Aug 16 11:38:16 2011
+Core run time: 7.169 secs using 1 thread
+Display time: 0.12 secs using 1 thread
+Run end time: Tue Feb  9 08:48:08 4461745
+Time Tick: 0.1
+Max Time: 50
+Sample Count: 50000
+StatDist Trajectory Count: 100
+StatDist Similarity Cache Maximum Size: 20000
+Discrete Time: FALSE
+Random Generator: standard
+Seed Pseudo Random: 100
+---------------------------------------------------------------------------------------------------------
+
+------------------------------------------------ Network ------------------------------------------------
+node Mdm2N {
+  description = "";
+  rate_up = (((@logic_p53 AND Mdm2C AND Dam) ? $KMn_pMCD : 0) + ((@logic_p53 AND Mdm2C AND (NOT Dam)) ? $KMn_pMC : 0) + ((@logic_p53 AND (NOT Mdm2C) AND Dam) ? $KMn_pD : 0) + ((@logic_p53 AND (NOT Mdm2C) AND (NOT Dam)) ? $KMn_p : 0) + ((NOT @logic_p53 AND Mdm2C AND Dam) ? $KMn_MCD : 0) + ((NOT @logic_p53 AND Mdm2C AND (NOT Dam)) ? $KMn_MC : 0) + ((NOT @logic_p53 AND NOT Mdm2C AND Dam) ? $KMn_D : 0) + ((NOT @logic_p53 AND NOT Mdm2C AND (NOT Dam)) ? $KMn : 0)) / $tMNu;
+  rate_down = (((@logic_p53 AND Mdm2C AND Dam) ? (1 - $KMn_pMCD) : 0) + ((@logic_p53 AND Mdm2C AND (NOT Dam)) ? (1 - $KMn_pMC) : 0) + ((@logic_p53 AND (NOT Mdm2C) AND Dam) ? (1 - $KMn_pD) : 0) + ((@logic_p53 AND (NOT Mdm2C) AND (NOT Dam)) ? (1 - $KMn_p) : 0) + ((NOT @logic_p53 AND Mdm2C AND Dam) ? (1 - $KMn_MCD) : 0) + ((NOT @logic_p53 AND Mdm2C AND (NOT Dam)) ? (1 - $KMn_MC) : 0) + ((NOT @logic_p53 AND NOT Mdm2C AND Dam) ? (1 - $KMn_D) : 0) + ((NOT @logic_p53 AND NOT Mdm2C AND (NOT Dam)) ? (1 - $KMn) : 0)) / $tMNd;
+
+  // extra attributes
+  logic_p53 = $case_a ? p53 : p53_h;
+}
+
+node p53_h {
+  description = "";
+  logic = NOT Mdm2N;
+  rate_up = ((@logic AND p53) ? 1 : 0) / $tp53hu;
+  rate_down = ((@logic ? 0 : 1)) / $tp53hd;
+}
+
+node p53 {
+  description = "";
+  logic = NOT Mdm2N;
+  rate_up = (@logic ? 1 : 0) / $tp53u;
+  rate_down = (((NOT @logic) AND NOT p53_h) ? 1 : 0) / $tp53d;
+}
+
+node Mdm2C {
+  description = "";
+  logic = $case_a ? p53_h : p53;
+  rate_up = (@logic ? 1 : 0) / $tMCu;
+  rate_down = (@logic ? 0 : 1) / $tMCd;
+}
+
+node Dam {
+  description = "";
+  logic = $case_a ? p53_h : p53;
+  rate_up = @logic ? 0 : 0;
+  rate_down = (@logic ? 1 : 0) / $tDd;
+}
+---------------------------------------------------------------------------------------------------------
+
+----------------------------------------------- Variables -----------------------------------------------
+$KMn = 1;
+$KMn_D = 0;
+$KMn_MC = 1;
+$KMn_MCD = 1;
+$KMn_p = 0;
+$KMn_pD = 0;
+$KMn_pMC = 1;
+$KMn_pMCD = 1;
+$case_a = 1;
+$fast = 100;
+$tDd = 5;
+$tMCd = 1;
+$tMCu = 0.6;
+$tMNd = 1;
+$tMNu = 0.3;
+$tp53d = 2;
+$tp53hd = 1;
+$tp53hu = 1;
+$tp53u = 2;
+---------------------------------------------------------------------------------------------------------
+

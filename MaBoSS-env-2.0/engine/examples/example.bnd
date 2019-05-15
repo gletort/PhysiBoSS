@@ -1,0 +1,21 @@
+node A {
+     rate_up=0;
+     rate_down=0;
+}
+node B
+{
+     rate_up=0;
+     rate_down=0;
+}
+
+node C
+{
+rate_up=0.1*( A OR NOT B);
+ rate_down=100* NOT( A OR NOT B);
+  }
+
+node D
+{
+rate_up=(NOT D OR B);
+rate_down=4*NOT(NOT D OR B);
+}

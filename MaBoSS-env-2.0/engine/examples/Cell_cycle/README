@@ -1,0 +1,7 @@
+
+# MaBoSS using 1 thread
+../../pub/MaBoSS cellcycle.bnd -c cellcycle_runcfg.cfg -c cellcycle_runcfg-thread_1.cfg -o /tmp/Cell_cycle_thread_1 # or other output files...
+
+# MaBoSS using 6 thread
+../../pub/MaBoSS cellcycle.bnd -c cellcycle_runcfg.cfg -c cellcycle_runcfg-thread_6.cfg -o /tmp/Cell_cycle_thread_6 # or other output files...
+

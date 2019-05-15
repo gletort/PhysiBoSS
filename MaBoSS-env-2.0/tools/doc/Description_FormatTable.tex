@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb,algorithm2e}
+\newcommand{\prob}{\mathbf{P}}
+
+\begin{document}
+\section*{MBSS\_FormatTable.pl}
+\subsection*{Aim}
+FormatMaBoSS.pl is a perl script that facilitates the use of MaBoSS, by creating tables from output files in a dedicated folder.
+\subsection*{How to run the script}
+It is run as a command line; inputs files need to be provided; MaBoSS executable name and threshold are optional.
+\begin{verbatim}
+MBSS_FormatTable.pl <file.bnd> <file.cfg> <(optional)threshold> 
+  <(optional)-mb MaBoSS executable name>
+\end{verbatim}
+
+Files should be in working directory or accessible by absolute path.
+MaBoSS executable should be in working directory, accessible by absolute path or by environment variable. 
+A threshold is used for removing low probability in the table of stationary distribution decomposition. If no threshold is provided, the file ``file\_statdist\_table.cfg'' is not constructed.
+
+\subsection*{Outputs}
+A folder is created, with the same name as the cfg file (adding a number as suffix if directory already exists). MaBoSS executable, bnd and cfg files are copied in this new folder (and MaBoSS executable name if it is a readable file).
+MaBoSS is run in the new folder, with the given bnd and cfg files as inputs. MBSS\_FormatTable.pl creates tables (in text format) from output files, in the new folder: ``file\_probtraj\_table.csv'' (from ``file\_probtraj.csv'')  and ``file\_statdist\_table.cfg'' (``from file\_statdist.cfg'' if the threshold is given). These tables have a column for each network state. These tables can be easily downloaded in a spreadsheet.
+
+ NB: these table are less compact than the output files produced directly by MaBoSS. These could be large, if the set of network states is large.
+
+\end{document}

@@ -1,0 +1,16 @@
+node A 
+{
+	rate_up = ( (NOT B) ? $up_A : 0.0 );
+	rate_down = (B ? $down_A : 0.0 );
+}
+Node B 
+{
+	rate_up = (T ? ((NOT A) ? $up_B : 0) : ( A ? $up_B : 0.0 ) ) ;
+	rate_down = ( T ? ( A ? $down_B : 0 ) : ( (NOT A) ? $down_B : 0.0 ))  ;
+	}
+node T {
+	rate_up=0;
+	rate_down=0;
+}
+
+

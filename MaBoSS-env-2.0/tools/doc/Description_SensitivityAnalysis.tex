@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb,algorithm2e}
+\newcommand{\prob}{\mathbf{P}}
+
+%\title{GenMut}
+
+\begin{document}
+%\maketitle
+\section*{MBSS\_SensitivityAnalysis.pl}
+
+\subsection*{Aim}
+MBSS\_SensitivityAnalysis.pl prepares multiple MaBoSS runs (within MBSS\_FormatTable.pl), considering the variation of every external variables according to a provided suffix: it creates a new folder, copies the bnd file in it and adds the given suffix to the variable by creating a new cfg file in each case. For example, if the external variable \$Var is initially set to 300, then it becomes \$Var = 300+100 and stored in a new cfg file. Note that the suffix is added to each external variable separately, creating therefore a cfg for each modified external variable.
+
+\subsection*{How to run the script}
+It is run as a command line. The suffix that modifies the definition of each external variable needs to be provided. The bnd file and the cfg files need also to be provided. MBSS\_FormatTable.pl should be accessible by command line.
+
+\begin{verbatim}
+MBSS_SensitivityAnalysis.pl <file.bnd> <file.cfg> "<add_string>"
+\end{verbatim}
+
+\subsection*{Outputs}
+A folder with the name ``Sensitivity\_NameOfCfgFile'' is created, the bnd file is copied in it.
+A cfg file is generated for every external variable in the new folder. The name of each new cfg file has the name of the modified external variable as suffix.
+A shell script is generated in the new folder that can run MBSS\_FormatTable.pl for every external variable modification. The name of the generated shell script is the name of the input cfg file, with ``Sensitivity\_'' as prefix. It can be excecuted directly (by the command line ``./Sensitivity\_NameOfCfgFile.sh'', as long as MBSS\_FormatTable.pl is accessible by command line.
+
+\end{document}

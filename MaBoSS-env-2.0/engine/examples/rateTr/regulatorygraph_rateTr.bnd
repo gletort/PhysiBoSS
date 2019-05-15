@@ -1,0 +1,230 @@
+node RAS
+{
+	logic = (EGFR | FGFR3 | GRB2);
+}
+node GRB2
+{
+	logic = (FGFR3 & !GRB2 & !SPRY) | EGFR;
+}
+node EGFR
+{
+	logic =  (EGFR_stimulus | SPRY) & !FGFR3 & !GRB2;
+}
+node mMDM2
+{
+	rate_up = TP53 ? $TrRate : 0.0;
+	rate_down = !TP53 ? $TrRate : 0.0;
+}
+node MDM2
+{
+	logic = (mMDM2 | AKT) & !p14ARF & !ATM_1;
+}
+node mp16INK4a
+{
+	rate_up = (!RB1) ? $TrRate : 0.0;
+	rate_down = RB1 ? $TrRate : 0.0;
+}
+node p16INK4a
+{
+	logic = GrowthInhibitors & mp16INK4a;
+}
+node SPRY
+{
+	logic = RAS;
+}
+node FGFR3_stimulus
+{
+	rate_up = 0;
+	rate_down = 0;
+}
+node mCyclinA
+{
+	rate_up = (E2F1_1 | E2F3_1) ? $TrRate : 0.0;
+	RATE_DOWN = (E2F1_1 | E2F3_1) ? 0.0 : $TrRate;
+}
+node CyclinA
+{
+//	logic = (E2F1_1 | E2F3_1) & CDC25A & !p21CIP & !RBL2;
+	logic = mCyclinA & CDC25A & !p21CIP & !RBL2;
+}
+node Apoptosis_1
+{
+	rate_up =  ((!E2F1_1 & TP53) | E2F1_2) ? $TrRate : 0.0 ;
+	rate_down = (!((!E2F1_1 & TP53) | E2F1_2 ) & ! Apoptosis_2) ? $TrRate : 0.0 ;
+}
+node Apoptosis_2
+{
+	rate_up = (E2F1_2 & Apoptosis_1) ? $TrRate : 0.0 ;
+	rate_down = (! E2F1_2) ? $TrRate : 0.0;
+}
+node DNAdamage
+{
+	rate_up = 0;
+	rate_down = 0;
+}
+node AKT
+{
+	logic = PI3K;
+}
+node mCDC25A
+{
+	rate_up = (E2F1_1 | E2F3_1) ? $TrRate : 0.0;
+	rate_down = (E2F1_1 | E2F3_1) ? 0.0 : $TrRate;
+}
+node CDC25A
+{
+//	logic = !CHEK12_1 & !RBL2 & (E2F1_1 | E2F3_1);
+	logic = !CHEK12_1 & !RBL2 & mCDC25A;
+}
+node mp21CIP
+{
+	rate_up = TP53 ? $TrRate : 0.0;
+	rate_down = !TP53 ? $TrRate : 0.0;
+}
+node p21CIP
+{
+	logic = !CyclinE1 & (GrowthInhibitors | mp21CIP) & !AKT;
+}
+node Proliferation
+{
+	logic = CyclinE1 | CyclinA;
+}
+node PTEN
+{
+//	logic = TP53;
+	rate_up = TP53 ? $TrRate : 0.0;
+	rate_down = (!TP53) ? $TrRate : 0.0;
+}
+node mATM
+{
+	rate_up = E2F1_1 ? $TrRate : 0.0;
+	rate_down = (!E2F1_1) ? $TrRate : 0.0;
+}
+node ATM_1
+{
+	rate_up = DNAdamage;
+	rate_down = !DNAdamage & !ATM_2; 
+}
+node ATM_2
+{
+//	rate_up = (ATM_1 & E2F1_1) & DNAdamage;
+//	rate_down = !(E2F1_1 & DNAdamage);
+	rate_up = (ATM_1 & mATM) & DNAdamage;
+	rate_down = !(mATM & DNAdamage);
+}
+node EGFR_stimulus
+{
+	rate_up = 0;
+	rate_down = 0;
+}
+node RBL2
+{
+	logic = !CyclinD1 & !CyclinE1;
+}
+node CyclinD1
+{
+	logic = (RAS | AKT) & !p16INK4a & !p21CIP;
+}
+node mE2F1_1
+{
+	rate_up = E2F3_1 ? $TrRate : 0.0;
+	rate_up = (!E2F3_1 & !mE2F1_2) ? $TrRate : 0.0;
+}
+node mE2F1_2
+{
+	rate_up = (E2F3_2 & mE2F1_1) ? $TrRate : 0.0;
+	rate_up = (!E2F3_2) ? $TrRate : 0.0;
+}
+node E2F1_1
+{
+//	rate_up = (!RB1 & !RBL2 & ((!(CHEK12_2 & ATM_2) & (RAS | E2F3_1)) | (CHEK12_2 & ATM_2 & !RAS & (E2F3_1 & !E2F3_2))))
+//                  |(!RBL2 & !RB1 & ATM_2 & CHEK12_2 & (RAS | (E2F3_2))) ;
+//
+//	rate_down = !E2F1_2 & !((!RB1 & !RBL2 & ((!(CHEK12_2 & ATM_2) & (RAS | E2F3_1)) | (CHEK12_2 & ATM_2 & !RAS & (E2F3_1 & !E2F3_2))))
+//                                  |(!RBL2 & !RB1 & ATM_2 & CHEK12_2 & (RAS | E2F3_2)) );
+	rate_up = (!RB1 & !RBL2 & ((!(CHEK12_2 & ATM_2) & (RAS | mE2F1_1)) | (CHEK12_2 & ATM_2 & !RAS & (mE2F1_1 & !mE2F1_2))))
+                  |(!RBL2 & !RB1 & ATM_2 & CHEK12_2 & (RAS | (mE2F1_2))) ;
+
+	rate_down = !E2F1_2 & !((!RB1 & !RBL2 & ((!(CHEK12_2 & ATM_2) & (RAS | mE2F1_1)) | (CHEK12_2 & ATM_2 & !RAS & (mE2F1_1 & !mE2F1_2))))
+    		|(!RBL2 & !RB1 & ATM_2 & CHEK12_2 & (RAS | mE2F1_2)) );
+}	
+node E2F1_2
+{
+	rate_up = E2F1_1 & (!RBL2 & !RB1 & ATM_2 & CHEK12_2 & (RAS | mE2F1_2));
+	rate_down = !(!RBL2 & !RB1 & ATM_2 & CHEK12_2 & (RAS | mE2F1_2)) ;
+}
+node FGFR3
+{
+	logic = $FGFR3Mut | (!EGFR & FGFR3_stimulus & !GRB2);
+}
+node mCHEK12
+{
+	rate_up = E2F1_1 ? $TrRate : 0.0;
+	rate_down = !E2F1_1 ? $TrRate : 0.0;
+}
+node CHEK12_1
+{
+	rate_up = ATM_1;
+	rate_down = !ATM_1 & !CHEK12_2;
+}
+node CHEK12_2
+{
+	rate_up = mCHEK12 & ATM_1 & CHEK12_1;
+	rate_down = !(mCHEK12 & ATM_1);
+}
+node E2F3_1
+{
+	rate_up = !RB1 & RAS;
+	rate_down = !(!RB1 & RAS) & !E2F3_2;
+}
+node E2F3_2
+{
+	rate_up = !RB1 & CHEK12_2 & RAS & E2F3_1;
+	rate_down = !(!RB1 & CHEK12_2 & RAS);
+}
+node mCyclinE1
+{
+	rate_up = (E2F1_1 | E2F3_1) ? $TrRate : 0.0;
+	rate_down = (!(E2F1_1 | E2F3_1)) ? $TrRate : 0.0;
+}
+node CyclinE1
+{
+	logic = !RBL2 & !p21CIP & CDC25A & mCyclinE1;
+}
+node PI3K
+{
+	logic = $PIK3CAMut | (GRB2 & RAS & !PTEN);
+}
+node GrowthInhibitors
+{
+	rate_up = 0;
+	rate_down = 0;
+}
+node p14ARF
+{
+//	logic = E2F1_1;
+	rate_up = E2F1_1 ? $TrRate : 0.0;
+	rate_down = !E2F1_1 ? $TrRate : 0.0;
+}
+node Growth_Arrest
+{
+	logic = p21CIP | RB1 | RBL2;
+}
+node mRB1
+{
+	rate_up = (!p16INK4a) ? $TrRate : 0.0;
+	rate_down = p16INK4a ? $TrRate : 0.0;
+}
+node RB1
+{
+	logic = !CyclinD1 & !CyclinE1 & mRB1 & !CyclinA;
+}
+node mTP53
+{
+	rate_up = E2F1_2 ? $TrRate : 0.0;
+	rate_down = !E2F1_2 ? $TrRate : 0.0;
+}
+node TP53
+{
+	logic = !MDM2 & ((ATM_1 & CHEK12_1) | mTP53);
+}

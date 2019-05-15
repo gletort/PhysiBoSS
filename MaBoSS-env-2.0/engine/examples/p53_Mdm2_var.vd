@@ -1,0 +1,27 @@
+$case_a = TRUE;
+$KMn=0;
+$KMn_p=0;
+$KMn_MC=1;
+$KMn_pMC=1;
+
+// $p53_istate=1;
+// $Mdm2C_istate=1;
+// $Mdm2N_istate=1;
+/*
+A.istate = 1;
+A.hstate = 1;
+A.isout = TRUE;
+*/
+
+//$sample_count = 1000000;
+//$sample_count = 100000;
+$sample_count = 1000;
+$max_time = 5;
+$time_tick = 0.1;
+$discrete_time = 1;
+
+//$unknown_istate = random; // default
+/*
+$unknown_istate = 0;
+$unknown_istate = 1;
+*/

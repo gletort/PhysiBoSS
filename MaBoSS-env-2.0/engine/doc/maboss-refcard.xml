@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd"
+>
+
+<book lang="en">
+  <title>MaBoSS Reference Card</title>
+  <bookinfo>
+    <author>
+      <firstname>Eric</firstname>
+      <surname>Viara</surname>
+    </author>
+    <author>
+      <firstname>Gautier</firstname>
+      <surname>Stoll</surname>
+    </author>
+    <!--
+	<copyright>
+	<year>2011</year>
+	<holder>Institut Curie</holder>
+	</copyright>
+    -->
+  </bookinfo>
+
+  <partintro>
+    <section>
+      <title><emphasis role="underline">Introduction</emphasis></title>
+      <para>MaBoSS is a C++ software for simulating continuous/discrete time Markov processes, applied on a Boolean network. MaBoSS uses a specific grammar for associating transition rates to each node. Given some initial conditions, MaBoSS applies Monte-Carlo kinetic algorithm (or Gillespie algorithm) to the network to produce time trajectories. Time evolution of probabilities are estimated. In addition, global and semi-global characterizations of the whole system are computed.</para>
+    </section>
+    <section>
+      <title><emphasis role="underline">Synopsis</emphasis></title>
+      <para>Running a MaBoSS simulation:</para>
+      <para>
+	<literal>MaBoSS -c </literal><emphasis>CONFIGURATION_FILE</emphasis><literal> -o </literal><emphasis>OUTPUT_PREFIX</emphasis><literal> </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+      </para>
+      <para>or, using long options:</para>
+      <para>
+	<literal>MaBoSS --config </literal><emphasis>CONFIGURATION_FILE</emphasis><literal> --output </literal><emphasis>OUTPUT_PREFIX</emphasis><literal> </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+      </para>
+      <para>Arguments:</para>
+      <para>- <emphasis>NETWORK_DESCRIPTION_FILE</emphasis>: file containing the network description</para>
+      <para>- <emphasis>CONFIGURATION_FILE</emphasis>: (optional) configuration file to be used for simulation; -c option can be used multiple times,
+configuration files being read in the given order
+      </para>
+      <para>- <emphasis>OUTPUT_PREFIX</emphasis>: output prefix of the generated files</para>
+      <para>More options are described below.</para>
+    </section>
+    <section>
+      <title><emphasis role="underline">Network Description File</emphasis></title>
+      <simplelist>
+	<member>Goals: description of the network: node names, logic and transition rates</member>
+	<member>Usual extension: .bnd</member>
+      </simplelist>
+
+      <section>
+	<title>General Syntax</title>
+	<para>
+	  Each node is described as follows:
+	  <para>
+	    <literal>node </literal><emphasis>NODE_NAME</emphasis><literal> {</literal>
+	    <emphasis>node_var1</emphasis> = <emphasis>expr1</emphasis><literal>;</literal>
+	    <emphasis>node_var2</emphasis> = <emphasis>expr2</emphasis><literal>;</literal>
+	    ...<literal>}</literal>
+	  </para>
+	  <para>
+	    Comments: same as C++ and Java: // or /* */
+	  </para>
+	</para>
+      </section>
+
+      <section>
+	<title>Expressions</title>
+	<para>
+	  An expression is an arithmetic and logical combination of node names (denoting node states), external variables (defined in the configuration files),
+	  <!-- node variable value of the current node, -->
+	  current node variable values,
+	  integer or double literals.
+	</para>
+
+	<section>
+	  <title><emphasis>Lexical units</emphasis></title>
+	  <para>
+	    <informaltable>
+	      <tgroup cols="4">
+		<colspec colname="col1" colwidth="1*"/>
+		<colspec colname="col2" colwidth="3*"/>
+		<colspec colname="col3" colwidth="2*"/>
+		<colspec colname="col3" colwidth="2*"/>
+		<thead>
+		  <row>
+		    <entry>Lexical Unit</entry>
+		    <entry>Syntax</entry>
+		    <entry>Regular Expression</entry>
+		    <entry>Examples</entry>
+		  </row>
+		</thead>
+		<tbody>
+		  <row>
+		    <entry>node name and node variable</entry>
+		    <entry>sequence of letters, digits and _ beginning by a letter or an _</entry>
+		    <entry>[a-aA-Z_][a-aA-Z0-9_]*</entry>
+		    <entry><para>MyNode</para><para>p53</para></entry>
+		  </row>
+		  <row>
+		    <entry>node variable value</entry>
+		    <entry>when a node variable is used in an expression, its name must be prefixed by an @</entry>
+		    <entry>@[a-aA-Z_][a-aA-Z_0-9]*</entry>
+		    <entry><para>@logic</para><para>@rate_up</para></entry>
+		  </row>
+		  <row>
+		    <entry>external variable</entry>
+		    <entry>sequence of letters, digits and _ beginning by a $</entry>
+		    <entry>$[a-zA-Z_0-9]+</entry>
+		    <entry>$myvar</entry>
+		  </row>
+		  <row>
+		    <entry>integer literal</entry>
+		    <entry>same lexical form as C, C++ and Java</entry>
+		    <entry></entry>
+		    <entry><para>10</para><para>2334</para></entry>
+		  </row>
+		  <row>
+		    <entry>double literal</entry>
+		    <entry>same lexical form as C, C++ and Java including scientific notation for doubles</entry>
+		    <entry></entry>
+		    <entry><para>1.23</para><para>1.2e+12</para></entry>
+		  </row>
+		  <!--
+		      <row>
+		      <entry>string literals</entry>
+		      <entry>same lexical form as C, C++ and Java</entry>
+		      <entry></entry>
+		      <entry>"hello world"</entry>
+		      </row>
+		  -->
+		</tbody>
+	      </tgroup>
+	    </informaltable>
+	  </para>
+
+	</section>
+	<section>
+	  <title><emphasis>Operators</emphasis></title>
+	  Supported operators in descending priority (same precedence as C, C++ and Java):
+	  <informaltable>
+	    <tgroup cols="3">
+	      <colspec colname="col1" colwidth="1*"/>
+	      <colspec colname="col2" colwidth="1*"/>
+	      <colspec colname="col3" colwidth="4*"/>
+	      <thead>
+		<row>
+		  <entry>Operator</entry>
+		  <entry>Aliases</entry>
+		  <entry>Description</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry><para>()</para></entry>
+		  <entry></entry>
+		  <entry><para>parenthesis</para></entry>
+		</row>
+		<row>
+		  <entry><para>!</para></entry>
+		  <entry><para>NOT</para></entry>
+		  <entry><para>logical NOT</para></entry>
+		</row>
+		<row>
+		  <entry><para>+</para><para>-</para></entry>
+		  <entry></entry>
+		  <entry><para>unary plus</para><para>unary minus</para></entry>
+		</row>
+		<row>
+		  <entry><para>*</para><para>/</para></entry>
+		  <entry></entry>
+		  <entry><para>multiplication</para><para>division</para></entry>
+		</row>
+		<row>
+		  <entry><para>+</para><para>-</para></entry>
+		  <entry></entry>
+		  <entry><para>addition</para><para>substraction</para></entry>
+		</row>
+		<row>
+		  <entry><para>&lt;</para><para>&lt;=</para><para>&gt;</para><para>&gt;=</para></entry>
+		  <entry></entry>
+		  <entry><para>less than</para><para>less than or equal</para><para>greater than</para><para>greater than or equal</para></entry>
+		</row>
+		<row>
+		  <entry><para>==</para><para>!=</para></entry>
+		  <entry></entry>
+		  <entry><para>equal to</para><para>not equal to</para></entry>
+		</row>
+		<row>
+		  <entry><para>&amp;&amp;</para></entry>
+		  <entry>&amp; AND</entry>
+		  <entry><para>logical and</para></entry>
+		</row>
+		<row>
+		  <entry><para>||</para></entry>
+		  <entry>| OR</entry>
+		  <entry><para>logical or</para></entry>
+		</row>
+		<row>
+		  <entry><para>^</para></entry>
+		  <entry>XOR</entry>
+		  <entry><para>logical or</para></entry>
+		</row>
+		<row>
+		  <entry><para>? :</para></entry>
+		  <entry></entry>
+		  <entry><para>ternary conditional</para></entry>
+		</row>
+	      </tbody>
+	    </tgroup>
+	  </informaltable>
+
+	</section>
+      </section>
+
+      <section>
+	<title>Node Variables</title>
+	<para>
+	  Any node variable name can be defined and used, but three of them have semantics linked to the algorithm:
+	  <informaltable>
+	    <tgroup cols="2">
+	      <colspec colname="col1" colwidth="1*"/>
+	      <colspec colname="col2" colwidth="3*"/>
+	      <thead>
+		<row>
+		  <entry>Node Variable</entry>
+		  <entry>Description</entry>
+		</row>
+	      </thead>
+	      <tbody>
+		<row>
+		  <entry>rate_up</entry>
+		  <entry>expression defining the transition rate to flip the state from 0 to 1</entry>
+		</row>
+		<row>
+		  <entry>rate_down</entry>
+		  <entry>expression defining the transition rate to flip the state from 1 to 0</entry>
+		</row>
+		<row>
+		  <entry>logic</entry>
+		  <entry><para>
+		    if rate_up and/or rate_down are not specified:
+		  </para>
+		  <para>
+		    rate_up = @logic ? 1.0 : 0.0;
+		  </para>
+		  rate_down = @logic ? 0.0 : 1.0;
+		  </entry>
+		</row>
+		<!--
+		    <row>
+		    <entry><emphasis>other_node_variable</emphasis></entry>
+		    <entry>other node variables have no special meaning but can be useful in expressions or in the MaBoSS API.</entry>
+
+</row>
+		-->
+	      </tbody>
+	    </tgroup>
+	  </informaltable>
+	</para>
+      </section>
+
+      <section>
+	<title>Example</title>
+	<screen>
+  // Basic network example
+
+  node A {
+    rate_up = 1.1;
+    rate_down = $A_rate_down * 10.2;
+    // $A_rate_down external variable must be defined in one of the configuration files
+  }
+
+  node B {
+    tmp = NOT A OR C;
+    // note that node variable tmp has been introduced for convenience to define 
+    // rate_up and rate_down without code duplication
+
+    rate_up = @tmp;
+    rate_down = NOT @tmp ? $B_var * 12. : 0.;
+    // $B_var must be defined in one of the configuration files
+  }
+
+  node C {
+    rate_up = $var2 &lt; 10 ? NOT B : A OR B;
+    rate_down = A AND B;
+    // $var2 must be defined in one of the configuration files
+  }
+
+  node D {
+    logic = A OR (NOT B XOR C);
+  }
+	</screen>
+      </section>
+
+    </section>
+    <section>
+      <title><emphasis role="underline">Configuration File</emphasis></title>
+      <para>
+	<simplelist>
+	  <member>Goals: definition of estimation parameters, network parameters, output parameters and run parameters</member>
+	  <member>Usual extension: .cfg</member>
+	</simplelist>
+      </para>
+      <section>
+	<title>General Syntax</title>
+	<para>
+	  Each parameter assignment is as follows:
+	</para>
+	<para>
+	  <emphasis>parameter</emphasis> = <emphasis>value</emphasis>;
+	</para>
+	<para>
+	  <emphasis>value</emphasis> may be a boolean (TRUE or FALSE), an integer or a double
+	</para>
+	<para>
+	  Comments: same as C++ and Java: // or /* */
+	</para>
+      </section>
+      <section>
+	<title>Parameter list</title>
+	<informaltable>
+	  <tgroup cols="4">
+	    <colspec colname="col1" colwidth="2*"/>
+	    <colspec colname="col2" colwidth="1*"/>
+	    <colspec colname="col3" colwidth="2*"/>
+	    <colspec colname="col4" colwidth="1.5*"/>
+	    <thead>
+	      <row>
+		<entry>Parameter</entry>
+		<entry>Type</entry>
+		<entry>Description</entry>
+		<entry>Default</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry><emphasis>node.</emphasis>istate</entry>
+		<entry>boolean or integer</entry>
+		<entry><para>initial state of the<emphasis> node;</emphasis></para>
+		<para>if value is an integer:</para>
+		<para>- a positive not null value means a TRUE state;</para>
+		<para>- a negative integer means that the initial state is random.</para>
+		</entry>
+		<entry>boolean random value</entry>
+	      </row>
+	      <row>
+		<entry><emphasis>[node_list].</emphasis>istate</entry>
+		<entry>
+<para>expression under the form:</para><para>proba_expr1 [istate_list1], proba_expr2 [istate_list2] ...</para></entry>
+<!--
+		<entry><para>initial states of the<emphasis> node list</emphasis>, for instance:</para><para>
+		[A, B, C].istate = 1 [0, 0, 1], 2 [0, 0, 1], 5 [1, 1, 1];</para>
+<para>
+means that the node group [A, B, C] has a probabilty of 1/(1+2+5) to have the initial state [0, 0, 1], a proba of 2/8 to have the initial state [0, 0, 1], a proba of 5/8 to have the initial state [1, 1, 1];
+</para>
+<para>
+-->
+<entry>
+<para>
+initial probability distribution of the <emphasis>node list</emphasis> states: group of nodes given by <emphasis>node list</emphasis> is in the initial states given by istate_list<emphasis>#</emphasis> with respective probability of proba_expr<emphasis>#</emphasis> / (proba_expr1 + proba_expr2 +...);
+
+</para>
+<para>
+  note that this can be applied to a single node, for instance:
+</para>
+<para>
+[A].istate = 0.3 [0], 0.7 [1];
+</para>
+<para>or:</para>
+<para>
+[A].istate = $p0 [0], $p1 [1];
+</para>
+<para>where $p0 and $p1 are variables defined in the configuration file or at the command line.</para></entry>
+		<entry></entry>
+	      </row>
+	      <row>
+		<entry><emphasis>node.</emphasis>is_internal</entry>
+		<entry>boolean</entry>
+		<entry>if set to TRUE, <emphasis>node</emphasis> is an internal node</entry>
+		<entry>FALSE</entry>
+	      </row>
+	      <row>
+		<entry><emphasis>node.</emphasis>refstate</entry>
+		<entry>boolean</entry>
+		<entry>reference state of the <emphasis>node</emphasis> for computing Hamming distance distribution</entry>
+		<entry>not used if not specified</entry>
+	      </row>
+	      <row>
+		<entry>$<emphasis>varname</emphasis></entry>
+		<entry>double, integer or boolean</entry>
+		<entry><para>numerical external variable to be used in expressions within the network description file;</para>
+		<para>a variable can be also used in expressions within the configuration file, in the probabilities for initial states for instance</para>
+		</entry>
+		<entry>error if unspecified and used in the network description file</entry>
+	      </row>
+	      <row>
+		<entry>timetick</entry>
+		<entry>double</entry>
+		<entry>time window</entry>
+		<entry>0.5</entry>
+	      </row>
+	      <row>
+		<entry>max_time</entry>
+		<entry>double</entry>
+		<entry>maximum time for a trajectory</entry>
+		<entry>1000</entry>
+	      </row>
+	      <row>
+		<entry>sample_count</entry>
+		<entry>integer</entry>
+		<entry>number of trajectories</entry>
+		<entry>10000</entry>
+	      </row>
+	      <row>
+		<entry>discrete_time</entry>
+		<entry>boolean</entry>
+		<entry>if set to FALSE, continuous time is used, otherwise discrete time is used (jump process)</entry>
+		<entry>FALSE</entry>
+	      </row>
+	      <row>
+		<entry>use_physrandgen</entry>
+		<entry>boolean</entry>
+		<entry>if set to TRUE, the physical random generator /dev/urandom is used; a pseudo random generator is used otherwise; note that this physical random generator has poor performance in multi-threads</entry>
+		<entry>TRUE</entry>
+	      </row>
+	      <row>
+		<entry>seed_pseudorandom</entry>
+		<entry>integer</entry>
+		<entry>seed number when a pseudo random generator is used</entry>
+		<entry>0</entry>
+	      </row>
+	      <row>
+		<entry>display_traj</entry>
+		<entry>boolean</entry>
+		<entry>if set to TRUE, trajectories are displayed</entry>
+		<entry>FALSE</entry>
+	      </row>
+	      <row>
+		<entry>statdist_traj_count</entry>
+		<entry>integer</entry>
+		<entry>number of trajectories for stationary distribution clustering</entry>
+		<entry>0</entry>
+	      </row>
+	      <row>
+		<entry>statdist_cluster_threshold</entry>
+		<entry>double</entry>
+		<entry>threshold for stationary distribution clustering</entry>
+		<entry>1.0</entry>
+	      </row>
+	      <row>
+		<entry>statdist_similarity_cache_max_size</entry>
+		<entry>integer</entry>
+		<entry>a cache is used if the cluster trajectory number is less than or equal to this parameter</entry>
+		<entry>20000</entry>
+	      </row>
+	      <row>
+		<entry>thread_count</entry>
+		<entry>integer</entry>
+		<entry>number of threads to be used</entry>
+		<entry>1</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</informaltable>
+      </section>
+      <section>
+	<title>Example</title>
+	<screen>
+	  // these external variables can be used in the network description file (.bnd file)
+	  $A_rate_down = 0.1;
+	  $B_var = 2;
+	  $var2 = 23;
+
+	  // note: A, B, C and D must be nodes defined in the network description file
+	  A.istate = 0;
+
+	  $p0 = 1;
+	  $p1 = 2;
+	  $p2 = 1;
+	  $p3 = 4;
+	  [B, C].istate = $p0 [0, 0], $p1 [0, 1], $p2 [1, 0], $p3 [1, 1];
+	  [D].istate = $p0 [0], ($p4*2) [1];
+
+	  B.is_internal = 1;
+	  C.is_internal = 1;
+	  C.refstate = 1;
+
+	  sample_count = 1000;
+	  max_time = 100;
+	  time_tick = 0.5;
+	  discrete_time = 0;
+	  use_physrandgen = FALSE;
+	  seed_pseudorandom = 100;
+	  statdist_traj_count = 10000;
+	  thread_count = 4;
+	</screen>
+      </section>
+    </section>
+
+    <section>
+      <title><emphasis role="underline">Building a model within MaBoSS</emphasis></title>
+      <section>
+	<title>Inputs</title>
+	<informaltable>
+	  <tgroup cols="3">
+	    <colspec colname="col1" colwidth="1*"/>
+	    <colspec colname="col2" colwidth="1*"/>
+	    <colspec colname="col3" colwidth="1*"/>
+	    <thead>
+	      <row>
+		<entry>Type</entry>
+		<entry>Parameters</entry>
+		<entry>Set in file</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry>Network description</entry>
+		<entry>node names, network logic, transition rates</entry>
+		<entry><emphasis>NETWORK_DESCRIPTION_FILE</emphasis></entry>
+	      </row>
+	      <row>
+		<entry>Network parameters</entry>
+		<entry>initial conditions, discrete or continuous time, network variables (external variables)</entry>
+		<entry><emphasis>CONFIGURATION_FILE</emphasis></entry>
+	      </row>
+	      <row>
+		<entry>Estimation parameters</entry>
+		<entry>trajectory number, cluster trajectory number, cluster threshold, random generator hints</entry>
+		<entry><emphasis>CONFIGURATION_FILE</emphasis></entry>
+	      </row>
+	      <row>
+		<entry>Output parameters</entry>
+		<entry>time tick, trajectory length, internal nodes, value of reference nodes, trajectory display</entry>
+		<entry><emphasis>CONFIGURATION_FILE</emphasis></entry>
+	      </row>
+	      <row>
+		<entry>Run parameters</entry>
+		<entry>thread count</entry>
+		<entry><emphasis>CONFIGURATION_FILE</emphasis></entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</informaltable>
+      </section>
+      <section>
+	<title>Outputs</title>
+	The generated files are as follows:
+	<informaltable>
+	  <tgroup cols="4">
+	    <colspec colname="col1" colwidth="2.3*"/>
+	    <colspec colname="col2" colwidth="1*"/>
+	    <colspec colname="col3" colwidth="1.5*"/>
+	    <colspec colname="col4" colwidth="3*"/>
+	    <thead>
+	      <row>
+		<entry>File name</entry>
+		<entry>Type</entry>
+		<entry>Optional</entry>
+		<entry>Description</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry><emphasis>OUTPUT_PREFIX</emphasis>_run.txt</entry>
+		<entry>Text file</entry>
+		<entry>No</entry>
+		<entry>Start and end time, summary of the parameters used, network display</entry>
+	      </row>
+	      <row>
+		<entry><emphasis>OUTPUT_PREFIX</emphasis>_traj.txt</entry>
+		<entry>Text file</entry>
+		<entry>Yes. Generated if display_traj configuration parameter is set to TRUE</entry>
+		<entry>All trajectories: a trajectory is a sequence of the network state at each time tick</entry>
+	      </row>
+	      <row>
+		<entry><emphasis>OUTPUT_PREFIX</emphasis>_probtraj.csv</entry>
+		<entry>Tabular file</entry>
+		<entry>No</entry>
+		<entry>Time evolution of probabilities: each line contains time, transition entropy, error on transition entropy, entropy, Hamming distance distribution, probabilities (and errors) for all states</entry>
+	      </row>
+	      <row>
+		<entry><emphasis>OUTPUT_PREFIX</emphasis>_fp.csv</entry>
+		<entry>Tabular file</entry>
+		<entry>No</entry>
+		<entry>
+		  <para>Fixed points with their probabilities</para>
+		</entry>
+	      </row>
+	      <row>
+		<entry><emphasis>OUTPUT_PREFIX</emphasis>_statdist.csv</entry>
+		<entry>Tabular file</entry>
+		<entry>Yes. Generated if statdist_traj_count is greater than 0</entry>
+		<!--
+		    <entry>Stationary distribution: each line contains the cluster number, each state with its respective probability</entry>
+		-->
+		<entry>
+		<para>- stationary distribution estimation for each trajectory,</para>
+		<para>- clustering of stationary distribution estimations,</para>
+		<para>- clustered estimation of stationary distributions (with errors),</para>
+<!--		<para>- fixed points with their probabilities</para> -->
+		</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</informaltable>
+      </section>
+    </section>
+    <section>
+      <title><emphasis role="underline">Other Options</emphasis></title>
+      <section>
+	<title>Generating logical boolean expressions</title>
+	<para>To generate the logical expressions from a network description file, use the -l or --generate-logical-expressions option as follows:</para>
+	<para>
+	  <literal>MaBoSS -c </literal><emphasis>CONFIGURATION_FILE</emphasis><literal> -l </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+	</para>
+	<para>or:</para>
+	<para>
+	  <literal>MaBoSS --config </literal><emphasis>CONFIGURATION_FILE</emphasis><literal> --generate-logical-expressions </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+	</para>
+	<para>
+	  Using this option on the previous network example will generate the following expressions:
+	</para>
+<screen>
+A : !A
+C : (!C &amp; !B) | (C &amp; !(A &amp; B))
+B : !B &amp; (!A | C)
+D : A | ((!B | C) &amp; !(!B &amp; C))</screen>
+      </section>
+
+
+      <section>
+	<title>Generating a template configuration</title>
+	<para>To generate a complete configuration from a network description file, use the -t or --generate-config-template option as follows:</para>
+	<para>
+	  <literal>MaBoSS -t </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+	</para>
+	<para>or:</para>
+	<para>
+	  <literal>MaBoSS --generate-config-template </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+	</para>
+	<para>
+	  The generated output can be redirect to a file, edited and then used as a configuration file for a simulation.
+	</para>
+	<para>
+	  Using this option on the previous network example will generate the following template configuration:
+	</para>
+<screen>
+//
+// MaBoSS 2.0 configuration template generated at Fri Sep 23 13:13:32 2016
+//
+
+// global configuration variables
+time_tick = 0.5;
+max_time = 1000;
+sample_count = 10000;
+discrete_time = 0;
+use_physrandgen = 1;
+seed_pseudorandom = 0;
+display_traj = 0;
+statdist_traj_count = 0;
+statdist_cluster_threshold = 1;
+thread_count = 1;
+statdist_similarity_cache_max_size = 20000;
+
+// variables to be set in the configuration file or by using the --config-vars option
+$A_rate_down = 0;
+$B_var = 0;
+$var2 = 0;
+
+// set is_internal attribute value to 1 if node is an internal node
+A.is_internal = 0;
+C.is_internal = 0;
+B.is_internal = 0;
+D.is_internal = 0;
+
+// if node is a reference node, set refstate attribute value to 0 or 1 according to its reference state
+// if node is not a reference node, skip its refstate declaration or set value to -1
+A.refstate = -1;
+C.refstate = -1;
+B.refstate = -1;
+D.refstate = -1;
+
+// if NODE initial state is:
+// - equals to 1: NODE.istate = 1;
+// - equals to 0: NODE.istate = 0;
+// - random: NODE.istate = -1; OR [NODE].istate = 0.5 [0], 0.5 [1]; OR skip NODE.istate declaration
+// - weighted random: [NODE].istate = P0 [0], P1 [1]; where P0 and P1 are arithmetic expressions
+[A].istate = 0.5 [0], 0.5 [1];
+[C].istate = 0.5 [0], 0.5 [1];
+[B].istate = 0.5 [0], 0.5 [1];
+[D].istate = 0.5 [0], 0.5 [1];
+</screen>
+      </section>
+
+      <section>
+	<title>Other configuration options</title>
+	<para>Inline configuration expressions and variable definitions can be given with the command line:</para>
+	<para> - the -e (aka --config-expr) option is used to give an inline configuration expression.</para>
+	<para>- the -v (aka --config-vars) option is used to give the values of variables.</para>
+	<para>
+	  <literal>MaBoSS -c </literal><emphasis>CONFIGURATION_FILE</emphasis> <literal>-e </literal><emphasis>CONFIG_EXPR</emphasis> <literal> -v </literal><emphasis>VAR=NUMERIC</emphasis> ... 
+	</para>
+	<para>or:</para>
+	<para>
+	  <literal>MaBoSS --config </literal><emphasis>CONFIGURATION_FILE</emphasis> <literal>--config-expr </literal><emphasis>CONFIG_EXPR</emphasis> <literal> --config-vars </literal><emphasis>VAR=NUMERIC</emphasis> ... 
+	</para>
+	<para>
+	  Each configuration option -c (--config), -e (--config-expr) or -v (--config-vars) can be used multiple times:
+	  <itemizedlist>
+	    <listitem>multiple -c (--config) and/or -e (--config-expr) options are managed in the order given at the command line,</listitem>
+	    <listitem>option -v (--config-vars) VAR=VALUE always overrides any VAR assignment in a configuration file or expression.</listitem>
+	  </itemizedlist>
+	  For instance:
+	</para>
+	<screen>
+MaBoSS -c conf1.txt -e 'thread_count = 2' -v '$var1=1.2,$var2=3.4' -c conf2.txt
+       -e 'discrete_time = 0; time_tick = 0.1' -v '$var4=10'
+	</screen>
+      </section>
+
+      <section>
+	<title>Dumping a configuration</title>
+	<para>To dump a complete configuration from a network description file and one or more configuration files, use the -d or --dump-config option as follows:</para>
+	<para>
+	  <literal>MaBoSS -c </literal><emphasis>CONFIGURATION_FILE</emphasis><literal> -d </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+	</para>
+	<para>or:</para>
+	<para>
+	  <literal>MaBoSS --config </literal><emphasis>CONFIGURATION_FILE</emphasis><literal> --dump-config </literal><emphasis>NETWORK_DESCRIPTION_FILE</emphasis>
+	</para>
+	<para>This functionality can be interesting in the following cases:</para>
+	<para>- giving only one configuration file, MaBoSS completes this configuration using its defaults and generate a full configuration,
+	</para>
+	<para>- giving several configuration files and/or configuration expressions (-e option) and/or variable definitions (-v option), MaBoSS interprets all these configurations, completes them using its defaults and generate a full configuration.
+	</para>
+      </section>
+    </section>
+
+    <section>
+      <title><emphasis role="underline">MaBoSS help</emphasis></title>
+      <screen>
+MaBoSS -h
+MaBoSS --help
+
+Usage:
+
+  MaBoSS [-h|--help]
+
+  MaBoSS [-V|--version]
+
+  MaBoSS [-c|--config CONF_FILE] [-v|--config-vars VAR1=NUMERIC[,VAR2=...]] [-e|--config-expr CONFIG_EXPR] -o|--output OUTPUT BOOLEAN_NETWORK_FILE
+
+  MaBoSS [-c|--config CONF_FILE] [-v|--config-vars VAR1=NUMERIC[,VAR2=...]] [-e|--config-expr CONFIG_EXPR] -d|--dump-config BOOLEAN_NETWORK_FILE
+
+  MaBoSS [-c|--config CONF_FILE] [-v|--config-vars VAR1=NUMERIC[,VAR2=...]] [-e|--config-expr CONFIG_EXPR] -l|--generate-logical-expressions BOOLEAN_NETWORK_FILE
+
+  MaBoSS -t|--generate-config-template BOOLEAN_NETWORK_FILE
+
+Options:
+
+  -V --version                            : displays MaBoSS version
+  -c --config CONF_FILE                   : uses CONF_FILE as a configuration file
+  -v --config-vars VAR=NUMERIC[,VAR2=...] : sets the value of the given variables to the given numeric values
+  -e --config-expr CONFIG_EXPR            : evaluates the configuration expression; may have multiple expressions
+                                            separated by semi-colons
+  -o --output OUTPUT                      : prefix to be used for output files; when present run MaBoSS simulation process
+  -d --dump-config                        : dumps configuration and exits
+  -t --generate-config-template           : generates template configuration and exits
+  -l --generate-logical-expressions       : generates the logical expressions and exits
+  -h --help                               : displays this message
+
+Notices:
+
+1. --config and --config-expr options can be used multiple times;
+   multiple --config and/or --config-expr options are managed in the order given at
+   the command line;
+   --config-vars VAR=VALUE always overrides any VAR assignment in a configuration file or
+   expression
+
+2. --dump-config, --generate-config-template, --generate-logical-expressions and --output
+   are exclusive options
+      </screen>
+    </section>
+  </partintro>
+</book>
+
+<!--
+    ;;; Local Variables: ***
+    ;;; eval: (load-file "emacs-macro") ***
+    ;;; End: ***
+-->

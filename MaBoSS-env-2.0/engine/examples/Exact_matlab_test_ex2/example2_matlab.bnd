@@ -1,0 +1,19 @@
+node A
+{
+  rate_up = 0.;
+  rate_down = 0.;
+}
+
+node B
+{
+  logic = NOT C AND A;
+  rate_up = (@logic ? $RuB : 0.0)+$T;
+  rate_down = (@logic ? 0.0 : $RdB)+$T;
+}
+
+node C
+{
+  logic = B;
+  rate_up = (@logic ? $RuC : 0.0)+$T;
+  rate_down = (@logic ? 0.0 : $RdC)+$T;
+}

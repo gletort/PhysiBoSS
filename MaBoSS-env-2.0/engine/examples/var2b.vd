@@ -1,0 +1,8 @@
+
+$A_istate = 1;
+
+$sample_count = 10000;
+$max_time = 50.;
+$time_tick = 2;
+$discrete_time = 0;
+

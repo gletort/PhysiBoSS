@@ -1,0 +1,168 @@
+Node erk {
+  logic = (mek);
+  rate_up = @logic ? $u_erk : 0;
+  rate_down = @logic ? 0 : $d_erk;
+}
+
+Node ikk {
+  logic = (nik);
+  rate_up = @logic ? $u_ikk : 0;
+  rate_down = @logic ? 0 : $d_ikk;
+}
+
+Node gsk3 {
+  logic = (!akt);
+  rate_up = @logic ? $u_gsk3 : 0;
+  rate_down = @logic ? 0 : $d_gsk3;
+}
+
+Node nfkb {
+  logic = (!ikb);
+  rate_up = @logic ? $u_nfkb : 0;
+  rate_down = @logic ? 0 : $d_nfkb;
+}
+
+Node ask1 {
+  logic = (traf2);
+  rate_up = @logic ? $u_ask1 : 0;
+  rate_down = @logic ? 0 : $d_ask1;
+}
+
+Node ras {
+  logic = (sos);
+  rate_up = @logic ? $u_ras : 0;
+  rate_down = @logic ? 0 : $d_ras;
+}
+
+Node egf {
+  logic = (egf);
+  rate_up = @logic ? $u_egf : 0;
+  rate_down = @logic ? 0 : $d_egf;
+}
+
+Node egfr {
+  logic = (egf);
+  rate_up = @logic ? $u_egfr : 0;
+  rate_down = @logic ? 0 : $d_egfr;
+}
+
+Node traf2 {
+  logic = (tnfr);
+  rate_up = @logic ? $u_traf2 : 0;
+  rate_down = @logic ? 0 : $d_traf2;
+}
+
+Node ikb {
+  logic = (!ikk) | (ikk & ex);
+  rate_up = @logic ? $u_ikb : 0;
+  rate_down = @logic ? 0 : $d_ikb;
+}
+
+Node map3k1 {
+  logic = (ras);
+  rate_up = @logic ? $u_map3k1 : 0;
+  rate_down = @logic ? 0 : $d_map3k1;
+}
+
+Node tnfr {
+  logic = (tnfa);
+  rate_up = @logic ? $u_tnfr : 0;
+  rate_down = @logic ? 0 : $d_tnfr;
+}
+
+Node ap1 {
+  logic = (cjun);
+  rate_up = @logic ? $u_ap1 : 0;
+  rate_down = @logic ? 0 : $d_ap1;
+}
+
+Node mek {
+  logic = (raf1);
+  rate_up = @logic ? $u_mek : 0;
+  rate_down = @logic ? 0 : $d_mek;
+}
+
+Node mkk4 {
+  logic = (map3k1 & map3k7);
+  rate_up = @logic ? $u_mkk4 : 0;
+  rate_down = @logic ? 0 : $d_mkk4;
+}
+
+Node ex {
+  logic = (nfkb);
+  rate_up = @logic ? $u_ex : 0;
+  rate_down = @logic ? 0 : $d_ex;
+}
+
+Node tnfa {
+  logic = (tnfa);
+  rate_up = @logic ? $u_tnfa : 0;
+  rate_down = @logic ? 0 : $d_tnfa;
+}
+
+Node raf1 {
+  logic = (ras);
+  rate_up = @logic ? $u_raf1 : 0;
+  rate_down = @logic ? 0 : $d_raf1;
+}
+
+Node map3k7 {
+  logic = (traf2);
+  rate_up = @logic ? $u_map3k7 : 0;
+  rate_down = @logic ? 0 : $d_map3k7;
+}
+
+Node mkk7 {
+  logic = (!ask1 & map3k1) | (ask1);
+  rate_up = @logic ? $u_mkk7 : 0;
+  rate_down = @logic ? 0 : $d_mkk7;
+}
+
+Node cjun {
+  logic = (jnk);
+  rate_up = @logic ? $u_cjun : 0;
+  rate_down = @logic ? 0 : $d_cjun;
+}
+
+Node sos {
+  logic = (egfr & !ph);
+  rate_up = @logic ? $u_sos : 0;
+  rate_down = @logic ? 0 : $d_sos;
+}
+
+Node jnk {
+  logic = (mkk7);
+  rate_up = @logic ? $u_jnk : 0;
+  rate_down = @logic ? 0 : $d_jnk;
+}
+
+Node pi3k {
+  logic = (egfr);
+  rate_up = @logic ? $u_pi3k : 0;
+  rate_down = @logic ? 0 : $d_pi3k;
+}
+
+Node p38 {
+  logic = (mkk4);
+  rate_up = @logic ? $u_p38 : 0;
+  rate_down = @logic ? 0 : $d_p38;
+}
+
+Node akt {
+  logic = (pi3k);
+  rate_up = @logic ? $u_akt : 0;
+  rate_down = @logic ? 0 : $d_akt;
+}
+
+Node ph {
+  logic = (!erk & ph) | (erk);
+  rate_up = @logic ? $u_ph : 0;
+  rate_down = @logic ? 0 : $d_ph;
+}
+
+Node nik {
+  logic = (map3k7);
+  rate_up = @logic ? $u_nik : 0;
+  rate_down = @logic ? 0 : $d_nik;
+}
+

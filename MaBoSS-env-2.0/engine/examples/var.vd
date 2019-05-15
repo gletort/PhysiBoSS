@@ -1,0 +1,15 @@
+
+// variable definition
+
+$gene_B_rate_up_coef = 3;
+$gene_B_rate_down_coef = 3 * 12;
+
+$var_1 = 1.2;
+
+$var_2 = 1.3;
+
+$var_3 = 1.3;
+$var_4 = $var_1 + 1.3;
+
+$GF_istate = 1;
+$p27_istate = 1;
