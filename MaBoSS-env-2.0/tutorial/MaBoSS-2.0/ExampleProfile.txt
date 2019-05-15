@@ -1,0 +1,13 @@
+TestProf1
+p53_b2
+DNAdam
+p53_b1:u:30
+Mdm2nuc:0.005
+Mdm2nuc,Mdm2cyt
+TestProf2
+p53_b1,DNAdam
+
+p53_b1:u:300
+Mdm2nuc:0.005
+Mdm2nuc,Mdm2cyt
+

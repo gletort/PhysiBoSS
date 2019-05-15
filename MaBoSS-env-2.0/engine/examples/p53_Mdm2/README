@@ -1,0 +1,12 @@
+
+p53_Mdm2 example
+----------------
+
+1. MaBoSS must be compiled (cd ../../src; make install)
+
+2. Running the example:
+  ../../pub/MaBoSS -c p53_Mdm2_runcfg.cfg -o p53_Mdm2 p53_Mdm2.bnd
+
+  The files p53_Mdm2_probtraj.csv and p53_Mdm2_statdist.csv will be generated.
+
+The description of these files can be found at https://maboss.curie.fr/pub/DescriptionOutputFile.pdf

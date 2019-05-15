@@ -1,0 +1,89 @@
+
+-------------------------------------------------- Run --------------------------------------------------
+MaBoSS version: 0.6
+Run start time: Wed Mar  9 18:00:27 2011
+Run end time: Wed Mar  9 18:01:39 2011
+Time Tick: 0.2
+Max Time: 5
+Sample Count: 1000000
+Discrete Time: TRUE
+Random Generator: physical
+---------------------------------------------------------------------------------------------------------
+
+------------------------------------------------ Network ------------------------------------------------
+node CycD {
+  description = "";
+  logic = CycD;
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node Rb {
+  description = "";
+  logic = NOT CycD AND NOT CycB AND (p27 OR NOT (CycA OR CycE));
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node E2F {
+  description = "";
+  logic = NOT Rb AND NOT CycB AND (NOT CycA OR p27);
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node CycE {
+  description = "";
+  logic = NOT Rb AND E2F;
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node Cdc20 {
+  description = "";
+  logic = CycB;
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node UbcH10 {
+  description = "";
+  logic = (NOT (cdh1 AND NOT UbcH10) AND (CycA OR CycB)) OR (NOT CycA AND NOT CycB AND (NOT cdh1 OR (Cdc20 AND UbcH10)));
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node cdh1 {
+  description = "";
+  logic = Cdc20 OR (NOT CycB AND (NOT CycA OR p27));
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node CycA {
+  description = "";
+  logic = NOT Rb AND NOT Cdc20 AND NOT (UbcH10 AND cdh1) AND (CycA OR E2F);
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node CycB {
+  description = "";
+  logic = NOT Cdc20 AND NOT cdh1;
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node p27 {
+  description = "";
+  logic = NOT CycD AND NOT CycB AND (NOT (CycA OR CycE) OR (p27 AND NOT (CycE AND CycA)));
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+---------------------------------------------------------------------------------------------------------
+
+----------------------------------------------- Variables -----------------------------------------------
+$fast = 10;
+$slow = 1;
+---------------------------------------------------------------------------------------------------------
+

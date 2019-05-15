@@ -1,0 +1,34 @@
+node p53
+{
+  logic = NOT Mdm2N;
+  rate_up = @logic ? 1.0 : 0.0 ;
+  rate_down = ((NOT @logic) AND NOT p53_h) ? 1.0 : 0.0 ;
+}
+
+
+node p53_h
+{
+  logic = NOT Mdm2N;
+  rate_up = (@logic AND p53) ? 1.0 : 0.0;
+  rate_down = (@logic ? 0.0 : 1.0);
+}
+
+node Mdm2C
+{
+  logic = $case_a ? p53_h : p53;
+  rate_up = @logic ? 1.0 : 0.0 ;
+  rate_down = @logic ? 0.1 : 1.0 ;
+}
+
+node Mdm2N
+{
+  logic_p53 = $case_a ? p53 : p53_h;
+  rate_up = (@logic_p53 AND Mdm2C) ? $KMn_pMC :
+            ((@logic_p53 ? $KMn_p : 0.0) + (Mdm2C ? $KMn_MC : 0.0) +
+            ((NOT @logic_p53 AND NOT Mdm2C) ? $KMn : 0.0));
+
+  rate_down = (@logic_p53 AND Mdm2C) ? (1-$KMn_pMC) :
+             ((@logic_p53 ? (1-$KMn_p) : 0.0) + (Mdm2C ? (1-$KMn_MC) : 0.0 ) + 
+  	     ((NOT @logic_p53 AND NOT Mdm2C) ? (1-$KMn) : 0.0));
+}
+

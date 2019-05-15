@@ -1,0 +1,68 @@
+node p53
+{
+  logic = NOT Mdm2N;
+  rate_up = (@logic ? 1.0 : 0.0)/$tp53u ;
+  rate_down = (((NOT @logic) AND NOT p53_h) ? 1.0 : 0.0)/$tp53d ;
+}
+
+
+node p53_h
+{
+  logic = NOT Mdm2N;
+  rate_up = ((@logic AND p53) ? 1.0 : 0.0)/$tp53hu;
+  rate_down = ((@logic ? 0.0 : 1.0))/$tp53hd;
+}
+
+node Mdm2C
+{
+  logic = $case_a ? p53_h : p53;
+  rate_up = (@logic ? 1.0 : 0.0)/$tMCu;
+  rate_down = (@logic ? 0.0 : 1.0)/$tMCd;
+}
+
+node Mdm2N
+{
+  logic_p53 = $case_a ? p53 : p53_h;
+  rate_up = (((@logic_p53 AND Mdm2C AND Dam) ? $KMn_pMCD : 0.0) +
+            ((@logic_p53 AND Mdm2C AND (NOT Dam)) ? $KMn_pMC : 0.0) +
+		((@logic_p53 AND (NOT Mdm2C) AND Dam) ? $KMn_pD : 0.0) +
+		((@logic_p53 AND (NOT Mdm2C) AND (NOT Dam)) ? $KMn_p : 0.0) +
+		((NOT @logic_p53 AND Mdm2C AND Dam) ? $KMn_MCD : 0.0) +
+		((NOT @logic_p53 AND Mdm2C AND (NOT Dam)) ? $KMn_MC : 0.0) +
+            ((NOT @logic_p53 AND NOT Mdm2C AND Dam) ? $KMn_D : 0.0) +
+ 		((NOT @logic_p53 AND NOT Mdm2C AND (NOT Dam)) ? $KMn : 0.0))/$tMNu;
+
+// case_a = TRUE means that p53 inhibits Mdm2N at level 1 in the presence of DNA damage
+// if p53 and MDM2C are present when DNA damage and Kmn_pMCD=1 => despite the presence of p53 and DNA damage, MDM2N can activate
+// if this is not true, then 7 exclusive cases are possible (8 cases total): 
+// (1) if p53 is active and Mdm2C is active in the absence of DNA damage, Mdm2N can activate OR
+// (2) if p53 is active and not Mdm2C in the presence of DNA damage, Mdm2N cannot activate (KMn_pD=0) OR 
+// É
+// (4) if Mdm2C is active and not p53 in the presence of DNA damage, Mdm2N can activate (KMn_MCD=1) OR
+// É
+// (7) if p53 is inactive and Mdm2C is inactive in the absence of DNA damage, Mdm2N cannot activate (KMn=0 no spontaneous activation)
+
+  rate_down = (((@logic_p53 AND Mdm2C AND Dam) ? (1-$KMn_pMCD) : 0.0) +
+            ((@logic_p53 AND Mdm2C AND (NOT Dam)) ? (1-$KMn_pMC) : 0.0) +
+		((@logic_p53 AND (NOT Mdm2C) AND Dam) ? (1-$KMn_pD) : 0.0) +
+		((@logic_p53 AND (NOT Mdm2C) AND (NOT Dam)) ? (1-$KMn_p) : 0.0) +
+		((NOT @logic_p53 AND Mdm2C AND Dam) ? (1-$KMn_MCD) : 0.0) +
+		((NOT @logic_p53 AND Mdm2C AND (NOT Dam)) ? (1-$KMn_MC) : 0.0) +
+            ((NOT @logic_p53 AND NOT Mdm2C AND Dam) ? (1-$KMn_D) : 0.0) +
+ 		((NOT @logic_p53 AND NOT Mdm2C AND (NOT Dam)) ? (1-$KMn) : 0.0))/$tMNd;
+
+// Everything that can inactivate Mdm2N is the opposite of what can activate it. 
+// This ensures that what gets activated remains active
+
+}
+
+node Dam
+{
+  logic = $case_a ? p53_h : p53;
+  rate_up = @logic ? 0.0 : 0.0;
+  rate_down = (@logic ? 1.0 : 0.0)/$tDd;
+
+// Stress is implicit in the initial condition
+}
+
+//

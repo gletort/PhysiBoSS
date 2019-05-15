@@ -1,0 +1,25 @@
+// Toy model of a 4 states cycle
+Node T
+{
+  rate_up = 0.0;
+  rate_down = ((NOT A) AND (NOT B)) ? $escape : 0.0 ;
+}
+
+Node A 
+{
+  rate_up = (T AND (NOT B)) ? $Au : 0.0;
+  rate_down = B ? $Ad : 0.0;
+}
+
+Node B 
+{
+  rate_up = A ? $Au : 0.0;
+  rate_down = A ? 0.0 : $Ad ;
+}
+
+// logical expressions
+C : 1 & 2
+D : NOT (A AND B)
+
+
+

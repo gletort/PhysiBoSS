@@ -1,0 +1,95 @@
+
+-------------------------------------------------- Run --------------------------------------------------
+MaBoSS version: 2.0 [networks up to 64 nodes]
+
+Run start time: Mon Jul  2 11:43:26 2018
+Run end time: Mon Jul  2 11:43:41 2018
+
+Core user runtime: 44.91 secs using 6 threads
+Core elapsed runtime: 7.78 secs using 6 threads
+
+Epilogue user runtime: 1.23 secs using 1 thread
+Epilogue elapsed runtime: 1.458 secs using 1 thread
+
+StatDist user runtime: 4.79 secs using 1 thread
+StatDist elapsed runtime: 5.172 secs using 1 thread
+
+Time Tick: 0.2
+Max Time: 5
+Sample Count: 1000000
+StatDist Trajectory Count: 5000
+StatDist Similarity Cache Maximum Size: 20000
+Discrete Time: TRUE
+Random Generator: standard
+Seed Pseudo Random: 100
+Generated Number Count: 23212917
+
+---------------------------------------------------------------------------------------------------------
+
+------------------------------------------------ Network ------------------------------------------------
+node CycD {
+  logic = CycD;
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node Rb {
+  logic = NOT CycD AND NOT CycB AND (p27 OR NOT (CycA OR CycE));
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node E2F {
+  logic = NOT Rb AND NOT CycB AND (NOT CycA OR p27);
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node CycE {
+  logic = NOT Rb AND E2F;
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node Cdc20 {
+  logic = CycB;
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node UbcH10 {
+  logic = (NOT (cdh1 AND NOT UbcH10) AND (CycA OR CycB)) OR (NOT CycA AND NOT CycB AND (NOT cdh1 OR (Cdc20 AND UbcH10)));
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node cdh1 {
+  logic = Cdc20 OR (NOT CycB AND (NOT CycA OR p27));
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node CycA {
+  logic = NOT Rb AND NOT Cdc20 AND NOT (UbcH10 AND cdh1) AND (CycA OR E2F);
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node CycB {
+  logic = NOT Cdc20 AND NOT cdh1;
+  rate_up = @logic ? $slow : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+
+node p27 {
+  logic = NOT CycD AND NOT CycB AND (NOT (CycA OR CycE) OR (p27 AND NOT (CycE AND CycA)));
+  rate_up = @logic ? $fast : 0;
+  rate_down = @logic ? 0 : $fast;
+}
+---------------------------------------------------------------------------------------------------------
+
+----------------------------------------------- Variables -----------------------------------------------
+$fast = 10;
+$slow = 1;
+---------------------------------------------------------------------------------------------------------
+

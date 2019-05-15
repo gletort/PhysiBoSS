@@ -1,0 +1,21 @@
+// Initial conditions
+// A_istate = 1;
+// if nothing, initial condition is randomly chosen
+
+
+// number of trajectories
+$sample_count = 100000;
+
+// maximum time of a trajectory - 
+// after max_time is reached, the computation stops
+$max_time = 20;
+
+// time of an interval on which probabilities are computed and averaged
+$time_tick = 0.5;
+
+// if discrete time is 1, the computation is fully discrete
+// in this case, the time interval is equal to time tick
+// if discrete time is 0, the computation is continuous
+// in this case, the time interval is chosen randomly
+$discrete_time = 0;
+

@@ -1,0 +1,11 @@
+In matlab:
+
+Aact generate the transition matrix (for the master equation) when node A is active.
+Aact generate the transition matrix (for the master equation) when node A is inactive.
+
+	Row/Column 1, state <nil>
+	Row/Column 2, state C
+	Row/Colmun 3, state B
+	Row/Colmun 4, state BC
+
+StochExactSim construct exact stocahstic simulation with entropy and condition entropy

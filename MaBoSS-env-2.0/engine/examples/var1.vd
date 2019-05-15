@@ -1,0 +1,18 @@
+// parameters (could be overriden with command line options)
+sample_count = 100;
+max_time = 1000.;
+thread_count = 8;
+use_phyrandgen = TRUE;
+seed_pseudorand = 2245;
+tick_time = 0.1;
+discrete_time = FALSE;
+
+A.istate = 1;
+p27.istate = 1;
+//iii.istate : default value is random
+B.is_out = TRUE; 
+B.valref = 1; // used
+
+// var definition
+$xxx = 1;
+

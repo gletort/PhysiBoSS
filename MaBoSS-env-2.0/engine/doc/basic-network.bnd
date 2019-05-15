@@ -1,0 +1,25 @@
+  node A {
+    rate_up = 1.1;
+    rate_down = $A_rate_down * 10.2;
+    // $A_rate_down external variable must be defined in one of the configuration files
+  }
+
+  node B {
+    tmp = (NOT A OR C);
+    // note that node variable tmp has been introduced for convenience to define 
+    // rate_up and rate_down without code duplication
+
+    rate_up = @tmp;
+    rate_down = NOT @tmp ? $B_var * 12. : 0.;
+    // $B_var must be defined in one of the configuration files
+  }
+
+  node C {
+    rate_up = $var2 < 10 ? NOT B : A OR B;
+    rate_down = A AND B;
+    // $var2 must be defined in one of the configuration files
+  }
+
+  node D {
+    logic = A OR (NOT B XOR C);
+  }

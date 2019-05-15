@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb,algorithm2e}
+\newcommand{\prob}{\mathbf{P}}
+
+
+\begin{document}
+\section*{MBSS\_PrepareProjectFile.sh}
+\subsection*{Aim}
+MBSS\_PrepareProjectFile.sh prepares a set of MaBoSS run, according to different modifications of a generic model (mutations, parameter sensitivity, etc.)
+
+\subsection*{How to run the script}
+MBSS\_PrepareProjectFile.sh is a shell script that uses a perl library, MBSS\_PrepareProjectFile.pm and two python3 scripts: MBSS\_PrepareProjectFileTrajectoryFig.py and MBSS\_PrepareProjectFilePieChart.py.
+Launching MBSS\_PrepareProjectFile.sh is done with the following command:
+\begin{verbatim}
+MBSS_PrepareProjectFile.sh File.pmbss
+\end{verbatim}
+
+MBSS\_PrepareProjectFile.sh must be accessible by command line, as MaBoSS. MBSS\_PrepareProjectFile.pm, MBSS\_PrepareProjectFileTrajectoryFig.py and MBSS\_PrepareProjectFilePieChart.py
+must be accessible within an environment variable.
+
+The file ``File.pmbss'' contains the following fields
+
+\begin{itemize}
+
+  \item \begin{verbatim}MABOSS = Executable_name;\end{verbatim}
+  \item  \begin{verbatim}BND= bnd_file.bnd;\end{verbatim}
+  \item  \begin{verbatim}CFG= cfg_file.cfg;\end{verbatim}
+
+The file File.pmbss can contain the optional fields:
+
+\item    \begin{verbatim}INIT_COND=[Previous_model.bnd,Previous_model_probtraj.csv,#line_number];\end{verbatim}
+From a previous run of MaBoSS that uses the file ``Previous\_model.bnd'' and produces a trajectory file ``Previous\_model\_probtraj.csv'', PrepMultiSim uses the line ``\#line\_number'' of this trajectory file as an initial condition in the .cfg file(s) in the project folder.
+\item    \begin{verbatim}MUT= First_node Second_Node ...;\end{verbatim}
+\item    \begin{verbatim}COMB_MUT=#number_of_possible_combined_mutation;\end{verbatim}
+\item    \begin{verbatim}VAR_SENS=[$External_variable1,Suffix_to_add] [$External_variable2,Suffix_to_add]  ...;\end{verbatim}
+\item    \begin{verbatim}COMB_VAR_SENS=#number_of_possible_combined_variable_sensitivity;\end{verbatim}
+\item    \begin{verbatim}TRAJ_TABLE=yes;\end{verbatim}
+\item    \begin{verbatim}STAT_TABLE=[yes,#probability_threshold];\end{verbatim}
+
+\end{itemize} 
+
+\subsection*{Outputs}
+
+According to the file ``File.pmbss'', a project folder ``File'' is created, which contains all necessary inputs and a shell script ``File.sh''. Launching this shell script runs (multiple) MaBoSS and creates output tables and figures (if specified).
+
+\end{document}

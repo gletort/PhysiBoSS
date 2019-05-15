@@ -1,0 +1,34 @@
+# ---PrepareProjectFile File for preparing MaBoSS, to be executed with the command "MBSS_PrepareProjectFile.sh File.pmbss"
+# ---A directory "File" will be created
+# ---Go to the directory: "cd File/", then run MaBoSS and construct tables within the dedicated shell script: "./File.sh"
+#----Avoid spaces in file names
+#
+#Executable MaBoSS name
+MABOSS = MaBoSS;
+#
+#cfg file
+CFG = example.cfg;
+#
+#BND file
+BND = example.bnd;
+#
+#Construct an initial condition from a previous simulation, by specifying the line number of a probtraj file to set as the initial condition
+#INIT_COND=[example_mut.bnd,example_mut/example_mut_probtraj.csv,40];
+#
+# Build a cfg file for each single mutation of the specified nodes. 
+MUT=Mdm2nuc Mdm2cyt;
+#
+# Extend the set of cfg files by considering mutation combinations up to the specified value
+COMB_MUT=2;
+#
+# Build the cfg file for each parameter variation, specified by an external variable and a suffix to add to the external variable definition
+VAR_SENS=[$u_Mdm2nuc , -.5] [$u_Mdm2cyt,* 0.01] [$d_Mdm2nuc,+ 0.03];
+#
+#Extend the set of cfg files by considering parameter variation combinations up to the specified value
+COMB_VAR_SENS=2;
+#
+#Compute table of probability trajectories? yes, no or fig (for producing pie and trajectory figures)
+TRAJ_TABLE=fig;
+#
+#Compute table of stationary distribution decomposition? yes (with probability cutoff) or no
+#STAT_TABLE=[yes,0.004];

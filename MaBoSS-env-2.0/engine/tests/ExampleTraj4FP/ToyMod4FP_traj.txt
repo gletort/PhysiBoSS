@@ -1,0 +1,345 @@
+
+Trajectory #1
+ istate	A -- T
+
+Trajectory #2
+ istate	A -- T
+
+Trajectory #3
+ istate	B -- A -- T
+0.04582050035	B -- A -- T	1
+
+Trajectory #4
+ istate	B -- T
+
+Trajectory #5
+ istate	B -- A -- T
+0.2122954701	B -- A -- T	1
+
+Trajectory #6
+ istate	T
+0.322331313	T	1
+
+Trajectory #7
+ istate	B -- T
+
+Trajectory #8
+ istate	A -- T
+
+Trajectory #9
+ istate	B -- A -- T
+0.9929883301	B -- A -- T	1
+
+Trajectory #10
+ istate	B -- T
+
+Trajectory #11
+ istate	T
+0.06456988339	T	1
+
+Trajectory #12
+ istate	B -- T
+
+Trajectory #13
+ istate	B -- A -- T
+0.2386505032	B -- A -- T	1
+
+Trajectory #14
+ istate	B -- T
+
+Trajectory #15
+ istate	T
+0.5079721739	T	1
+
+Trajectory #16
+ istate	B -- T
+
+Trajectory #17
+ istate	B -- T
+
+Trajectory #18
+ istate	A -- T
+
+Trajectory #19
+ istate	T
+0.08404982931	T	1
+
+Trajectory #20
+ istate	T
+0.1669873485	T	1
+
+Trajectory #21
+ istate	B -- A -- T
+0.2664723881	B -- A -- T	1
+
+Trajectory #22
+ istate	T
+0.3907963184	T	1
+
+Trajectory #23
+ istate	A -- T
+
+Trajectory #24
+ istate	A -- T
+
+Trajectory #25
+ istate	B -- T
+
+Trajectory #26
+ istate	B -- T
+
+Trajectory #27
+ istate	B -- A -- T
+0.1043195867	B -- A -- T	1
+
+Trajectory #28
+ istate	B -- A -- T
+0.1910034309	B -- A -- T	1
+
+Trajectory #29
+ istate	A -- T
+
+Trajectory #30
+ istate	B -- A -- T
+0.428898911	B -- A -- T	1
+
+Trajectory #31
+ istate	A -- T
+
+Trajectory #32
+ istate	A -- T
+
+Trajectory #33
+ istate	T
+1.655195299	T	1
+
+Trajectory #34
+ istate	A -- T
+
+Trajectory #35
+ istate	T
+0.1254459176	T	1
+
+Trajectory #36
+ istate	A -- T
+
+Trajectory #37
+ istate	B -- A -- T
+0.3272410531	B -- A -- T	1
+
+Trajectory #38
+ istate	B -- T
+
+Trajectory #39
+ istate	B -- A -- T
+0.6710128869	B -- A -- T	1
+
+Trajectory #40
+ istate	A -- T
+
+Trajectory #41
+ istate	B -- A -- T
+2.9180203	B -- A -- T	1
+
+Trajectory #42
+ istate	B -- A -- T
+0.0674961202	B -- A -- T	1
+
+Trajectory #43
+ istate	A -- T
+
+Trajectory #44
+ istate	B -- T
+
+Trajectory #45
+ istate	A -- T
+
+Trajectory #46
+ istate	A -- T
+
+Trajectory #47
+ istate	B -- A -- T
+0.7397879835	B -- A -- T	1
+
+Trajectory #48
+ istate	A -- T
+
+Trajectory #49
+ istate	B -- T
+
+Trajectory #50
+ istate	A -- T
+
+Trajectory #51
+ istate	B -- T
+
+Trajectory #52
+ istate	T
+0.2708608671	T	1
+
+Trajectory #53
+ istate	B -- T
+
+Trajectory #54
+ istate	B -- T
+
+Trajectory #55
+ istate	T
+0.8195551476	T	1
+
+Trajectory #56
+ istate	B -- A -- T
+1.36703018	B -- A -- T	1
+
+Trajectory #57
+ istate	A -- T
+
+Trajectory #58
+ istate	T
+0.1074887237	T	1
+
+Trajectory #59
+ istate	B -- T
+
+Trajectory #60
+ istate	B -- T
+
+Trajectory #61
+ istate	B -- A -- T
+0.4349820904	B -- A -- T	1
+
+Trajectory #62
+ istate	T
+0.619335846	T	1
+
+Trajectory #63
+ istate	A -- T
+
+Trajectory #64
+ istate	B -- T
+
+Trajectory #65
+ istate	B -- A -- T
+0.051472944	B -- A -- T	1
+
+Trajectory #66
+ istate	B -- T
+
+Trajectory #67
+ istate	B -- A -- T
+0.2201987962	B -- A -- T	1
+
+Trajectory #68
+ istate	B -- A -- T
+0.3321994828	B -- A -- T	1
+
+Trajectory #69
+ istate	B -- A -- T
+0.4767561893	B -- A -- T	1
+
+Trajectory #70
+ istate	B -- T
+
+Trajectory #71
+ istate	A -- T
+
+Trajectory #72
+ istate	B -- A -- T
+0.001105244985	B -- A -- T	1
+
+Trajectory #73
+ istate	A -- T
+
+Trajectory #74
+ istate	A -- T
+
+Trajectory #75
+ istate	B -- A -- T
+0.2469851732	B -- A -- T	1
+
+Trajectory #76
+ istate	B -- A -- T
+0.3659427716	B -- A -- T	1
+
+Trajectory #77
+ istate	B -- A -- T
+0.5223412565	B -- A -- T	1
+
+Trajectory #78
+ istate	B -- T
+
+Trajectory #79
+ istate	B -- T
+
+Trajectory #80
+ istate	B -- A -- T
+0.01822286473	B -- A -- T	1
+
+Trajectory #81
+ istate	A -- T
+
+Trajectory #82
+ istate	B -- T
+
+Trajectory #83
+ istate	A -- T
+
+Trajectory #84
+ istate	B -- A -- T
+0.4021291493	B -- A -- T	1
+
+Trajectory #85
+ istate	T
+0.5725030698	T	1
+
+Trajectory #86
+ istate	B -- T
+
+Trajectory #87
+ istate	B -- T
+
+Trajectory #88
+ istate	T
+0.03594734778	T	1
+
+Trajectory #89
+ istate	A -- T
+
+Trajectory #90
+ istate	A -- T
+
+Trajectory #91
+ istate	B -- T
+
+Trajectory #92
+ istate	B -- A -- T
+0.4411401924	B -- A -- T	1
+
+Trajectory #93
+ istate	B -- T
+
+Trajectory #94
+ istate	B -- T
+
+Trajectory #95
+ istate	A -- T
+
+Trajectory #96
+ istate	T
+0.05432331042	T	1
+
+Trajectory #97
+ istate	B -- A -- T
+0.1320806549	B -- A -- T	1
+
+Trajectory #98
+ istate	B -- A -- T
+0.2241978052	B -- A -- T	1
+
+Trajectory #99
+ istate	T
+0.3372075775	T	1
+
+Trajectory #100
+ istate	T
+0.4834545034	T	1

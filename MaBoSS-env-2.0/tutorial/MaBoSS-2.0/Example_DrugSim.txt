@@ -1,0 +1,4 @@
+example
+DNAdam,Mdm2cyt
+0.0, 0.2, 0.4
+6
