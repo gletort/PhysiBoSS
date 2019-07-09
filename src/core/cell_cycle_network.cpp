@@ -102,8 +102,8 @@ void CellCycleNetwork::set_input_nodes()
 	enough_to_node( "IGF", "igf" );
 	enough_to_node( "TNF", "tnf" );
 	enough_to_node( "GF", "gf" );
-	enough_to_node( "TGFbeta", "tgfb" );
-	enough_to_node( "IL2", "il2" );
+	enough_to_node( "TGFBR", "tgfb" );
+	enough_to_node( "IL2R", "il2" );
 	enough_to_node( "TCR", "tcr" );
 
 	// If has enough contact with ecm or not
@@ -407,10 +407,10 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 			mycell->secrete("tnf", 0, dt);
 	}
 	
-	// others, active or not field secretion
-	int nf = 2;
-	std::string fieldsNodes[nf] = {"TGFbeta", "IL2"};
-	std::string fields[nf] = {"tgfb", "il2"};
+	// others, active or not field secretion, different writing possible
+	int nf = 3;
+	std::string fieldsNodes[nf] = {"TGFbeta", "IL2", "TGFB"};
+	std::string fields[nf] = {"tgfb", "il2", "tgfb"};
 	for ( int f = 0; f < nf; f ++ )
 	{
 		ind = maboss->get_node_index( fieldsNodes[f] );
