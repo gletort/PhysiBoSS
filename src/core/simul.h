@@ -103,15 +103,10 @@ class Simul
 		/** \brief Time from which passive cells have repulsion coefficient */
 		double tpassive;
 		/** \brief Time from which EGF density is added */
-		double tegf;
-		/** \brief Time from which TNF density is added */
-		double ttnf;
-		/** \brief Duration of TNF injection (keep constant concentration at first voxel) */
-		double ttnf_pulse;
-		/** \brief When next time TNF density will be added */
-		double ttnf_next;
-		/** \brief Time from which TNF density is removed */
-		double tremtnf;
+		//double tegf;
+	
+		/////////// Injections parameters
+		/** \todo create a class to handle injections instead of lot of vectors ?? */	
 		/** \brief Mode of densities injection (from sides, everywhere, Dirichlet...) 
 		 *
 		 * Possibles modes:
@@ -119,6 +114,14 @@ class Simul
 		 * 1 : From all sides (boundary)
 		 */
 		int mode_injection;
+		/** \brief Time from which given density is added, and frequency */
+		std::vector<double> pulse_intervals;
+		/** \brief Duration of pulse for given density */
+		std::vector<double> pulse_duration;
+		/** \brief If should remove density (simulate washout) at given time step */
+		std::vector<double> time_washout;
+		/** \brief If should inject density at given time step */
+		std::vector<double> inject_until;
 
 		/** \brief Ratio of (not empty) voxels to write to output file for microenv densities */
 		double ratio_write;

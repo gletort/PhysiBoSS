@@ -55,11 +55,7 @@ void Simul::clear()
 	t_output_densities = 600.0; // printing microenvironement interval
 	t_max = 3*24*60;       // maximal time
 	npassive = 0;       // no passive cells (obstacles, dextran)
-	tegf = t_max*2;
-	ttnf = t_max*2;
-	ttnf_pulse = 10;    // injection during 10 minutes
-	ttnf_next = 0;		// when to add tnf
-	tremtnf = t_max*2;
+	//tegf = t_max*2;
 	tpassive = t_max*2;
 	fric_passive = 0.0001;
 	mode_injection = -1;
@@ -164,11 +160,17 @@ double dist( std::vector<double> one, std::vector<double> two )
 void Simul::run_time_step( double t )
 {
 	// Inject given concentration on first voxel only
-	if ( t < ttnf_next )
+	for ( int f = 0; f < ndensities; f++ )
 	{
-		int k = microenvironment.get_index("tnf");
-		if ( k >= 0 ) 
-			inject_density(k);
+		if ( conc_names[f] != "oxygen" )
+		{
+			if ( inject_until[f] > t )
+			{
+				int k = microenvironment.get_index(conc_names[f]);
+				if ( k >= 0 ) 
+					inject_density(k);
+			}
+		}
 	}
 	cell_container.simulate_cell_sources_and_sinks( &microenvironment, dt );
 	microenvironment.simulate_diffusion_decay( dt );
@@ -188,10 +190,14 @@ void Simul::initSimul() throw()
 	reader.getDoubleValue( "simulation", "maximal_time", &t_max );
 	// Space parameters
 	reader.getDoubleValue( "simulation", "minimum_voxel_size", &min_voxel_size );
-
+	// Handle external densities
 	reader.getIntValue( "simulation", "number_of_densities", &ndensities );
 	concentrations.resize(ndensities);
+	pulse_intervals.resize(ndensities);
+	pulse_duration.resize(ndensities);
+	time_washout.resize(ndensities);
 	conc_names.resize(ndensities);
+
 	reader.getIntValue( "simulation", "mode_cell_cycle", &mode_cycle );
 	// openmp setup
 	reader.getIntValue( "simulation", "number_of_threads", &omp_num_threads );
@@ -211,10 +217,8 @@ void Simul::initSimul() throw()
 	reader.getStringValue( "initial_configuration", "create_ecm_from_file", &ecm_file );
 	reader.getDoubleValue( "initial_configuration", "nb_passive_cells", &npassive );
 	reader.getDoubleValue( "initial_configuration", "time_passive_cells", &tpassive );
-	reader.getDoubleValue( "initial_configuration", "time_add_egf", &tegf );
-	reader.getDoubleValue( "initial_configuration", "time_add_tnf", &ttnf );
-	reader.getDoubleValue( "initial_configuration", "duration_add_tnf", &ttnf_pulse );
-	reader.getDoubleValue( "initial_configuration", "time_remove_tnf", &tremtnf );
+	
+	// Injection parameters
 	reader.getIntValue( "initial_configuration", "mode_injection", &mode_injection );
 	for ( int i = 0; i < ndensities; i++ )
 	{
@@ -222,9 +226,16 @@ void Simul::initSimul() throw()
 		reader.getStringValue("simulation", "density_"+std::to_string(i), &curname );
 		strip( &curname );
 		conc_names[i] = curname;
-		concentrations[i] = 0;
+		concentrations[i] = 0;  //default, nothing
+		pulse_intervals[i] = t_max*2.0;  // default, no injection
+		pulse_duration[i] = t_max*2.0;  // default, continuous injection
+		time_washout[i] = t_max*2.0; // default, no washout
 		reader.getDoubleValue( "initial_configuration", conc_names[i]+"_concentration", &(concentrations[i]) );
+		reader.getDoubleValue( "initial_configuration", "time_add_"+conc_names[i], &(pulse_intervals[i]) );
+		reader.getDoubleValue( "initial_configuration", "duration_add_"+conc_names[i], &(pulse_duration[i]) );
+		reader.getDoubleValue( "initial_configuration", "time_remove_"+conc_names[i], &time_washout[i] );
 	}
+
 	// Membrane shape: so far, none, duct or sphere
 	reader.getStringValue("initial_configuration", "membrane_shape", &membrane_shape);
 	cell_container.set_membrane_shape( membrane_shape );
@@ -630,9 +641,17 @@ void Simul::run()
 
 	int output_index = 0;
 	int trep = 0;
-	int tputegf = 0;
-	double tputtnf = ttnf;	
-	ttnf_next = ttnf_pulse;	
+	
+	//int tputegf = 0;
+	std::vector<double> time_of_injections;
+	time_of_injections.resize(ndensities);
+	inject_until.resize(ndensities);
+	for ( int f = 0; f < ndensities; f++ )
+	{
+		inject_until[f] = pulse_duration[f];   // initially injection ON
+		time_of_injections[f] = pulse_intervals[f];
+	}
+
 	BioFVM::RUNTIME_TIC();
 	BioFVM::TIC();
 	std::cout << "CLOCKS_PER_SEC = " << CLOCKS_PER_SEC << "\n";
@@ -679,7 +698,7 @@ void Simul::run()
 				cell_container.set_passive_repulsion(50);
 				trep = 1;
 			}
-			if ( !tputegf && t > tegf )
+			/**if ( !tputegf && t > tegf )
 			{
 				int k = microenvironment.get_index("egf");
 				for( int n=0; n < microenvironment.number_of_voxels() ; n++ )
@@ -687,24 +706,29 @@ void Simul::run()
 					microenvironment.density_vector(n)[k] = 145; 	
 				}
 				tegf += 100; // reput frequently
-			}
-			if ( t > tputtnf )
+			}*/
+			
+			// Check if should inject or remove a density
+			for ( int f = 0; f < ndensities; f++ )
 			{
-				// tmp version
-				//int ktn = microenvironment.get_index("tnf");
-				//concentrations[ktn] *= 10.0;
-				//tputtnf += 50000;
-
-				ttnf_next = t + ttnf_pulse;
-				if ( mode_injection == 0 ) tremtnf = t + dt + ttnf_pulse;  // need to remove only when it's mode 0 = microflu
-				tputtnf += ttnf; 
-			}
-			if ( t > tremtnf )
-			{
-				int k = microenvironment.get_index("tnf");
-				if ( k >= 0 )
-					remove_density(k);
-				tremtnf += t_max;
+				// inject ?
+				if ( t > time_of_injections[f] )
+				{
+					inject_until[f] = t + pulse_duration[f];
+					if ( mode_injection == 0 ) time_washout[f] = t + dt + pulse_duration[f];  // need to remove only when it's mode 0 = microflu
+					time_of_injections[f] += pulse_intervals[f]; 
+				}
+				// washout ?
+				if ( t > time_washout[f] )
+				{
+					if ( conc_names[f] != "oxygen" )
+					{
+						int k = microenvironment.get_index(conc_names[f]);
+						if ( k >= 0 )
+							remove_density(k);
+						time_washout[f] += t_max;  // no more washout
+					}
+				}
 			}
 
 			run_time_step(t);
@@ -789,13 +813,12 @@ void Simul::write_properties(std::ostream& os)
 	os << "\t<load_cells_from_file> " << init_file << " </load_cells_from_file>" << std::endl;
 	os << "\t<nb_passive_cells> " << npassive << " </nb_passive_cells>" << std::endl;
 	os << "\t<time_passive_cells> " << tpassive << " </time_passive_cells>" << std::endl;
-	os << "\t<time_add_egf> " << tegf << " </time_add_egf>" << std::endl;
-	os << "\t<time_add_tnf> " << ttnf << " </time_add_tnf>" << std::endl;
-	os << "\t<duration_add_tnf> " << ttnf_pulse << " </duration_add_tnf>" << std::endl;
-	os << "\t<time_remove_tnf> " << tremtnf << " </time_remove_tnf>" << std::endl;
 	for ( int i = 0; i < ndensities; i++ )
 	{
 		os << "\t<"+conc_names[i]+"_concentration> " << concentrations[i] << " </"+conc_names[i]+"_concentration>" << std::endl;
+		os << "\t<time_add_"+conc_names[i]+"> " << pulse_intervals[i] << " </time_add_"+conc_names[i]+">" << std::endl;
+		os << "\t<duration_add_"+conc_names[i]+"> " << pulse_duration[i] << " </duration_add_"+conc_names[i]+">" << std::endl;
+		os << "\t<time_remove_"+conc_names[i]+"> " << time_washout[i] << " </time_remove_"+conc_names[i]+">" << std::endl;
 	}
 	os << "\t<membrane_shape> " << membrane_shape << " </membrane_shape>" << std::endl;
 	os << "\t<membrane_length> " << membrane_rad << " </membrane_length>" << std::endl;

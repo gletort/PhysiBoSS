@@ -326,6 +326,7 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 	{
 		set_current_phase( PhysiCell_constants::apoptotic );
 		start_apoptosis();
+		return;
 	}
 	
 	ind = maboss->get_node_index( "Migration" );

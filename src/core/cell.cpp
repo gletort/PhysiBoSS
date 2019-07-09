@@ -252,8 +252,14 @@ void Cell::init_env_rates()
 {
 	int ndens = number_of_microdensities();
 	secretion_rates.resize( ndens, 0.0 );
-	uptake_rates.resize( ndens, 0.0 ) ;
-	saturation_densities.resize( ndens, 50.0 );
+	uptake_rates.resize( ndens ) ;
+	saturation_densities.resize( ndens );
+	for ( int i = 0; i < ndens; i++ )
+	{
+		secretion_rates[i] = 0.0;
+		uptake_rates[i] = cell_line->init_uptake_rate;
+		saturation_densities[i] = 50.0;
+	}
 	int index = density_index("oxygen");
 	if ( index >= 0 )
 	{
@@ -263,15 +269,15 @@ void Cell::init_env_rates()
 	if ( index >= 0 )	
 	{
 		saturation_densities[index] = 1;
-		uptake_rates[index] = cell_line->init_uptake_rate;
+		//uptake_rates[index] = cell_line->init_uptake_rate;
 	}
-	index = density_index("tgfb");
+	/**index = density_index("tgfb");
 	if ( index >= 0 )	
 	{
 		saturation_densities[index] = 30; // 4
-		uptake_rates[index] = cell_line->init_uptake_rate;
+		//uptake_rates[index] = cell_line->init_uptake_rate;
 		secretion_rates[index] = 0.04;
-	}
+	}*/
 }
 
 /* Load default values from cell line */
