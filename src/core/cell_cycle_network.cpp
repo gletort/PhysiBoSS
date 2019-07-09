@@ -290,7 +290,9 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 
 	//maboss->printNodes( &networkState );
 
+	////// Nodes related to cell death
 	// Die if not enough oxygen, BN output Hypoxia or Necrosis or Autophagy (not enough glucose)
+	// Necrosis
 	int necr = 0;
 	ind = maboss->get_node_index( "Hypoxia" );
 	if ( ind >= 0 ) 
@@ -306,6 +308,22 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 		set_current_phase( PhysiCell_constants::necrotic_swelling );
 		start_necrosis_swelling(dt);
 		return;
+	}
+	
+	ind = maboss->get_node_index( "NonACD" );
+	if ( ind >= 0 && nodes[ind] ) 
+	{
+		set_current_phase( PhysiCell_constants::necrotic_swelling );
+		start_necrosis_swelling(dt);
+		return;
+	}
+	
+	// Apoptosis
+	ind = maboss->get_node_index( "Apoptosis" );
+	if ( ind >= 0 && nodes[ind] )
+	{
+		set_current_phase( PhysiCell_constants::apoptotic );
+		start_apoptosis();
 	}
 	
 	ind = maboss->get_node_index( "Migration" );
@@ -335,7 +353,6 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 	{
 		mycell->set_mmp( nodes[ind] );
 	}	
-	//	std::cout << "Degradation of matrix feedback not yet implemented." << std::endl;
 	//	std::cout << "Degradation of matrix feedback not yet implemented." << std::endl;
 
 	
@@ -367,22 +384,9 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 		mycell->freezer( 3*nodes[ind] ); // 3 for bitwise operation
 	}
 
-	ind = maboss->get_node_index( "Apoptosis" );
-	if ( ind >= 0 && nodes[ind] )
-	{
-		set_current_phase( PhysiCell_constants::apoptotic );
-		start_apoptosis();
-	}
-		
-	ind = maboss->get_node_index( "NonACD" );
-	if ( ind >= 0 && nodes[ind] ) 
-	{
-		set_current_phase( PhysiCell_constants::necrotic_swelling );
-		start_necrosis_swelling(dt);
-		return;
-	}
 
-	// For model with TNF production	
+	//// Production of a density as feedback of active node
+	// For model with TNF production, keep in memory time of first activation	
 	ind = maboss->get_node_index( "NFkB" );
 	if ( ind >= 0 )
 	{
@@ -399,6 +403,16 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 		else 
 			mycell->secrete("tnf", 0, dt);
 	}
+	
+	// others, active or not field secretion
+	int nf = 2;
+	std::string fields[nf] = {"TGfB", "IL2"};
+	for ( int f = 0; f < nf; f ++ )
+	{
+		ind = maboss->get_node_index( fields[f] );
+		if ( ind >= 0 )
+			mycell->secrete(fields[f], nodes[ind], dt);
+	}	
 }
 
 /* De-mobilize the cell components (dying cells): actin, cadherins, integrins */
