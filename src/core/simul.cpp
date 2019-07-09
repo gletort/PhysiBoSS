@@ -465,7 +465,7 @@ void Simul::initCellLine( CellLine* cl, int type )
 	}
 	cl->scaleOxygenLevels( microenvironment.voxel_volume(0) * 0.000001 );  // in fg/µm^3
 
-	double proportion = 0;
+	double proportion = 1;
 	/** \todo should be in initial_configuration instead */
 	reader.getDoubleValue(propname, "initial_proportion", &proportion);
 	type_prop.push_back(proportion);
