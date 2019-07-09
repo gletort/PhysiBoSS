@@ -103,6 +103,8 @@ void CellCycleNetwork::set_input_nodes()
 	enough_to_node( "TNF", "tnf" );
 	enough_to_node( "GF", "gf" );
 	enough_to_node( "TGFbeta", "tgfb" );
+	enough_to_node( "IL2", "il2" );
+	enough_to_node( "TCR", "tcr" );
 
 	// If has enough contact with ecm or not
 	ind = maboss->get_node_index( "ECM_sensing" );
@@ -406,10 +408,11 @@ void CellCycleNetwork::from_nodes_to_cell(double dt, double t)
 	
 	// others, active or not field secretion
 	int nf = 2;
-	std::string fields[nf] = {"TGfB", "IL2"};
+	std::string fieldsNodes[nf] = {"TGFbeta", "IL2"};
+	std::string fields[nf] = {"tgfb", "il2"};
 	for ( int f = 0; f < nf; f ++ )
 	{
-		ind = maboss->get_node_index( fields[f] );
+		ind = maboss->get_node_index( fieldsNodes[f] );
 		if ( ind >= 0 )
 			mycell->secrete(fields[f], nodes[ind], dt);
 	}	
@@ -425,6 +428,7 @@ void CellCycleNetwork::demobilize(double dt)
 }
 
 /* Output current phase of the cell */
+/** \todo Create configuratble output (e.g. clickables options from Jupyter notebook ?) */
 void CellCycleNetwork::output( std::string& delimeter, std::ofstream* file )
 {
 	int ind;
