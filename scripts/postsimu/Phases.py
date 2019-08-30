@@ -12,12 +12,14 @@ def get_one_phases( basedir ):
 	napop = []
 	nnecr = []
 	naive = []
+	inactive = []
 
 	## to calculate nb of unique cell in each state
 	listapop = []
 	listnecr = []
 	listsurv = []
 	listnaiv = []
+        listinactive = []
 	for t in times:
 		tdata = uts.read_file( basedir, t )
 		phase = tdata['phase']
@@ -57,12 +59,21 @@ def get_one_phases( basedir ):
 			cells = []
 		listnaiv = npy.r_[listnaiv,cells]
 		listnaiv = npy.unique(listnaiv)
+		ind = npy.where(phase==15)
+		ind = ind[0]
+		inactive.append( len(ind) )
+		if len(ind) > 1:
+			cells = tdata['ID'][ind]
+		else:
+			cells = []
+		listinactive = npy.r_[listinactive,cells]
+		listinactive = npy.unique(listinactive)
 	
-	return [times, nsurv, naive, napop, nnecr, listsurv, listapop, listnecr, listnaiv]
+	return [times, nsurv, naive, napop, nnecr, inactive, listsurv, listapop, listnecr, listnaiv, listinactive]
 	
 def do_one_phase( basedir, anapath ):
 	""" Calculate and plot n of cells in each phase of one run folder """
-	[times, surv, naive, apop, necr, lists, lista, listn, listnaive] = get_one_phases( basedir )
+	[times, surv, naive, apop, necr, inac, lists, lista, listn, listnaive, listinactive] = get_one_phases( basedir )
 	
 	## Plot results
 	bfig()
@@ -71,6 +82,7 @@ def do_one_phase( basedir, anapath ):
 	plot_one_xy( times, naive, 111, col='b', mark='v' ) 
 	plot_one_xy( times, apop, 111, col='r', mark='+' ) 
 	plot_one_xy( times, necr, 111, col='k', mark='*' ) 
+	plot_one_xy( times, inac, 111, col='grey', mark='^' ) 
 	plot_title( 'Time (min)', 'Nb of cells' )
 	efig_all( outname )
 
@@ -78,6 +90,54 @@ def do_one_phase( basedir, anapath ):
 	outname = anapath+'/cells_nphases.png'
 	plot_pie( [len(lists), len(lista), len(listn)], 111, col=['g','r','k'], lab=['Survival', 'Apoptosis', 'Necrosis'] )
 	efig_all( outname )
+
+def get_treg_types( basedir ):
+	""" Calculate the number of cell in each cell type at all time points """
+	times = uts.get_times( basedir )
+	ntreg = []
+	ndying = []
+	nteff = []
+	inactive = []
+	nother = []
+
+	for t in times:
+		tdata = uts.read_file( basedir, t )
+		phase = tdata['phase']
+		ttype = tdata['T-Type']
+                
+                # dying cell: 100 = apoptose, > 100 necrose
+                ind = npy.where(phase>=100)
+		ind = ind[0]
+		ndying.append( len(ind) )
+		
+                ind = npy.where(phase==15)
+		ind = ind[0]
+		inactive.append( len(ind) )
+		
+                ind = npy.where( (ttype==0)&(phase!=15))
+		nother.append( len(ind[0]) )
+                ind = npy.where(ttype==1)
+		ntreg.append( len(ind[0]) )
+                ind = npy.where(ttype==2)
+		nteff.append( len(ind[0]) )
+		
+	return [times, ndying, inactive, nother, ntreg, nteff]
+
+def time_treg_type( basedir, anapath ):
+	""" Calculate and plot n of cells in each type of one run folder """
+	[times, apop, inac, other, treg, teff] = get_treg_types( basedir )
+	
+	## Plot results
+	bfig()
+	outname = anapath+'/cells_time_treg_types.png'
+	plot_one_xy( times, teff, 111, col='g', mark='o', lab='Teff' ) 
+	plot_one_xy( times, treg, 111, col='b', mark='v', lab='Treg' ) 
+	plot_one_xy( times, apop, 111, col='r', mark='+', lab='Apoptose' ) 
+	plot_one_xy( times, other, 111, col='k', mark='*', lab='Other' ) 
+	plot_one_xy( times, inac, 111, col='grey', mark='^', lab='Inactive' ) 
+	plot_title( 'Time (min)', 'Nb of cells' )
+	efig_all( outname )
+
 
 def multi_runs_phase( basedir, anapath, nums, para, paraName, grouping=0, vert=-1 ):
 	""" Plot together different simulations in run$i folders 
@@ -172,6 +232,15 @@ def multi_runs_phase( basedir, anapath, nums, para, paraName, grouping=0, vert=-
 			efig_all(outname)
 		
 
+def do_treg_type( basedir, anapath, paraName='NULL', group=0, vert=-1 ):
+	""" Calculate nb of cells for each phase of current folder"""
+	if uts.is_run( basedir ) >= 0:
+		time_treg_type( basedir, anapath )
+	elif uts.contains_runs( basedir ) >=0:
+		[nums, para] = uts.extract_parameters( anapath, paraName )
+		print 'Not implemented yet'
+	else:
+		print 'Given directory is not a run directory nor contains run$i subfolders'
 
 def do_phase( basedir, anapath, paraName='NULL', group=0, vert=-1 ):
 	""" Calculate nb of cells for each phase of current folder"""

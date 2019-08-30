@@ -419,7 +419,7 @@ int Cell_Container::writePov(double timepoint, double scale)
 	return 0;
 }
 
-int Cell_Container::writeCellReport(double timepoint, int cyclemode)
+int Cell_Container::writeCellReport(double timepoint, int cyclemode, int outputmode)
 {
 	std::string filename; 
 	filename.resize( 1024 );
@@ -434,9 +434,20 @@ int Cell_Container::writeCellReport(double timepoint, int cyclemode)
 	if ( cyclemode == 0 )
 	   povFile << "phenotype" << delimeter << "phase" << delimeter << "elapsed_time";
 	else
-		povFile << "Cell_cell" << delimeter << "phase" << delimeter << "Cycle";
+		povFile << "Cell_cell" << delimeter << "phase" << delimeter; 
+	switch ( outputmode )
+	{
+		case 0:   // for TNF model
+			povFile << "Cycle" << delimeter << "NFkB";
+			break;
+		case 1:  // for T-reg model
+			povFile << "T-Type" << delimeter << "IL2";
+			break;
+		default:
+			povFile << "Cycle" << delimeter << "Empty";
+			break;
+	}
 	//povFile << delimeter << "angle";
-	povFile << delimeter << "NFkB";
 	povFile << std::endl;
 
    std::ofstream passFile;
@@ -474,7 +485,7 @@ int Cell_Container::writeCellReport(double timepoint, int cyclemode)
 	return 0;
 }
 
-void Cell_Container::log_output(double t, int output_index, Microenvironment* microenvironment, std::ofstream& report_file, int cyclemode)
+void Cell_Container::log_output(double t, int output_index, Microenvironment* microenvironment, std::ofstream& report_file, int cyclemode, int outputmode)
 {
 	int num_new_cells= 0;
 	int num_deaths=0;
@@ -505,7 +516,7 @@ void Cell_Container::log_output(double t, int output_index, Microenvironment* mi
 	num_divisions_in_current_step = 0;
 	num_deaths_in_current_step = 0;
 	//writePov(t, scale);
-	writeCellReport(t, cyclemode);
+	writeCellReport(t, cyclemode, outputmode);
 	// Writing microenvironment state, don't for now
 /**	std::string filename; 
 	filename.resize( 1024 , '\0' ); 

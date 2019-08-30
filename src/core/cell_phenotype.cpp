@@ -462,6 +462,95 @@ void CellPhenotype::set_3T3()
 	
 }
 
+/* create default phenotype: for fibroblast T-cell line */
+void CellPhenotype::set_Tcell()
+{
+	phases.resize(7);
+	
+	phases[0].code = PhysiCell_constants::Ki67_positive_premitotic; 
+	phases[0].name = "Ki67_positive_premitotic";    // G1 + S 
+	phases[0].duration = 14 * 60.0; // minutes
+	phases[0].birth_rate = 0.0 / phases[0].duration; 
+	phases[0].death_rate = 0.00007;       // minutes, =10% in 24h 
+	phases[0].death_type = PhysiCell_constants::apoptotic; 
+	phases[0].arrest_density = pow( 0.006012 , 1.5 ); // cells per cubic micron  
+	phases[0].volume_change_timescale_N = 10*60.0; 
+	phases[0].volume_change_timescale_C = 14*60.0;  // time to reach 95% of new volume
+	phases[0].volume_change_timescale_F = 1.1*60.0;
+	phases[0].color = "rgb(0,200,100)";	
+	phase_map[(int)PhysiCell_constants::Ki67_positive_premitotic] = 0;
+
+	// Duration counts here	
+	phases[1].code = PhysiCell_constants::Ki67_positive_postmitotic; 
+	phases[1].name = "Ki67_positive_postmitotic"; 
+	phases[1].duration = 2.7 * 60.0;  // after M = M
+	phases[1].birth_rate = 0; 
+	phases[1].death_rate = 0.00007; // arbitrary 
+	phases[1].arrest_density = 9e99; // cells per cubic micron  
+	phases[1].volume_change_timescale_N = 9.1*60.0; 
+	phases[1].volume_change_timescale_C = 11.1*60.0; 
+	phases[1].volume_change_timescale_F = 1*60.0; 	
+	phases[1].color = "rgb(0,100,50)";	
+	phase_map[(int)PhysiCell_constants::Ki67_positive_postmitotic] = 1;
+
+	phases[2].code = PhysiCell_constants::Ki67_negative; 
+	phases[2].name = "Ki67_negative";   // G0 
+	phases[2].duration = 0 * 60.0; // recycle nearly immediatly
+	phases[2].birth_rate = 0; 
+	phases[2].death_rate = 0.00007;       // minutes 
+	phases[2].arrest_density = 9e99; // cells per cubic micron  
+	phases[2].volume_change_timescale_N = 9.1*60.0; 
+	phases[2].volume_change_timescale_C = 11.1*60.0; 
+	phases[2].volume_change_timescale_F = 1*60.0; 	
+	phases[2].color = "rgb(0,100,200)";	
+	phase_map[(int)PhysiCell_constants::Ki67_negative] = 2;
+	
+	phases[3].code = PhysiCell_constants::apoptotic; 
+	phases[3].name = "apoptotic"; 
+	phases[3].duration = 8.6 * 60.0;
+	phases[3].birth_rate = 0; 
+	phases[3].death_rate = 0; 
+	phases[3].arrest_density = 9e99; // cells per cubic micron  
+	phases[3].volume_change_timescale_N = 8.6*60.0;   // from PhysiCell publi
+	phases[3].volume_change_timescale_C = 3*60.0; 
+	phases[3].volume_change_timescale_F = 1*60.0; 	
+	phases[3].color = "rgb(150,0,0)";	
+	phase_map[(int)PhysiCell_constants::apoptotic] = 3;
+
+	phases[4].code = PhysiCell_constants::necrotic_swelling; 
+	phases[4].name = "necrotic_swelling"; 
+	phases[4].duration = 3.0 * 60.0;
+	phases[4].volume_change_timescale_N = 230*60.0; 
+	phases[4].volume_change_timescale_C = 936.2*60.0; 
+	phases[4].volume_change_timescale_F = 4.47*60.0; 
+	phases[4].calcification_rate = 0.0042/60.0;	
+	phases[4].color = "rgb(50,50,50)";	
+	phase_map[(int)PhysiCell_constants::necrotic_swelling] = 4;
+
+	phases[5].code = PhysiCell_constants::necrotic_lysed; 
+	phases[5].name = "necrotic_lysed"; 
+	phases[5].duration = 45.0 * 24 * 60.0;
+	phases[5].volume_change_timescale_N = 230*60.0; 
+	phases[5].volume_change_timescale_C = 936.2*60.0; 
+	phases[5].volume_change_timescale_F = 59*60.0; 
+	phases[5].calcification_rate = 0.0042/60.0;	
+	phases[5].color = "rgb(100,100,100)";	
+	phase_map[(int)PhysiCell_constants::necrotic_lysed] = 5;
+	
+	phases[6].code = PhysiCell_constants::inactive; 
+	phases[6].name = "inactive"; 
+	phases[6].duration = 170000.1 * 60.0;
+	phases[6].birth_rate = 1.0/phases[6].duration; 
+	phases[6].death_rate = 0.00105/60.0; 
+	phases[6].arrest_density = pow( 0.006012, 1.5); // cells per cubic micron  
+	phases[6].volume_change_timescale_N = 9.1*60.0; 
+	phases[6].volume_change_timescale_C = 11.1*60.0; 
+	phases[6].volume_change_timescale_F = 1*60.0; 	
+	phases[6].color = "rgb(0,0,0)";	
+	phase_map[(int)PhysiCell_constants::inactive] = 6;
+	
+}
+
 /** Write current phenotype values to file */
 void CellPhenotype::output( int phase, std::string& delimeter, std::ofstream* file )
 {

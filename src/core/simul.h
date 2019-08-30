@@ -45,6 +45,8 @@ class Simul
 
 		/** \brief Which cell cycle mode is used: 0 classic, 1 boolean network*/
 		int mode_cycle;
+		/** \brief What to write in output files: 0, NFkb information, 1, T-eff informations */
+		int outmode;
 
 		/// Space parameters
 		/** \brief Radius of cell */

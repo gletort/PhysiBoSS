@@ -85,12 +85,13 @@ void addOneCell( Vector3d delta, double rad, int type, std::ostream& out, double
 	out << 0 << del << 0 << del; 
 	double elaps = 0;
 	cells.push_back( new Vector3d(delta) );
-	if ( UniformRandom() <= postm )
+	// to have some cells in postmitotic phase, uncomment this
+	/**if ( UniformRandom() <= postm )
 	{ 
 		rad = minrad;
 		elaps = UniformRandom()*2.7*60.0;
 		phase = 1;
-	}
+	}*/
 	rads.push_back( rad );
 	// x, y, z, rad
 	out << delta[0] << del << delta[1] << del << delta[2] << del;

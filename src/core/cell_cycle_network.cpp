@@ -103,8 +103,11 @@ void CellCycleNetwork::set_input_nodes()
 	enough_to_node( "TNF", "tnf" );
 	enough_to_node( "GF", "gf" );
 	enough_to_node( "TGFBR", "tgfb" );
-	enough_to_node( "IL2R", "il2" );
-	enough_to_node( "TCR", "tcr" );
+	enough_to_node( "IL2R_b1", "il2" );
+	enough_to_node( "IL2R_b2", "il2" );
+	enough_to_node( "TCR_b1", "tcr" );
+	enough_to_node( "TCR_b2", "tcr" );
+	enough_to_node( "CD28", "tcr" );
 
 	// If has enough contact with ecm or not
 	ind = maboss->get_node_index( "ECM_sensing" );
@@ -283,6 +286,14 @@ void CellCycleNetwork::do_proliferation( double dt )
 		set_current_phase( PhysiCell_constants::Ki67_positive_premitotic );
 		mycell->update_target_nuclear(2.0);
 	}
+	
+	// If cells is in inactive state
+	if ( phase->code == PhysiCell_constants::inactive )
+	{
+		// switch to pre-mitotic phase 
+		set_current_phase( PhysiCell_constants::Ki67_positive_premitotic );
+		mycell->update_target_nuclear(2.0);
+	}
 }
 
 /* Read the value of output BN nodes and transfer action to the cell */
@@ -446,6 +457,25 @@ void CellCycleNetwork::output( std::string& delimeter, std::ofstream* file )
 		{
 			(*file) << got_activated << delimeter;
 			(*file) << -1;
+			// tmp solution to print current network state 
+			//for ( int val : nodes )
+			//	(*file)	<< val;
+		}	
+		// IL2 model, output Tref or Teff cells
+		ind = maboss->get_node_index( "IL2" );
+		if ( ind >= 0 )
+		{
+			int il = nodes[ind];
+			ind = maboss->get_node_index( "TGFB" );
+			int tg = 0;
+			if ( ind )
+				tg = nodes[ind];
+
+			int type = 0;
+			if ( tg && !il ) type = 1; // Treg
+			if ( !tg && il ) type = 2; // Teff
+			(*file) << type << delimeter;
+			(*file) << il;
 			// tmp solution to print current network state 
 			//for ( int val : nodes )
 			//	(*file)	<< val;

@@ -54,6 +54,7 @@ void Simul::clear()
 	t_output_interval = 60.0; // printing interval
 	t_output_densities = 600.0; // printing microenvironement interval
 	t_max = 3*24*60;       // maximal time
+	outmode = 0; // what to write in output files
 	npassive = 0;       // no passive cells (obstacles, dextran)
 	//tegf = t_max*2;
 	tpassive = t_max*2;
@@ -188,6 +189,7 @@ void Simul::initSimul() throw()
 	reader.getDoubleValue( "simulation", "output_interval", &t_output_interval ); 
 	reader.getDoubleValue( "simulation", "output_densities", &t_output_densities ); 
 	reader.getDoubleValue( "simulation", "maximal_time", &t_max );
+	reader.getIntValue( "simulation", "output_mode", &outmode ); 
 	// Space parameters
 	reader.getDoubleValue( "simulation", "minimum_voxel_size", &min_voxel_size );
 	// Handle external densities
@@ -465,7 +467,7 @@ void Simul::initCellLine( CellLine* cl, int type )
 	}
 	cl->scaleOxygenLevels( microenvironment.voxel_volume(0) * 0.000001 );  // in fg/µm^3
 
-	double proportion = 0;
+	double proportion = 1;
 	/** \todo should be in initial_configuration instead */
 	reader.getDoubleValue(propname, "initial_proportion", &proportion);
 	type_prop.push_back(proportion);
@@ -524,7 +526,7 @@ void Simul::initCells( std::string input_file )
 
 	if ( init_file == "" )
 	{
-		double sphere_radius = duct_radius - 15;
+		double sphere_radius = duct_radius; 
 		create_sphere( sphere_radius );
 
 		// Add passive cells if asked
@@ -607,7 +609,6 @@ void Simul::initialize( std::string input_file )
 			prop_file.close();
 		}
 	}
-
 	initCells( input_file );
 }
 
@@ -672,7 +673,7 @@ void Simul::run()
 		{
 			if(  fabs( t - t_next_output_time ) < 0.0001 )
 			{
-				cell_container.log_output(t, output_index, &microenvironment, report_file, mode_cycle);
+				cell_container.log_output(t, output_index, &microenvironment, report_file, mode_cycle, outmode);
 				// temp: to write ECM values at all times 
 				int e = microenvironment.get_index("ecm");
 				if ( e >= 0 )
@@ -736,7 +737,7 @@ void Simul::run()
 			output_index++;
 		}
 			
-		cell_container.log_output(t, output_index, &microenvironment, report_file, mode_cycle);
+		cell_container.log_output(t, output_index, &microenvironment, report_file, mode_cycle, outmode);
 		std::string svgname; 
 		svgname.resize( 1024 );
 		sprintf( (char*) svgname.c_str() , "output//svg_t%05d.svg" , (int)round(t) ); 

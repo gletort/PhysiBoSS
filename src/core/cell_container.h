@@ -195,9 +195,11 @@ class Cell_Container : public BioFVM::Agent_Container
 	int find_escaping_face_index(Cell* agent);
 
 	/** \brief Outputs */
-	void log_output(double t, int output_index, BioFVM::Microenvironment* microenvironment, std::ofstream& report_file, int cyclemode);
-	/** \brief Write summary report of events during the output times */
-	int writeCellReport(double timepoint, int cyclemode);
+	void log_output(double t, int output_index, BioFVM::Microenvironment* microenvironment, std::ofstream& report_file, int cyclemode, int outputmode);
+	/** \brief Write summary report of events during the output times 
+	 *
+	 * outputmode: what to write in the output files */
+	int writeCellReport(double timepoint, int cyclemode, int outputmode);
 	int writePov(double timepoint, double scale);
 
 	/** \brief Draw active cells of the container in SVG file */

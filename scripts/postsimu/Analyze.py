@@ -78,6 +78,12 @@ elif what == 'phase':
 	if other == 'group':
 		group = 1
 	ph.do_phase( basedir, anapath, param, group, vert )
+elif what == 'treg':
+	import Phases as ph
+	group = 0
+	if other == 'group':
+		group = 1
+	ph.do_treg_type( basedir, anapath, param, group, vert )
 elif what == 'BN':
 	import BNState as bn
 	bn.survivalState( basedir, anapath, param )

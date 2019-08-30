@@ -113,6 +113,7 @@
 			static const int G2_phase=12;
 			static const int M_phase=13;
 			static const int live=14;
+			static const int inactive=15;
 			// death phases
 			static const int apoptotic=100;
 			static const int necrotic_swelling=101;

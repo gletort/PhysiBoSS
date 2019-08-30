@@ -173,6 +173,9 @@ void CellLine::read_properties( ReadXML* reader, std::string what )
 		line_phenotype.set_3T3(); 
 	if ( pheno == 4 )
 		line_phenotype.set_G0_cells(); 
+	if ( pheno == 5 )
+		line_phenotype.set_Tcell(); 
+	
 }
 
 /* Read the value of threshold for given field 

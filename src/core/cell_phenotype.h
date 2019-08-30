@@ -162,6 +162,9 @@ class CellPhenotype
 		/** \brief create default phenotype: for fibroblast 3T3 cell line */
 		void set_3T3();
 
+		/** \brief create default phenotype: for T-cell line */
+		void set_Tcell();
+
 		/** \brief Return the RGB code of given phase */
 		inline std::string get_color( int phase )
 		{ return phases[phase].color; };

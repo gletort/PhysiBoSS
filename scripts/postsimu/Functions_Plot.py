@@ -256,6 +256,9 @@ def dim_plot( dim=2, splot=111 ):
 		sfig.set_xlabel('x')
 		sfig.set_ylabel('y')
 
+def add_legend( splot=111 ):
+    ax = plt.subplot( splot )
+    leg = ax.legend(loc='upper left', shadow=True, fontsize='x-large')
 
 def bfig():
 	""" Create figure """
