@@ -98,7 +98,7 @@ plot: $(BIN_DIR) $(MAIN3)
 	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS_Plot ./src/main/plotTxt.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
 
 maboss:
-	cd $(BOSS_SRC) && make clean && make MAXNODES=$(MAXNODES) install_alib
+	cd $(BOSS_SRC) && make MAXNODES=$(MAXNODES) install_alib
 
 #---------- Generate doc with Doxygen
 .PHONY: doc clean cleanbin mrproper zip
@@ -114,6 +114,7 @@ clean:
 	rm -f $(PROGRAM_NAME).exe
 	rm -f ./examples/test_* 
 	rm -f $(BIN_DIR)/* 
+	cd $(BOSS_SRC) && make clean
 
 cleanbin:
 	rm -f $(BIN_DIR)/*
