@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Global parameters of the simulation (time parameters are in min, distance in microns -->
+<simulation>
+	<time_step> 0.02 </time_step>
+	<mechanics_time_step> 0.1 </mechanics_time_step>
+	<cell_cycle_time_step> 2 </cell_cycle_time_step>
+	<maximal_time> 1440 </maximal_time>                <!-- Time to simulate, 24 h -->
+	<output_interval> 30 </output_interval>            <!-- Write output file of cells positions every 30 min -->
+	<number_of_threads> 16 </number_of_threads>  <!-- parallelization with openmp -->
+	<mode_cell_cycle> 1  </mode_cell_cycle>      <!-- To use with a boolean network implementation -->
+	<output_densities> 450 </output_densities>         <!-- Write output files of ECM densities (TNF here) every 450 min -->
+	<write_passive_cells> 0 </write_passive_cells>
+	<minimum_voxel_size> 15 </minimum_voxel_size>      <!-- Discretization size of the microenvironment grid (BioFVM) --> 
+	<bounding_box_xmin> -500 </bounding_box_xmin>      <!-- Dimensions of the simulated space -->
+	<bounding_box_xmax> 500 </bounding_box_xmax>
+	<bounding_box_ymin> -500 </bounding_box_ymin>
+	<bounding_box_ymax> 500 </bounding_box_ymax>
+	<bounding_box_zmin> -500 </bounding_box_zmin>
+	<bounding_box_zmax> 500 </bounding_box_zmax>
+	<number_of_densities> 2 </number_of_densities>  <!-- Densities to simulate in the microenvironment -->
+	<density_0> oxygen </density_0>
+	<density_1> tnf </density_1>
+	<dirichlet_boundary> 0 </dirichlet_boundary>    <!-- Constant injection of densities on the external boundaries -->
+	<write_ratio_voxels> 0.4 </write_ratio_voxels>  <!-- When output densities files, don't write all the voxels values but randomly selected ones -->
+</simulation>
+
+<!-- Properties of the first cell line, common to all cells in this type -->
+<cell_properties>
+	<polarity_coefficient> 0.1 </polarity_coefficient>       <!-- How much polarized by default -->
+	<!-- Motility parameters -->
+    <motility_amplitude_min> 0.01 </motility_amplitude_min>  
+    <motility_amplitude_max> 0.01 </motility_amplitude_max>
+	<mode_motility> 1 </mode_motility>
+	<!-- Cell-cell adhesion and repulsion coefficients -->
+	<homotypic_adhesion_min> 2 </homotypic_adhesion_min>
+	<homotypic_adhesion_max> 2 </homotypic_adhesion_max>
+	<heterotypic_adhesion_min> 2 </heterotypic_adhesion_min>
+	<heterotypic_adhesion_max> 2 </heterotypic_adhesion_max>
+	<max_interaction_factor> 1.2 </max_interaction_factor>
+	<cell_cell_repulsion> 10 </cell_cell_repulsion>
+	<!-- Cell default minimal volumes (after division) -->
+	<cell_radius> 8.413 </cell_radius>
+	<nucleus_radius> 5.052 </nucleus_radius>
+	<fluid_fraction> 0.75 </fluid_fraction>
+	<solid_nuclear> 135 </solid_nuclear>
+	<solid_cytoplasmic> 486 </solid_cytoplasmic>
+	<cytoplasmic_nuclear_fraction> 3.6 </cytoplasmic_nuclear_fraction>
+	<phenotype_number> 3 </phenotype_number> <!-- Use default preset phenotype parameters for cell phases -->
+	<!-- Cell parameters dependant on ECM densities interaction -->
+	<oxygen_necrotic> 0 </oxygen_necrotic>
+	<oxygen_critical> 0 </oxygen_critical>
+	<oxygen_no_proliferation> 0 </oxygen_no_proliferation>
+	<oxygen_hypoxic> 40 </oxygen_hypoxic>
+	<oxygen_reference> 40 </oxygen_reference>
+	<oxygen_saturation> 40 </oxygen_saturation>
+	<initial_uptake_rate> 0.0025 </initial_uptake_rate>
+	<protein_threshold> 2.8e-05 </protein_threshold>
+	<secretion_rate> 0.1 </secretion_rate>
+</cell_properties>
+
+<!-- Parameters related to boolean network computation -->
+<network>
+	<network_update_step> 10 </network_update_step>
+</network>
+
+
+<!-- Initial configuration of the simulation and injection management -->
+<initial_configuration>
+	<load_cells_from_file> init.txt </load_cells_from_file>
+	<membrane_shape> sphere </membrane_shape>	
+	<membrane_length> 470 </membrane_length>
+	<time_passive_cells> 1500 </time_passive_cells>
+	<oxygen_concentration> 40 </oxygen_concentration> <!-- concentration of	available oxygen -->
+	<tnf_concentration> 0.5 </tnf_concentration>      <!-- concentration of injected TNF -->
+	<duration_add_tnf> 80000 </duration_add_tnf>      <!-- Duration of the injection, > maximal time then continuous -->  
+	<time_remove_tnf> 80000 </time_remove_tnf>        <!-- If wash-off TNF at some time or not -->
+	<time_add_tnf> 80000 </time_add_tnf>              <!-- If doesn't add TNF from the begining, at what time -->
+	<mode_injection> 1 </mode_injection>              <!-- Modes of injection: 0 microfluidic-like (everywhere), 1 spheroid-like (at the boundaries) -->
+</initial_configuration>
