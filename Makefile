@@ -11,7 +11,17 @@ MODE := R
 # R = Release
 # D = Debug
 # P = Profiling
+ifndef MAXNODES
+MAXNODES = 64
+endif
 
+ifeq ($(shell expr $(MAXNODES) '>' 64), 1)
+INFIX := _$(MAXNODES)n
+else
+MAXNODES = 64
+endif
+
+LIBMABOSS := MaBoSS$(INFIX)
 
 #---------- Organize in classic directories, build, bin, src
 MABOSS_DIR = MaBoSS-env-2.0/engine/
@@ -23,7 +33,7 @@ CUR_DIR = $(shell pwd)
 ### MaBoSS directory
 BOSS := MaBoSS-env-2.0/engine
 BOSS_SRC := $(BOSS)/src
-LIB := -L$(CUR_DIR)/$(BOSS)/lib -lMaBoSS
+LIB := -L$(CUR_DIR)/$(BOSS)/lib -l$(LIBMABOSS)
 INC := -I$(CUR_DIR)/$(BOSS)/include
 
 #---------- Folders to look in
@@ -76,10 +86,10 @@ build:
 	@mkdir -p $@
 
 $(ALL_OBJECTS): %.o: %.cpp %.h | build 
-	$(COMPILE_COMMAND) $(CXXFLAGS) $(INC) -c $< -o $(BUILD_DIR)/$(@F)
+	$(COMPILE_COMMAND) $(CXXFLAGS) $(INC) -DMAXNODES=$(MAXNODES) -c $< -o $(BUILD_DIR)/$(@F)
 
 physiboss: $(BIN_DIR) $(MAIN)
-	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS ./src/main/PhysiBoSS.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
+	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS$(INFIX) ./src/main/PhysiBoSS.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
 
 create: $(BIN_DIR) $(MAIN2) 
 	$(COMPILE_COMMAND) -o $(BIN_DIR)/PhysiBoSS_CreateInitTxtFile ./src/main/createTxt.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
@@ -88,7 +98,7 @@ plot: $(BIN_DIR) $(MAIN3)
 	$(COMPILE_COMMAND) $(INC) -o $(BIN_DIR)/PhysiBoSS_Plot ./src/main/plotTxt.cpp $(BUILD_DIR)/*.o $(LIB) -ldl
 
 maboss:
-	cd $(BOSS_SRC) && make clean && make install_alib	
+	cd $(BOSS_SRC) && make clean && make MAXNODES=$(MAXNODES) install_alib
 
 #---------- Generate doc with Doxygen
 .PHONY: doc clean cleanbin mrproper zip
