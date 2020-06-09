@@ -8,4 +8,4 @@
 docker pull gletort/physiboss
 ## run it by mounting local directory so that Inputs/Outputs are on local machine
 simname=$(basename $1)
-docker run -d -it -v $1:/home/PhysiBoSS/running/$simname gletort/physiboss sh -c "cd /home/PhysiBoSS/running/"$simname"/"$2; /home/PhysiBoSS/bin/PhysiBoSS > docking.txt"
+docker run -d -it -v $1:/home/PhysiBoSS/running/$simname gletort/physiboss sh -c "cd /home/PhysiBoSS/running/"$simname"/"$2"; /home/PhysiBoSS/bin/PhysiBoSS > docking.txt"
