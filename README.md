@@ -19,8 +19,8 @@ It is adapted from [PhysiCell](http://physicell.mathcancer.org) sources, with th
 
 ## Usage
 ### Compiling PhysiBoSS
-PhysiBoSS should run and be easily installed on Linux and MacOS system. We also provide a [Docker image](https://github.com/gletort/PhysiBoSS/tree/master/Docker) of PhysiBoSS that can be used if it cannot be installed in your machine.
-It requires moderatly recent version of C++ (at least c++11) and OpenMP support. Compilation of MaBoSS library requires `flex` and `bison` library, usually already present (and can be easily installed on e.g. Linux ubuntu with `sudo apt-get install bison flex`).
+PhysiBoSS should run and be easily installed on Linux and MacOS system. 
+It requires moderatly recent version of C++ (at least c++11) and OpenMP support. Compilation of MaBoSS library requires `flex` and `bison` library, usually already present (and can be easily installed on e.g. Linux ubuntu with `sudo apt-get install bison flex`). We also provide a [Docker image](https://github.com/gletort/PhysiBoSS/tree/master/Docker) of PhysiBoSS that can be used if it cannot be installed in your machine. It can also be used without any installation via a Web interface for specific simulations on [nanohub](#nanohub).
 
 To install it on Linux system, from a Terminal:
 Clone the repository on your local machine, and go inside the main directory. Type `make install`, which will install and compile MaBoSS then PhysiBoSS. The executables will be created in the 'bin' directory if all goes well. 
@@ -69,6 +69,12 @@ Example of a parameter file (with only few parameters shown):
 
 ### Image and analyse a simulation
 To visualize graphically the result of a simulation, with use the software Paraview (or you can also generate a `.svg` snapshot of the simulation). Analysis of the result files were done with python scripts proposed in this directory. For documentation on how to use Paraview to set-up the rendering of PhysiBoSS outputs, see [here](https://github.com/gletort/PhysiBoSS/wiki/Paraviewing), with the explication on how to draw spheres from a set of points (x, y, z, radius).
+
+### Nanohub
+PhysiBoSS can be directly used via a Web interface on nanohub. This allows to run it without any installation and running directly on the server and can be used without any coding skills. The parameters of the simulation can be entered in the interface and then the simulation will be runned on the nanohub server. It just required a nanohub account.
+Available simulations tools of PhysiBoSS can be found on [https://nanohub.org/resources/tools](https://nanohub.org/resources/tools), under the keywords PhysiBoSS or PhysiBoSSa.
+
+A model of tumors cell spheroid growing and invading into the surrounding extra-cellular matrix (ECM) is currently available [PhysiBoSSa_ECM](https://proxy.nanohub.org/weber/1663662/howueVcBQ44wNqfD/12/apps/project_repo_ecm_simul.ipynb?). Various parameters as the density of the extracellular matrix, the cell motility, ECM degradation from the cells, TGF-beta production... can be tuned by the user.
 
 
 ## Documentation 
